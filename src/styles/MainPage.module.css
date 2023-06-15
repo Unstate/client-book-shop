@@ -1,0 +1,4 @@
+.siteContainer {
+    @apply flex px-[42px] space-x-[34px] mt-[30px]
+}
+

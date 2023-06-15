@@ -1,0 +1,23 @@
+.book {
+    @apply mx-[42px] mt-[30px] flex space-x-[50px] font-sans
+}
+    
+.bookImage {
+    @apply w-[300px] h-[450px]
+}
+    
+.bookTitle {
+    @apply font-bold text-[25px]
+}
+    
+.bookAuthors {
+    @apply font-normal text-[20px] text-[#160F2980]
+}
+    
+.bookDescription {
+    @apply text-[16px] w-[540px]
+}
+    
+.bookTitleContainer {
+    @apply mb-[30px]
+}

@@ -1,0 +1,7 @@
+.footer {
+    @apply mt-[100px] flex justify-center h-[134px] bg-[#F3DFC1]
+}
+
+.rigthsCompany {
+    @apply text-center py-[10px] uppercase font-[14px]
+}

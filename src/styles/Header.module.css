@@ -1,0 +1,35 @@
+.siteHeader {
+    @apply flex items-center justify-between mb-[30px] px-[42px] pt-[22px]
+}
+
+.nav {
+    @apply flex space-x-[30px]
+}
+
+.item {
+    @apply font-sans text-[20px]
+}
+
+.searchContainer {
+    @apply flex
+}
+
+.search {
+    @apply py-[9px] px-[12px] border-[2px] border-gray-500 text-[20px] w-[561px] z-0 relative 
+}
+
+hr {
+    @apply border-[2px] border-[#160F2980]
+}
+
+.serchAndUserLogoContainer {
+    @apply flex space-x-[23px]
+}
+
+.userImageContainer {
+    @apply flex justify-center items-center cursor-pointer
+}
+
+.searchButton {
+    @apply relative left-[540px] z-20 cursor-pointer
+}

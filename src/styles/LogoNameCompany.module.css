@@ -1,0 +1,11 @@
+.aboutCompany {
+    @apply flex items-center space-x-[30px]
+}
+
+.logoCompanyImage {
+    @apply w-[70px] h-[70px]
+}
+
+.nameCompany {
+    @apply uppercase font-sans font-[650] text-[40px]
+}
