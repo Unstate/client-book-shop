@@ -5,6 +5,7 @@ import CertainBookPage from "../pages/CertainBookPage"
 import classes from '../styles/AppRoute.module.css'
 import Footer from "./Footer"
 import LoginPage from "../pages/LoginPage"
+import RegistrationPage from "../pages/RegistrationPage"
 
 const AppRoute = () => {
     return (
@@ -15,6 +16,7 @@ const AppRoute = () => {
                     <Route path='/mainPage' element={<MainPage></MainPage>}></Route>
                     <Route path='/books/:id' element={<CertainBookPage></CertainBookPage>}></Route>
                     <Route path='/login' element={<LoginPage></LoginPage>}></Route>
+                    <Route path='/registration' element={<RegistrationPage></RegistrationPage>}></Route>
                     <Route path='/*' element={<Navigate to='/mainPage' replace/>}/>
                 </Routes>
                 <Footer></Footer>

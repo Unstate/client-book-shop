@@ -1,0 +1,68 @@
+.formContainer {
+    @apply w-[1400px] h-[800px] flex m-auto mt-[20px];
+    
+}
+
+.infoContainer {
+    @apply w-[465px] bg-[#246A73] pt-[80px] px-[80px] 
+}
+
+.questionButton {
+    @apply uppercase font-[600] mt-[15px] border-[2px] border-[#246A73] px-[33.5px] py-[15px] text-[16px] bg-white text-[#246A73] rounded-sm
+}
+
+.questionButton:hover {
+    @apply text-white bg-[#160F29]
+}
+
+.question {
+    @apply font-bold text-white uppercase text-[24px] pb-[36px]
+}
+
+.questionContainer {
+    @apply flex flex-col items-center justify-center mb-[258px]
+}
+
+.LogoNameCompanyContainer {
+    @apply mb-[208px] text-white
+}
+
+.stick {
+    @apply flex justify-center w-[325px] border-[2px] border-white 
+}
+
+.formTitle {
+    @apply pt-[186px] font-bold uppercase text-[32px] px-[400px] mb-[50px]
+}
+
+.form {
+    @apply flex flex-col justify-center items-center
+}
+
+.formButton {
+    @apply uppercase font-[600] mt-[15px] border-[2px] border-[#160F29] px-[64px] py-[15px] text-[20px] bg-white text-[##160F29] rounded-sm
+}
+
+.formButton:hover {
+    @apply text-white bg-[#160F29]
+}
+
+.item {
+    @apply border-[2px] border-[#160F2980] flex items-center py-[12px] px-[12px] space-x-[12px] w-[463px] mb-[28px]
+}
+
+.item input {
+    @apply w-[440px]
+}
+
+.passwordLink {
+    @apply pr-[310px] mb-[50px] text-[18px] text-[#160F29]
+}
+
+.passwordLink:hover {
+    @apply text-[#B65C34]
+}
+
+.item p {
+    @apply text-red-500
+}
