@@ -1,5 +1,5 @@
 .siteHeader {
-    @apply flex items-center justify-between mb-[30px] px-[42px] pt-[22px]
+    @apply flex items-center justify-between mb-[30px]  pt-[22px]
 }
 
 .nav {
@@ -19,7 +19,7 @@
 }
 
 hr {
-    @apply border-[2px] border-[#160F2980]
+    @apply border-[1px] border-[#160F2980]
 }
 
 .serchAndUserLogoContainer {

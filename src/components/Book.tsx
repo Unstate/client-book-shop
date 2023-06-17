@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { Image } from "../ReduxToolkit/bookSlice";
 import classes from '../styles/Book.module.css'
-import cat from '../assets/cat.jpeg'
+import cat from '../assets/Covermiddle.svg'
 import { Link } from "react-router-dom";
 
 export interface BookProps {
@@ -12,13 +12,13 @@ export interface BookProps {
     id: string;
 }
 
-const Book: FC<BookProps> = ({ author, title, genres, img, id }) => {
+const Book: FC<BookProps> = ({ author, title, img, id }) => {
     return (
         <div className={classes.bookContainer}>
             <div className={classes.imageContainer}>   
-                {img.thumbnail
+                {img
                     ? <Link to={`/books/${id}`}>
-                        <img className={classes.image} src={img.thumbnail} alt="Картинка не прогрузилась" 
+                        <img className={classes.image} src={img.mediumFingernail} alt="Картинка не прогрузилась" 
                         onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
                             currentTarget.onerror = null
                             currentTarget.src = cat

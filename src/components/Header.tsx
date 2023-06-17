@@ -6,7 +6,7 @@ import search from '../assets/searchButton.svg'
 
 const Header = () => {
     return (
-        <>
+        <div className='px-[42px]'>
             <header className={classes.siteHeader}>
                 <Link to="/mainPage">
                     <LogoNameCompany></LogoNameCompany>
@@ -22,7 +22,7 @@ const Header = () => {
                 </div>
             </header>
             <hr></hr>
-        </>
+        </div>
 
     )
 }

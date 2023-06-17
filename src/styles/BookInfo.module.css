@@ -1,0 +1,67 @@
+.book {
+    @apply mt-[30px] flex space-x-[50px] font-sans mb-[30px]
+}
+    
+.bookImage {
+    @apply w-[300px] h-[450px]
+}
+    
+.bookTitle {
+    @apply font-bold text-[25px] mb-[10px]
+}
+    
+.bookAuthors {
+    @apply font-normal text-[20px] text-[#160F2980] mb-[50px]
+}
+    
+.bookDescription {
+    @apply text-[16px] w-[540px] 
+}
+
+.bookDesc {
+    @apply h-[165px] overflow-hidden text-ellipsis mb-[20px];
+}
+    
+.bookTitleContainer {
+    @apply mb-[30px]
+}
+
+.bookInfoContainer {
+    @apply flex space-x-[50px]
+}
+
+.item {
+    @apply text-[18px] text-[#160F2980] pb-[20px]
+}
+
+.bookButton {
+    @apply uppercase font-[600] mt-[15px] border-[2px] border-[#160F2980] px-[197px] py-[15px] text-[16px]
+}
+
+.bookButton:hover {
+    @apply bg-[#160F29] text-white
+}
+
+.linkReadMoreContainer {
+    @apply mb-[38px]
+}
+
+.dItem {
+    @apply text-[18px] pb-[20px] w-[146px] whitespace-nowrap overflow-hidden text-ellipsis
+}
+
+.allChar {
+    @apply text-[#246A73] text-[18px] font-semibold 
+}
+
+.allChar:hover {
+    @apply cursor-pointer text-[#B65C34];
+}
+
+.linkReadMore {
+    @apply text-[18px] text-[#246A73] font-semibold;
+}
+
+.linkReadMore:hover {
+    @apply text-[#B65C34] cursor-pointer font-semibold
+}

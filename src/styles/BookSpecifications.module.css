@@ -1,0 +1,27 @@
+.aboutBookContainer {
+    @apply mt-[30px]
+}
+
+.aboutBookTitle {
+    @apply mb-[30px] text-[#160F29] font-semibold text-[25px]
+}
+
+.aboutBookDescription {
+    @apply w-[943px] text-[20px] mb-[30px]
+}
+
+.charItem {
+    @apply flex space-x-[53px]
+}
+
+.itemF {
+    @apply w-[134px] text-[20px] text-[#160F2980] pb-[20px]
+}
+
+.itemS {
+    @apply w-[200px] text-[20px] text-[#160F2980] pb-[20px]
+}
+
+.itemD {
+    @apply text-[20px] text-[#160F29] mb-[10px]
+}

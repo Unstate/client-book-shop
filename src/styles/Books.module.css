@@ -1,3 +1,11 @@
 .booksContainer {
     @apply w-[100%] flex flex-wrap gap-x-[34px] gap-y-[30px]
 }
+
+.buttonPage {
+    @apply mx-[10px] p-[10px] border-[2px] border-[#160F29] text-[#160F29]
+}
+
+.buttonPage:hover {
+    @apply bg-[#160F29] text-white
+}

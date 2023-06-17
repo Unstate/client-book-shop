@@ -1,14 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface Image {
-    smallThumbnail: string;
-    thumbnail: string;
+    largeFingernail: string;
+    mediumFingernail: string;
+    smallFingernail: string;
 }
 
 export interface BooksProps {
-    id: string;
+    _id: string;
     authors: string[];
-    genre: string[];
+    genres: string[];
     title: string;
     img: Image;
     description: string;
@@ -18,12 +19,14 @@ interface BooksState {
     books: BooksProps[];
     isLoading: boolean;
     error: string;
+    totalPages: number;
 }
 
 const initialState:BooksState = {
     books: [],
     isLoading: false,
     error: '',
+    totalPages: 0,
 }
 
 export const booksSlice = createSlice({
@@ -42,6 +45,9 @@ export const booksSlice = createSlice({
             state.isLoading = false
             state.error = action.payload
         },
+        totalPagesCount(state,action:PayloadAction<number>) {
+            state.totalPages = action.payload
+        }
     }
 })
 

@@ -1,23 +1,51 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { BooksProps } from "./bookSlice";
+import { Image } from "./bookSlice";
+
+export interface CertainBook {
+    authors: string[];
+    bookBinding: string;
+    bookSeries: string;
+    comments: any[];
+    description: string;
+    genres: string[];
+    img: Image;
+    pageCount: number;
+    painters: string[];
+    publishedDate: string;
+    publisher:string;   
+    title: string;
+    translaters: string[];
+    _id: string;
+}
 
 interface CertainBookProps {
-    book: BooksProps;
+    book: CertainBook;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: CertainBookProps = {
     book: {
-        id: '',
         authors: [],
-        genre: [],
-        title: '',
-        img: {
-            smallThumbnail: '',
-            thumbnail: '',
-        },
+        bookBinding: '',
+        bookSeries: '',
+        comments: [],
         description: '',
+        genres: [],
+        img: {
+            largeFingernail: '',
+            mediumFingernail: '',
+            smallFingernail: '',
+        },
+        pageCount: 0,
+        painters: [],
+        publishedDate: '',
+        publisher: '',
+        title: '',
+        translaters: [],
+        _id: ''
+        
+        
     },
     isLoading: false,
     error: '',
@@ -30,7 +58,7 @@ export const certainBookSlice = createSlice({
         certainBookFetching(state) {
             state.isLoading = true
         },
-        certainBookFetchingSucces(state,action:PayloadAction<BooksProps>) {
+        certainBookFetchingSucces(state,action:PayloadAction<CertainBook>) {
             state.isLoading = false
             state.error = ''
             state.book = action.payload
