@@ -20,6 +20,9 @@ interface BooksState {
     isLoading: boolean;
     error: string;
     totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    page: number;
 }
 
 const initialState:BooksState = {
@@ -27,6 +30,9 @@ const initialState:BooksState = {
     isLoading: false,
     error: '',
     totalPages: 0,
+    hasNextPage: false,
+    hasPrevPage: false,
+    page: 1,
 }
 
 export const booksSlice = createSlice({
@@ -37,7 +43,7 @@ export const booksSlice = createSlice({
             state.isLoading = true;
         },
         booksFetchingSucces(state, action: PayloadAction<BooksProps[]>) {
-            state.isLoading = false;
+            state.isLoading = false
             state.error = ''
             state.books = action.payload
         },
@@ -45,8 +51,17 @@ export const booksSlice = createSlice({
             state.isLoading = false
             state.error = action.payload
         },
-        totalPagesCount(state,action:PayloadAction<number>) {
+        totalPagesCount(state, action:PayloadAction<number>) {
             state.totalPages = action.payload
+        },
+        setHasNextPage(state, action:PayloadAction<boolean>) {
+            state.hasNextPage = action.payload
+        },
+        setHasPrevPage(state, action:PayloadAction<boolean>) {
+            state.hasPrevPage = action.payload
+        },
+        setCurrentPage(state, action: PayloadAction<number>) {
+            state.page = action.payload
         }
     }
 })

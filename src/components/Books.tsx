@@ -4,6 +4,8 @@ import classes from '../styles/Books.module.css'
 import { fetchBooks } from '../ReduxToolkit/actionCreators'
 import Book from './Book'
 import Preloader from './Preloader'
+import { booksSlice } from '../ReduxToolkit/bookSlice'
+import PaginationF from './Pagination/Pagination'
 
 
 const Books = () => {
@@ -11,14 +13,14 @@ const Books = () => {
     const dispatch = useAppDispatch()
     const { books, isLoading } = useAppSelector(state => state.booksReducer)
     const { totalPages } = useAppSelector(state => state.booksReducer)
-    const [page, setPage] = useState(1)
+    const { page } = useAppSelector(state => state.booksReducer)
     const limit = 12
     const pagesArray: number[] = []
 
     for (let i = 1; i < totalPages + 1; i++) {
         pagesArray.push(i)
     }
-    console.log(pagesArray)
+    console.log(pagesArray, totalPages)
 
 
     // прописать редьюесер фильтрации, который будет засовывать новый
@@ -39,6 +41,10 @@ const Books = () => {
         // console.log(books)
     }, [page])
 
+    const setCurrentPage = (num:number) => {
+        dispatch(booksSlice.actions.setCurrentPage(num))
+    }
+
     return (
         <>
             {isLoading
@@ -52,10 +58,19 @@ const Books = () => {
                             title={book.title}
                             genres={book.genres}
                             img={book.img}></Book>)}
-                    <div>
-                        {pagesArray.map((num, index) =>
-                            <button className={classes.buttonPage} key={index} onClick={() => setPage(num)}>{num}</button>)}
-                    </div>
+                    <PaginationF
+                        currentPage={page}
+                        lastPage={totalPages}
+                        maxLength={7}
+                        setCurrentPage={setCurrentPage}></PaginationF>
+                    {/* <div className='flex flex-wrap'>
+                        <div className='cursor-pointer' onClick={() => dispatch(booksSlice.actions.setCurrentPage(page - 1))}> PREV </div>
+                        {pageNums.map((num, index) =>
+                            num === page
+                            ? <button className={`${classes.buttonPage} ${classes.active}`} key={index} onClick={() => dispatch(booksSlice.actions.setCurrentPage(num))}>{num}</button>
+                            : <button className={classes.buttonPage} key={index} onClick={() => dispatch(booksSlice.actions.setCurrentPage(num))}>{num}</button>)}
+                        <div className='cursor-pointer' onClick={() => dispatch(booksSlice.actions.setCurrentPage(page + 1))}> NEXT </div>
+                    </div> */}
                 </div>}
         </>
     )

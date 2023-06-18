@@ -1,0 +1,15 @@
+.buttonPage {
+    @apply mx-[10px] p-[10px] border-[2px] border-[#160F29] text-[#160F29]
+}
+
+.buttonPage:hover {
+    @apply bg-[#160F29] text-white
+}
+
+.active {
+    @apply bg-[#160F29] text-white
+}
+
+.active:hover {
+    @apply text-[#160F29] bg-white
+}
