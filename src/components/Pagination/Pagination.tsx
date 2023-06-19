@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { getPaginationItems } from './getPaginationItems'
-import classes from './Pagination.module.css'
+import PageLink from './PageLink';
+import left from './../../assets/left.svg'
+import right from './../../assets/right.svg'
 
 type Props = {
     currentPage: number;
@@ -9,41 +11,38 @@ type Props = {
     setCurrentPage: Function
 };
 
-const PaginationF:FC<Props> = ({currentPage, lastPage, maxLength, setCurrentPage}) => {
+const PaginationF: FC<Props> = ({ currentPage, lastPage, maxLength, setCurrentPage }) => {
 
     const pageNums = getPaginationItems(currentPage, lastPage, maxLength);
 
     return (
-        <>
-            <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}
-            >
-                Previous
-            </button>
-            {pageNums.map((num, index) => (
-                num === currentPage
-                ? <button className={`${classes.buttonPage} ${classes.active}`} key={index} onClick={() => setCurrentPage(num)}> {!isNaN(num) ? num : '...'}</button>
-                : <button className={classes.buttonPage} key={index} onClick={() => setCurrentPage(num)}> {!isNaN(num) ? num : '...'}</button>)
-            )}
-                            
-            {/* {pageNums.map((pageNum, idx) => (
-                <button
-                    key={idx}
-                    disabled={isNaN(pageNum)}
-                    onClick={() => setCurrentPage(pageNum)}
+        <div className='m-auto mt-[40px]'>
+            <nav className="pagination" aria-label="Pagination">
+                <PageLink
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(currentPage - 1)}
                 >
-                   
-                </button>
-            ))} */}
-            <button
-                disabled={currentPage === lastPage}
-                onClick={() => setCurrentPage(currentPage + 1)}
-            >
-                Next
-            </button>
-        </>
-    )
+                    <img src={left}></img>
+                </PageLink>
+                {pageNums.map((pageNum, idx) => (
+                    <PageLink
+                        key={idx}
+                        active={currentPage === pageNum}
+                        disabled={isNaN(pageNum)}
+                        onClick={() => setCurrentPage(pageNum)}
+                    >
+                        {!isNaN(pageNum) ? pageNum < 10 ? '0' + pageNum : pageNum : '...'}
+                    </PageLink>
+                ))}
+                <PageLink
+                    disabled={currentPage === lastPage}
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                    <img src={right}></img>
+                </PageLink>
+            </nav>
+        </div>
+    );
 }
 
 export default PaginationF

@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 import { getBookById } from '../ReduxToolkit/actionCreators'
 import CertainBook from '../components/CertainBook'
 import Preloader from '../components/Preloader'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 
 const CertainBookPage = () => {
@@ -19,6 +21,7 @@ const CertainBookPage = () => {
 
     return (
         <>
+            <Header></Header>
             {isLoading
                 ? <Preloader></Preloader>
                 : <div>
@@ -37,6 +40,7 @@ const CertainBookPage = () => {
                         title={book.title}
                         translaters={book.translaters}></CertainBook>
                 </div>}
+                <Footer></Footer>
         </>
     )
 }

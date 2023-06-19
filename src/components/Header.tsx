@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div className='px-[42px]'>
             <header className={classes.siteHeader}>
-                <Link to="/mainPage">
+                <Link to="/booksPage">
                     <LogoNameCompany></LogoNameCompany>
                 </Link>
                 <div className={classes.serchAndUserLogoContainer}>
@@ -17,7 +17,7 @@ const Header = () => {
                         <input className={classes.search} placeholder='Название книги'></input>
                     </div>
                     <div className={classes.userImageContainer}>
-                        <img src={user}></img>
+                        <Link to={'/login'}><img src={user}></img></Link>
                     </div>
                 </div>
             </header>

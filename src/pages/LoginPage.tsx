@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import classes from '../styles/LoginPage.module.css'
 import LogoNameCompany from "../components/LogoNameCompany";
-import user from '../assets/userButton.svg'
 import email from '../assets/mail.svg'
 import lock from '../assets/lock.svg'
 import see from '../assets/see.svg'
+import { Link } from "react-router-dom";
 
 const schema = yup.object({
     firstName: yup.string().required(),
@@ -31,7 +31,7 @@ const LoginPage = () => {
                 <div className={classes.LogoNameCompanyContainer}><LogoNameCompany></LogoNameCompany></div>
                 <div className={classes.questionContainer}>
                     <div className={classes.question}>еще нет аккаунта?</div>
-                    <button className={classes.questionButton}>Зарегестрироваться</button>
+                    <Link to='/registration'><button className={classes.questionButton}>Зарегестрироваться</button></Link>
                 </div>
                 <div className={classes.stick}></div>
             </div>

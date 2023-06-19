@@ -1,6 +1,5 @@
 .formContainer {
-    @apply w-[1400px] h-[800px] flex m-auto mt-[20px];
-    
+    @apply w-[1400px] h-[100vh] flex m-auto;
 }
 
 .infoContainer {
@@ -20,11 +19,11 @@
 }
 
 .questionContainer {
-    @apply flex flex-col items-center justify-center mb-[258px]
+    @apply flex flex-col items-center justify-center mb-[200px]
 }
 
 .LogoNameCompanyContainer {
-    @apply mb-[208px] text-white
+    @apply mb-[180px] text-white
 }
 
 .stick {

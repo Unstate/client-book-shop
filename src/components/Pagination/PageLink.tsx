@@ -1,16 +1,17 @@
-import { HTMLProps } from 'react';
+import { FC, HTMLProps } from 'react';
 import cn from 'classnames';
-import './PageLink.css';
+import './PageLink.css'
 
-export type Props = HTMLProps<HTMLAnchorElement> & { active?: boolean };
+type Props = HTMLProps<HTMLAnchorElement> & { active?: boolean };
 
-export default function PageLink({
+const PageLink:FC<Props> =({
   className,
   active,
   disabled,
   children,
   ...otherProps
-}: Props) {
+}) => {
+  console.log(children)
   const customClassName = cn('page-link', className, {
     active,
     disabled,
@@ -30,3 +31,5 @@ export default function PageLink({
     </a>
   );
 }
+
+export default PageLink

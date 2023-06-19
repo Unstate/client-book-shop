@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import classes from '../styles/Books.module.css'
 import { fetchBooks } from '../ReduxToolkit/actionCreators'
@@ -14,7 +14,7 @@ const Books = () => {
     const { books, isLoading } = useAppSelector(state => state.booksReducer)
     const { totalPages } = useAppSelector(state => state.booksReducer)
     const { page } = useAppSelector(state => state.booksReducer)
-    const limit = 12
+    const limit = 32
     const pagesArray: number[] = []
 
     for (let i = 1; i < totalPages + 1; i++) {

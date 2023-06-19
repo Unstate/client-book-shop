@@ -1,5 +1,5 @@
 .formContainer {
-    @apply w-[1400px] h-[800px] flex m-auto mt-[20px];
+    @apply w-[1400px] h-[100vh] flex m-auto ;
     
 }
 
@@ -16,11 +16,11 @@
 }
 
 .questionContainer {
-    @apply flex flex-col items-center justify-center mb-[258px]
+    @apply flex flex-col items-center justify-center mb-[200px]
 }
 
 .LogoNameCompanyContainer {
-    @apply mb-[208px] text-white
+    @apply mb-[180px] text-white
 }
 
 .stick {
@@ -28,7 +28,7 @@
 }
 
 .formTitle {
-    @apply pt-[186px] font-bold uppercase text-[32px] px-[328px] mb-[50px]
+    @apply pt-[100px] font-bold uppercase text-[32px] px-[328px] mb-[50px]
 }
 
 .questionButton:hover {
