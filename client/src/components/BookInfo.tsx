@@ -12,12 +12,14 @@ interface BookInfoProps {
     pageCount: number
 }
 
-const BookInfo: React.FC<BookInfoProps> = ({img, title, authors, description, genres, publisher, bookSeries, pageCount}) => {
+const BookInfo: React.FC<BookInfoProps> = ({ img, title, authors, description, genres, publisher, bookSeries, pageCount }) => {
     return (
         <>
             <div className={classes.book}>
                 <div className={classes.bookImageContainer}>
-                    <img className={classes.bookImage} src={img.largeFingernail}></img>
+                    <img
+                        className={classes.bookImage}
+                        src={img.largeFingernail} />
                 </div>
                 <div className={classes.aboutBookContainer}>
                     <div className={classes.bookTitleContainer}>
@@ -28,10 +30,17 @@ const BookInfo: React.FC<BookInfoProps> = ({img, title, authors, description, ge
                         <div className={classes.bookDescription}>
                             <div className={classes.bookDesc}>{description}</div>
                             <div className={classes.linkReadMoreContainer}>
-                                <a href="#section1" className={classes.linkReadMore}>Читать далее</a>
+                                <a
+                                    href="#section1"
+                                    className={classes.linkReadMore}>
+                                    Читать далее
+                                </a>
                             </div>
                             <div>
-                                <button className={classes.bookButton}>Хочу почитать</button>
+                                <button
+                                    className={classes.bookButton}>
+                                    Хочу почитать
+                                </button>
                             </div>
                         </div>
                         <div className={classes.nameCell}>

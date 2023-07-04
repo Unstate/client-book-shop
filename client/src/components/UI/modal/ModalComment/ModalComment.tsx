@@ -1,15 +1,34 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import classes from './ModalComment.module.css'
 import cross from '../../../../assets/Cross.svg'
 import StarRating from '../../starRating/StarRating';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { setNewBookComment } from '../../../../ReduxToolkit/actionCreators';
 
 interface ModalCommentProps {
+    id: string;
     children: React.ReactElement | React.ReactNode;
     visable: boolean;
     setVisable: Function;
 }
 
-const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable }) => {
+const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id }) => {
+
+    // сделать обработку ошибки, если статус код 401, то пользователь не авторизован
+    // нужно вывести ему это, что тип пошел нахуй, с
+
+    const [rating, setRating] = useState<number>(0)
+    const dispatch = useAppDispatch()
+    const [title, setTitle] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+
+    const handleRating = (rate: number) => {
+        setRating(rate)
+    }
+
+    const handleReset = () => {
+        setRating(0)
+    }
 
     return (
         <>
@@ -17,15 +36,38 @@ const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable }) 
                 ? <div className={classes.modalWrapper}>
                     <div className={classes.modalContainer}>
                         <div className={classes.modalTitle}>
-                            <div>{children}</div>
-                            <img src={cross} className={classes.crossImage} onClick={() => setVisable(false)}></img>
+                            <p>{children}</p>
+                            <img
+                                src={cross}
+                                className={classes.crossImage}
+                                onClick={() => setVisable(false)} />
                         </div>
-                        <StarRating></StarRating>
-                        <div className={classes.modalInputContainer}><input type="text" className={classes.modalInput} placeholder='Заголовок *' /></div>
-                        <div className={classes.modalInputContainer}><input type="text" className={classes.modalInput} placeholder='Комментарий *' /></div>
-                        {/* эта кнопка будет отправлять изменение на сервер */}
-                        <button className={classes.modalButton} onClick={() => setVisable(false)}>Опубликовать</button>
-                        {/* именно она, та что сверху от этой строчки */}
+                        <StarRating
+                            rating={rating}
+                            handleRating={handleRating}></StarRating>
+                        <div className={classes.modalInputContainer}>
+                            <input
+                                type="text"
+                                className={classes.modalInput}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder='Заголовок *' />
+                        </div>
+                        <div className={classes.modalInputContainer}>
+                            <input
+                                type="text"
+                                className={classes.modalInput}
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                placeholder='Комментарий *' />
+                        </div>
+                        <button
+                            className={classes.modalButton} 
+                            onClick={() => {
+                                dispatch(setNewBookComment(id, title, description, rating))
+                                setVisable(false)
+                            }}>Опубликовать
+                        </button>
                     </div>
                 </div>
                 : <></>}

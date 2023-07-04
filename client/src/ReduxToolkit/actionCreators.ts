@@ -16,7 +16,6 @@ export const fetchBooks = (limit=30, page=1) => async (dispatch: AppDispatch) =>
                 limit: limit,
                 page: page,
             }})
-        // console.log(response.data)
         dispatch(booksSlice.actions.booksFetchingSucces(response.data.books))
         dispatch(booksSlice.actions.totalPagesCount(response.data.totalPages))
         dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
@@ -36,14 +35,20 @@ export const getBookById = (id:any) => async (dispatch: AppDispatch) => {
     }
 }
 
-export const getBookByIdComments = (id:any) => async (dispatch: AppDispatch) => {
+export const getBookByIdComments = (id:string) => async (dispatch: AppDispatch) => {
     try {
-        const response = await axios.get<IComments>(`/api/books/${id}/comments`)
-        // console.log(response.data)
+        const response = await axios.get<IComments[]>(`http://localhost:3000/api/books/${id}/comments`)
+        // console.log(`http://localhost:3000/api/books/${id}/comments`)
+        // console.log(`${id}`)
+        console.log(response.data)
         dispatch(booksSlice.actions.setComments(response.data))
     } catch (error: any) {
         // dispatch(certainBookSlice.actions.certainBookFetchingError(error))
     }
+}
+
+export const setNewBookComment = (id:string, title:string,text:string, rating:number) => async () => {
+    return axios.post(`http://localhost:3000/api/books/${id}/comments`, {title, text, rating})
 }
 
 export const getUserId = (id:any) => async (dispatch: AppDispatch) => {
@@ -59,7 +64,6 @@ export const getUserId = (id:any) => async (dispatch: AppDispatch) => {
 export const login = (email:string, password:string) => async (dispatch: AppDispatch) => {
     try {
         const response = await AuthService.login(email, password)
-        // console.log(response)
         localStorage.setItem('token',response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
@@ -71,7 +75,6 @@ export const login = (email:string, password:string) => async (dispatch: AppDisp
 export const registration = (email:string,username:string,password:string) => async (dispatch: AppDispatch) => {
     try {
         const response = await AuthService.registration(email,username,password)
-        // console.log(response)
         localStorage.setItem('token',response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
@@ -96,7 +99,6 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<AuthResponse>(`http://localhost:3000/api/auth/refresh`,{
             withCredentials: true,
         })
-        // console.log(response)
         localStorage.setItem('token',response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))

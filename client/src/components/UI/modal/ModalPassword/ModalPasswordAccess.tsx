@@ -37,32 +37,61 @@ const ModalPasswordAccess: FC<ModalPasswordProps> = ({ children, visable, setVis
                     <form className={classes.modalContainer} onSubmit={handleSubmit(onSubmit)}>
                         <div className={classes.modalTitle}>
                             {children}
-                            <img src={cross} className={classes.crossImage} onClick={() => setVisable(false)}></img>
+                            <img
+                                src={cross}
+                                className={classes.crossImage}
+                                onClick={() => setVisable(false)} />
                         </div>
                         <div className={classes.inputsContainer}>
                             <div className={classes.modalInputContainer}>
                                 {password
-                                    ? <input placeholder="Введите текущий пароль" className={classes.modalInput} {...register("password")} type="password" value={value} onChange={(e) => setValue(e.target.value)} />
-                                    : <input placeholder="Введите текущий пароль" className={classes.modalInput} {...register("password")} type="text" value={value} onChange={(e) => setValue(e.target.value)} />}
+                                    ? <input
+                                        placeholder="Введите текущий пароль"
+                                        className={classes.modalInput} {...register("password")}
+                                        type="password" value={value}
+                                        onChange={(e) => setValue(e.target.value)} />
+                                    : <input
+                                        placeholder="Введите текущий пароль"
+                                        className={classes.modalInput} {...register("password")}
+                                        type="text" value={value}
+                                        onChange={(e) => setValue(e.target.value)} />}
                                 <button onClick={(e) => {
                                     e.preventDefault()
                                     setPassword(!password)
-                                }}><img src={see} /></button>
+                                }}>
+                                    <img src={see} />
+                                </button>
                             </div>
                             <p>{errors.password?.message}</p>
-                            {value != correctValue ? <div>Пароли не совпадают</div> : <></>}
+                            {value != correctValue ? <p>Пароли не совпадают</p> : <></>}
                             <div className={classes.modalInputContainer}>
                                 {correctPassword
-                                    ? <input placeholder="Введите текущий пароль" className={classes.modalInput} {...register("correctPassword")} type="password" value={correctValue} onChange={(e) => setCorrectValue(e.target.value)} />
-                                    : <input placeholder="Введите текущий пароль" className={classes.modalInput} {...register("correctPassword")} type="text" value={correctValue} onChange={(e) => setCorrectValue(e.target.value)} />}
-                                <button onClick={(e) => {
-                                    e.preventDefault()
-                                    setСorrectPassword(!correctPassword)
-                                }}><img src={see} /></button>
+                                    ? <input
+                                        placeholder="Введите текущий пароль"
+                                        className={classes.modalInput} {...register("correctPassword")}
+                                        type="password" value={correctValue}
+                                        onChange={(e) => setCorrectValue(e.target.value)} />
+                                    : <input
+                                        placeholder="Введите текущий пароль"
+                                        className={classes.modalInput} {...register("correctPassword")}
+                                        type="text" value={correctValue}
+                                        onChange={(e) => setCorrectValue(e.target.value)} />}
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        setСorrectPassword(!correctPassword)}}>
+                                    <img src={see} />
+                                </button>
                             </div>
-                            <p>{errors.correctPassword?.message}</p>
+                            <p>
+                                {errors.correctPassword?.message}
+                            </p>
                         </div>
-                        <button className={classes.modalButton} onClick={() => setVisable(false)}>Подтвердить</button>
+                        <button
+                            className={classes.modalButton}
+                            onClick={() => setVisable(false)}>
+                            Подтвердить
+                        </button>
                     </form>
                 </div>
                 : <></>}

@@ -1,12 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-// import classes from '../styles/CertainBookPage.module.css'
 import { useEffect } from 'react'
 import { getBookById } from '../ReduxToolkit/actionCreators'
 import CertainBook from '../components/CertainBook'
 import Preloader from '../components/Preloader'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 
 
 const CertainBookPage = () => {
@@ -15,15 +12,12 @@ const CertainBookPage = () => {
     const { book, isLoading } = useAppSelector(state => state.certainBookReducer)
     const { id } = useParams()
 
-    // console.log(book)
-
     useEffect(() => {
         dispatch(getBookById(id))
     }, [])
 
     return (
         <>
-            <Header></Header>
             {isLoading
                 ? <Preloader></Preloader>
                 : <div>
@@ -43,7 +37,6 @@ const CertainBookPage = () => {
                         translaters={book.translaters}
                         id={book._id}></CertainBook>
                 </div>}
-                <Footer></Footer>
         </>
     )
 }

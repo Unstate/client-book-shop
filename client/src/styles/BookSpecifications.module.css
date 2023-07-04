@@ -25,3 +25,7 @@
 .itemD {
     @apply text-[20px] text-[#160F29] mb-[10px]
 }
+
+.charContainer {
+    @apply flex space-x-[70px] mb-[30px]
+}

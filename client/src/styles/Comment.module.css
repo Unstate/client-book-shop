@@ -1,0 +1,27 @@
+.commentContainer {
+    @apply w-[100%] h-[380px] bg-[#E2F4F2] p-[30px]
+}
+
+.infoCommentContainer {
+    @apply text-[18px] text-[#160F2980] flex justify-between mb-[30px]
+}
+
+.commentBody {
+    @apply text-[#160F29] flex flex-col space-y-[20px] text-[20px]
+}
+
+.commentTitle {
+    @apply text-[22px] font-[600]
+}
+
+.commentFooter {
+    @apply flex justify-between relative bottom-[-147px]
+}
+
+.markContainer {
+    @apply flex space-x-[10px] text-[#160F2980] text-[20px]
+}
+
+.button {
+    @apply cursor-pointer
+}

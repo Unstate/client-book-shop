@@ -42,20 +42,26 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
                     <div className={classes.modalContainer}>
                         <div className={classes.modalTitle}>
                             {children}
-                            <img src={cross} className={classes.crossImage} onClick={() => setVisable(false)}></img>
+                            <img 
+                            src={cross} 
+                            className={classes.crossImage} 
+                            onClick={() => setVisable(false)}/>
                         </div>
                         <div
                             className={classes.dropzone}
                             onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                        >
+                            onDrop={handleDrop}>
                             {files
                                 ? <div className="uploads">
                                     <ul>
                                         {Array.from(files).map((file: any, idx) => <li key={idx}>{file.name}</li>)}
                                     </ul>
                                     <div className="actions">
-                                        <button className={classes.modalButton} onClick={() => setVisable(false)}>Сохранить изменения</button>
+                                        <button
+                                            className={classes.modalButton}
+                                            onClick={() => setVisable(false)}>
+                                            Сохранить изменения
+                                        </button>
                                     </div>
                                 </div>
                                 : <>
@@ -70,12 +76,24 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
 
                                     />
                                     <div className={classes.modalButtonContainer}>
-                                        <button className={classes.modalButton} onClick={(e) => handleClick(e)}>Выбрать файл</button>
-                                        <button className={classes.modalButton} onClick={(e) => handleClick(e)}>Вставить из буфера</button>
+                                        <button
+                                            className={classes.modalButton}
+                                            onClick={(e) => handleClick(e)}>
+                                            Выбрать файл
+                                        </button>
+                                        <button
+                                            className={classes.modalButton}
+                                            onClick={(e) => handleClick(e)}>
+                                            Вставить из буфера
+                                        </button>
                                     </div>
                                 </>}
                         </div>
-                        <button className={`${classes.modalButton} ${classes.modalButtonDelete}`} onClick={handleClearClick}>Удалить фотографию</button>
+                        <button
+                            className={`${classes.modalButton} ${classes.modalButtonDelete}`}
+                            onClick={handleClearClick}>
+                            Удалить фотографию
+                        </button>
                     </div>
                 </div>
                 : <></>}

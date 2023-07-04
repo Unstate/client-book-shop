@@ -6,11 +6,17 @@ import { useState } from "react"
 import ModalUploader from "./UI/modal/ModalUploader/ModalUploader"
 import ModalName from "./UI/modal/ModalName/ModalName"
 import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
-import ModalComment from "./UI/modal/ModalComment/ModalComment"
-import StarRating from "./UI/starRating/StarRating"
 
 
-const User: React.FC<IUser> = ({ email, isActivated, logo, password, username, id }) => {
+const User: React.FC<IUser> = (
+    {
+        email,
+        isActivated,
+        logo,
+        password,
+        username,
+        id
+    }) => {
 
     const [visableName, setVisableName] = useState<boolean>(false)
     const [visableImg, setVisableImg] = useState<boolean>(false)
@@ -23,9 +29,15 @@ const User: React.FC<IUser> = ({ email, isActivated, logo, password, username, i
                 Личные данные
                 <div className={classes.userProfile}>
                     <div className={classes.userCard}>
-                        <div className={classes.userImageContainer}><img className={classes.userImage} src={goose}></img></div>
+                        <div className={classes.userImageContainer}>
+                            <img
+                                className={classes.userImage}
+                                src={goose} />
+                        </div>
                         <div>
-                            <img className={classes.urlImage} src={url}></img>
+                            <img
+                                className={classes.urlImage}
+                                src={url} />
                             <div>
                                 <div className={classes.userCardInfo}>
                                     <div className={classes.itemTitle}>Имя пользователя</div>
@@ -43,10 +55,26 @@ const User: React.FC<IUser> = ({ email, isActivated, logo, password, username, i
                         </div>
                     </div>
                     <div className={classes.buttonsContainer}>
-                        <button className={classes.userProfileButton} onClick={() => setVisableImg(true)}>изменить фотографию</button>
-                        <button className={classes.userProfileButton} onClick={() => setVisableName(true)}>изменить имя пользователя</button>
-                        <button className={classes.userProfileButton} onClick={() => setVisableEmail(true)}>изменить E-mail</button>
-                        <button className={classes.userProfileButton} onClick={() => setVisablePassword(true)}>изменить пароль</button>
+                        <button
+                            className={classes.userProfileButton}
+                            onClick={() => setVisableImg(true)}>
+                            изменить фотографию
+                        </button>
+                        <button
+                            className={classes.userProfileButton}
+                            onClick={() => setVisableName(true)}>
+                            изменить имя пользователя
+                        </button>
+                        <button
+                            className={classes.userProfileButton}
+                            onClick={() => setVisableEmail(true)}>
+                            изменить E-mail
+                        </button>
+                        <button
+                            className={classes.userProfileButton}
+                            onClick={() => setVisablePassword(true)}>
+                            изменить пароль
+                        </button>
                     </div>
                 </div>
                 <hr></hr>

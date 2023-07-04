@@ -13,17 +13,32 @@ interface BookSpecificationsProps {
     publishedDate: string;
 }
 
-const BookSpecifications:React.FC<BookSpecificationsProps> = ({description, genres, publisher, bookSeries, bookBinding, painters, translaters, pageCount, publishedDate}) => {
+const BookSpecifications: React.FC<BookSpecificationsProps> = (
+    { 
+        description,
+        genres,
+        publisher,
+        bookSeries,
+        bookBinding,
+        painters,
+        translaters,
+        pageCount,
+        publishedDate
+    }) => {
+        
     return (
         <div className={classes.aboutBookContainer}>
             <div id="section1" className={classes.aboutBookTitle}>О книге</div>
             <div className={classes.aboutBookDescription}>{description}</div>
             <div id="section2" className={classes.aboutBookTitle}>Характеристики</div>
-            <div className="flex space-x-[70px] mb-[30px]">
+            <div className={classes.charContainer}>
                 <div>
                     <div className={classes.charItem}>
                         <div className={classes.itemF}>Жанр</div>
-                        <div className={classes.itemD}>{genres.map((genre, index) => <div key={index}>{genre}</div>)}</div>
+                        <div className={classes.itemD}>
+                            {genres.map((genre, index) =>
+                                <div key={index}>{genre}</div>)}
+                        </div>
                     </div>
                     <div className={classes.charItem}>
                         <div className={classes.itemF}>Издательство</div>
@@ -41,11 +56,21 @@ const BookSpecifications:React.FC<BookSpecificationsProps> = ({description, genr
                 <div>
                     <div className={classes.charItem}>
                         <div className={classes.itemS}>Художник</div>
-                        <div className={classes.itemD}>{painters.length ? painters.map((painter, index) => <div key={index}>{painter}</div>) : <div> — </div>}</div>
+                        <div className={classes.itemD}>
+                            {painters.length
+                                ? painters.map((painter, index) =>
+                                    <div key={index}>{painter}</div>)
+                                : <div> — </div>}
+                        </div>
                     </div>
                     <div className={classes.charItem}>
                         <div className={classes.itemS}>Переводчик</div>
-                        <div className={classes.itemD}>{translaters.length ? translaters.map((translater, index) => <div key={index}>{translater}</div>) : <div> — </div>}</div>
+                        <div className={classes.itemD}>
+                            {translaters.length
+                                ? translaters.map((translater, index) =>
+                                    <div key={index}>{translater}</div>)
+                                : <div> — </div>}
+                        </div>
                     </div>
                     <div className={classes.charItem}>
                         <div className={classes.itemS}>Год издания</div>

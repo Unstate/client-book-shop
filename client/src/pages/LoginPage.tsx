@@ -12,7 +12,6 @@ import { useAppDispatch } from "../hooks/redux";
 import { login } from "../ReduxToolkit/actionCreators";
 
 const schema = yup.object({
-    // firstName: yup.string().required(),
     mail: yup.string().required(),
     password: yup.string().required(),
 }).required();

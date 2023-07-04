@@ -36,25 +36,42 @@ const ModalPassword: FC<ModalPasswordProps> = ({ children, visable, setVisable }
                     <form className={classes.modalContainer} onSubmit={handleSubmit(onSubmit)}>
                         <div className={classes.modalTitle}>
                             {children}
-                            <img src={cross} className={classes.crossImage} onClick={() => setVisable(false)}></img>
+                            <img
+                                src={cross}
+                                className={classes.crossImage}
+                                onClick={() => setVisable(false)} />
                         </div>
                         <div className={classes.modalInputContainer}>
                             {password
-                                ? <input placeholder="Введите текущий пароль" className={classes.modalInput} {...register("password")} type="password" value={value} onChange={(e) => setValue(e.target.value)} />
-                                : <input placeholder="Введите текущий пароль" className={classes.modalInput} {...register("password")} type="text" value={value} onChange={(e) => setValue(e.target.value)} />}
+                                ? <input
+                                    placeholder="Введите текущий пароль"
+                                    className={classes.modalInput} {...register("password")}
+                                    type="password" value={value}
+                                    onChange={(e) => setValue(e.target.value)} />
+                                : <input
+                                    placeholder="Введите текущий пароль"
+                                    className={classes.modalInput} {...register("password")}
+                                    type="text" value={value}
+                                    onChange={(e) => setValue(e.target.value)} />}
                             <button onClick={(e) => {
                                 e.preventDefault()
                                 setPassword(!password)
                             }}><img src={see} /></button>
                         </div>
                         <p>{errors.password?.message}</p>
-                        <button className={classes.modalButton} onClick={() => {
-                            setTest(true)
-                            setVisable(false)
-                        }}>Подтвердить</button>
+                        <button
+                            className={classes.modalButton}
+                            onClick={() => {
+                                setTest(true)
+                                setVisable(false)
+                            }}>Подтвердить</button>
                     </form>
                 </div>
-                : <ModalPasswordAccess visable={test} setVisable={setTest}>Изменение пароля</ModalPasswordAccess>}
+                : <ModalPasswordAccess
+                    visable={test}
+                    setVisable={setTest}>
+                    Изменение пароля
+                </ModalPasswordAccess>}
         </>
     );
 }
