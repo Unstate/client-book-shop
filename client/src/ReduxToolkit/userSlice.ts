@@ -4,6 +4,7 @@ import { IUser } from "../components/models/IUser";
 interface IUsers {
     user: IUser;
     isAuth: boolean;
+    isLoading: boolean
 }
 
 const initialState: IUsers = {
@@ -17,12 +18,20 @@ const initialState: IUsers = {
         logo: '',
     },
     isAuth: false,
+    isLoading: false,
 }
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        userFetching(state) {
+            state.isLoading = true
+        },
+        userFetchingSucces(state,action:PayloadAction<IUser>) {
+            state.isLoading = false
+            state.user = action.payload
+        },
         setUser(state, action: PayloadAction<IUser>) {
             state.user = action.payload
         },

@@ -1,5 +1,6 @@
 .siteHeader {
-    @apply flex items-center justify-between mb-[30px]  pt-[22px]
+    @apply flex items-center justify-between mb-[30px] pt-[22px];
+    font-family: 'Open Sans';
 }
 
 .nav {

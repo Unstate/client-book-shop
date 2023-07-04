@@ -3,7 +3,7 @@
 }
 
   .duck {
-    @apply w-[700px] h-[700px];
+    @apply w-[600px] h-[600px];
     -webkit-animation: spinner 1500ms infinite linear;
     -moz-animation: spinner 1500ms infinite linear;
     -ms-animation: spinner 1500ms infinite linear;

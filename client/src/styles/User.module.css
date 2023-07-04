@@ -1,0 +1,40 @@
+.userContainer {
+    @apply px-[42px] pt-[30px]
+}
+
+.userProfile {
+    @apply flex space-x-[301px] mb-[30px]
+}
+
+.userCard {
+    @apply w-[729px] h-[280px] bg-[#B65C34] rounded-[15px] flex items-center justify-center space-x-[50px]
+}
+
+
+.userCardInfo {
+    @apply flex space-x-[53px]
+}
+
+.itemTitle {
+    @apply w-[182px] h-[27px] mb-[29px] text-[#FFFFFF80]
+}
+
+.itemDesc {
+    @apply text-white 
+}
+
+.urlImage {
+    @apply mb-[29px] 
+}
+
+.userProfileButton {
+    @apply w-[286px] py-[15px] uppercase text-[#160F29] text-[16px] font-[600] border-[2px] border-[#160F29]
+}
+
+.userProfileButton:hover {
+     @apply bg-[#160F29] text-white
+}
+
+.buttonsContainer {
+    @apply flex flex-col space-y-[20px]
+}

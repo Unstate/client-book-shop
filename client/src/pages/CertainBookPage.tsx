@@ -15,6 +15,8 @@ const CertainBookPage = () => {
     const { book, isLoading } = useAppSelector(state => state.certainBookReducer)
     const { id } = useParams()
 
+    // console.log(book)
+
     useEffect(() => {
         dispatch(getBookById(id))
     }, [])
@@ -38,7 +40,8 @@ const CertainBookPage = () => {
                         publishedDate={book.publishedDate}
                         publisher={book.publisher}
                         title={book.title}
-                        translaters={book.translaters}></CertainBook>
+                        translaters={book.translaters}
+                        id={book._id}></CertainBook>
                 </div>}
                 <Footer></Footer>
         </>

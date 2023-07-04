@@ -1,0 +1,43 @@
+.modalWrapper {
+    @apply w-[100%] h-[100%] bg-[#160F2980] z-[100] absolute top-0 right-0 overflow-hidden flex justify-center items-center;
+    font-family: 'Open Sans';
+}
+
+.modalContainer {
+    @apply w-[772px] bg-white flex flex-col space-y-[30px] p-[40px];
+    animation: ani 0.5s forwards;
+}
+
+.modalTitle {
+    @apply text-[#160F29] font-semibold text-[25px] flex justify-between
+}
+
+.crossImage {
+    @apply cursor-pointer;
+}
+
+@keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+
+.modalInputContainer {
+    @apply w-[692px]
+}
+
+.modalInput {
+    @apply w-[100%] border-[3px] border-[#160F2980] pl-[12px] py-[16px] text-[18px]
+}
+
+.modalButton {
+    @apply uppercase font-[600] mt-[20px] border-[2px] border-[#160F2980]  py-[15px] text-[16px] w-[692px]
+}
+
+.modalButton:hover {
+     @apply bg-[#160F29] text-white
+}
+
+.disable {
+    @apply hidden
+}

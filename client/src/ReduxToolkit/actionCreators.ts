@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AppDispatch } from './store';
-import { booksSlice } from './bookSlice';
+import { IComments, booksSlice } from './bookSlice';
 import { CertainBook, certainBookSlice } from './certainBookSlice';
 import { userSlice } from './userSlice';
 import AuthService from '../components/services/AuthService';
@@ -36,10 +36,30 @@ export const getBookById = (id:any) => async (dispatch: AppDispatch) => {
     }
 }
 
+export const getBookByIdComments = (id:any) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await axios.get<IComments>(`/api/books/${id}/comments`)
+        // console.log(response.data)
+        dispatch(booksSlice.actions.setComments(response.data))
+    } catch (error: any) {
+        // dispatch(certainBookSlice.actions.certainBookFetchingError(error))
+    }
+}
+
+export const getUserId = (id:any) => async (dispatch: AppDispatch) => {
+    try {
+        dispatch(userSlice.actions.userFetching())
+        const response = await axios.get<IUser>(`/api/users/${id}`)
+        dispatch(userSlice.actions.userFetchingSucces(response.data))
+    } catch (error: any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
 export const login = (email:string, password:string) => async (dispatch: AppDispatch) => {
     try {
         const response = await AuthService.login(email, password)
-        console.log(response)
+        // console.log(response)
         localStorage.setItem('token',response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
@@ -51,7 +71,7 @@ export const login = (email:string, password:string) => async (dispatch: AppDisp
 export const registration = (email:string,username:string,password:string) => async (dispatch: AppDispatch) => {
     try {
         const response = await AuthService.registration(email,username,password)
-        console.log(response)
+        // console.log(response)
         localStorage.setItem('token',response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
@@ -76,7 +96,7 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
         const response = await axios.get<AuthResponse>(`http://localhost:3000/api/auth/refresh`,{
             withCredentials: true,
         })
-        console.log(response)
+        // console.log(response)
         localStorage.setItem('token',response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))

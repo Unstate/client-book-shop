@@ -23,6 +23,19 @@ interface BooksState {
     hasNextPage: boolean;
     hasPrevPage: boolean;
     page: number;
+    comments: IComments;
+}
+
+export interface IComments {
+    bookId: string;
+    date: number;
+    dislikes: string[];
+    likes: string[];
+    rating: number;
+    text: string;
+    title: string;
+    userId: string;
+    _id: string;
 }
 
 const initialState:BooksState = {
@@ -33,6 +46,17 @@ const initialState:BooksState = {
     hasNextPage: false,
     hasPrevPage: false,
     page: 1,
+    comments: {
+        bookId: '',
+        date: 0,
+        dislikes: [],
+        likes: [],
+        rating: 0,
+        text: '',
+        title: '',
+        userId: '',
+        _id: '',
+    },
 }
 
 export const booksSlice = createSlice({
@@ -62,6 +86,12 @@ export const booksSlice = createSlice({
         },
         setCurrentPage(state, action: PayloadAction<number>) {
             state.page = action.payload
+        },
+        setComments(state, action:PayloadAction<IComments>) {
+            state.comments = action.payload
+        },
+        filterBooks(state, action:PayloadAction<BooksProps[]>) {
+            state.books = action.payload
         }
     }
 })

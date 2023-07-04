@@ -18,7 +18,9 @@ app.use(cors({
 }))
 app.use(cookieParser());
 app.use('/api', router);
+
 app.use(errorMiddleware);
+
 
 const start = async () => {
     try {
@@ -32,4 +34,5 @@ const start = async () => {
 }
 
 start();
+
 

@@ -1,0 +1,8 @@
+.myButton {
+    @apply uppercase font-[600] border-[2px] border-[#160F2980] text-[16px];
+    font-family: 'Open Sans';
+}
+
+.myButton:hover {
+     @apply bg-[#160F29] text-white
+}

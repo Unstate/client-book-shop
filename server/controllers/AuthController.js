@@ -1,6 +1,7 @@
 import ApiError from "../exeptions/ApiError.js";
 import AuthService from "../services/AuthService.js";
 import {validationResult} from 'express-validator'
+import DropBoxV2Service from "../services/DropBoxV2Service.js";
 
 class AuthController{
     async registration(req, res, next){
@@ -10,9 +11,9 @@ class AuthController{
                 throw ApiError.BadRequest('Validation error', validResult.array())
             
             const {email, username, password} = req.body;
-            const userInfo = await AuthService.registration(email, username, password);
-            res.cookie('refreshToken', userInfo.refreshToken, {maxAge:900000, httpOnly:true});
-            res.json(userInfo);
+            const userData = await AuthService.registration(email, username, password);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge:900000, httpOnly:true});
+            res.json(userData);
         } catch (error) {
             next(error);
         }
@@ -22,6 +23,7 @@ class AuthController{
         try {
             const {email, password} = req.body;
             const userData = await AuthService.login(email, password);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge:900000, httpOnly:true});
             res.json(userData);
         } catch (error) {
             next(error);
@@ -53,7 +55,18 @@ class AuthController{
         try {
             const activationLink = req.params.link;
             await AuthService.activate(activationLink);
-            res.redirect(process.env.CLIENT_URL);
+            res.redirect('https://ya.ru/');
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async refreshDropboxToken(req, res, next){
+        try {
+            const {code} = req.query;
+            res.sendStatus(200);
+
+            DropBoxV2Service.refreshAccessToken(code);
         } catch (error) {
             next(error);
         }

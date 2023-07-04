@@ -3,7 +3,7 @@ export function getPaginationItems(
     lastPage: number,
     maxLength: number
   ) {
-    // debugger
+    
     const res: Array<number> = [];
   
     // handle lastPage less than maxLength

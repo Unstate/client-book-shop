@@ -18,9 +18,10 @@ interface CertainBookProps {
     publisher: string;
     title: string;
     translaters: string[];
+    id: string;
 }
 
-const CertainBook: React.FC<CertainBookProps> = ({ authors, bookBinding, bookSeries, comments, description, genres, img, pageCount, painters, publishedDate, publisher, title, translaters }) => {
+const CertainBook: React.FC<CertainBookProps> = ({ id, authors, bookBinding, bookSeries, comments, description, genres, img, pageCount, painters, publishedDate, publisher, title, translaters }) => {
 
     const bread = `Все книги / ${title}`
 
@@ -48,7 +49,8 @@ const CertainBook: React.FC<CertainBookProps> = ({ authors, bookBinding, bookSer
             publishedDate={publishedDate}
             publisher={publisher}
             translaters={translaters}></BookSpecifications>
-            <Comments></Comments>
+            <Comments
+            id={id}></Comments>
         </div>
     )
 }

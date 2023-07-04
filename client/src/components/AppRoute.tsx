@@ -7,11 +7,12 @@ import BooksPage from "../pages/BooksPage"
 import { useAppDispatch, useAppSelector } from "../hooks/redux"
 import { useEffect } from "react"
 import { checkAuth } from "../ReduxToolkit/actionCreators"
+import UserPage from "../pages/UserPages"
 
 const AppRoute = () => {
 
     const dispatch = useAppDispatch()
-    const { user,isAuth } = useAppSelector(state => state.userReducer)
+    const { isAuth } = useAppSelector(state => state.userReducer)
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -22,12 +23,13 @@ const AppRoute = () => {
     return (
         <>
             <div className={classes.appWrapper}>
-            {isAuth ? <div>АВТОРИЗОВАН</div> : <div>ВОЙДИ</div>}
+            {isAuth ? <div>АВТОРИЗОВАН</div> : <div> НЕЕЕЕ АВТОРИЗОВАН</div>}
                 <Routes>
                     <Route path='/booksPage' element={<BooksPage></BooksPage>}></Route>
                     <Route path='/books/:id' element={<CertainBookPage></CertainBookPage>}></Route>
                     <Route path='/login' element={<LoginPage></LoginPage>}></Route>
                     <Route path='/registration' element={<RegistrationPage></RegistrationPage>}></Route>
+                    <Route path='/users/:id' element={<UserPage></UserPage>}></Route>
                     <Route path='/*' element={<Navigate to='/login' replace/>}/>
                 </Routes>
             </div>

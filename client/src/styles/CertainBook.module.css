@@ -1,5 +1,6 @@
 .certainBookContainer {
-    @apply mx-[42px]
+    @apply mx-[42px];
+    font-family: 'Open Sans';
 }
 
 

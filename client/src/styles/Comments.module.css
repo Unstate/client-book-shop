@@ -1,3 +1,3 @@
 .aboutBookTitle {
-    @apply mb-[30px] text-[#160F29] font-semibold text-[25px]
+    @apply mb-[30px] text-[#160F29] font-semibold text-[25px] flex justify-between items-center
 }

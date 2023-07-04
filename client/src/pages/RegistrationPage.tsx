@@ -10,7 +10,7 @@ import lock from '../assets/lock.svg'
 import see from '../assets/see.svg'
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../hooks/redux";
-import { login, registration } from "../ReduxToolkit/actionCreators";
+import { registration } from "../ReduxToolkit/actionCreators";
 
 const schema = yup.object({
     username: yup.string().required(),
@@ -84,9 +84,6 @@ const RegistrationPage = () => {
 
 
                     <button type="submit" className={classes.formButton} onClick={() => {
-                        console.log(`EMAIL >>> ${mail}`)
-                        console.log(`USERNAME >>> ${username}`)
-                        console.log(`PASSWORD >>> ${value}`)
                         dispatch(registration(mail,username,value))
                     }}>Зарегестрироваться</button>
                 </form>
