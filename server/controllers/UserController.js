@@ -14,6 +14,15 @@ class UserController{
         }
     }
 
+    async getUsers(req, res, next){
+        try {
+            const usersData = await UserService.getUsers();
+            res.status(200).json(usersData);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async getLogo(req, res, next){
         try {
             const id = req.params.id;
@@ -32,6 +41,18 @@ class UserController{
             const id = req.params.id;
             const file = req.file;
             await UserService.uploadLogo(id, file);
+            
+            res.sendStatus(200);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async deleteLogo(req, res, next){
+        try {
+            const id = req.params.id;
+
+            await UserService.deleteLogo(id);
             
             res.sendStatus(200);
         } catch (error) {
@@ -95,10 +116,10 @@ class UserController{
             const validResult = validationResult(req);
             if(!validResult.isEmpty())
                 throw ApiError.BadRequest('Validation error', validResult.array())
-
-            const {id} = req.user;
+            
+            const id = req.params.id;
+            
             const {password} = req.body;
-
             await UserService.changePassword(password, id);
 
             res.sendStatus(200);
@@ -109,8 +130,8 @@ class UserController{
 
     async chooseFavoriteBook(req, res, next){
         try {
-            const userId = req.user.id;
-            const {bookId} = req.query;
+            const userId = req.params.id;
+            const {bookId} = req.body;
             await UserService.chooseFavoriteBook(bookId, userId);
             res.sendStatus(201);
         } catch (error) {
@@ -120,8 +141,9 @@ class UserController{
 
     async getFavoriteBook(req, res, next){
         try {
-            const userId = req.user.id;
-            const favoriteBooks = await UserService.getFavoriteBook(userId);
+            const userId = req.params.id;
+            const {limit, page} = req.body;
+            const favoriteBooks = await UserService.getFavoriteBook(limit, page, userId);
             res.status(200).json(favoriteBooks);
         } catch (error) {
             next(error)
@@ -130,7 +152,8 @@ class UserController{
 
     async deleteFavoriteBook(req, res, next){
         try {
-            const {userId, bookId} = req.body;
+            const userId = req.params.id;
+            const {bookId} = req.body;
             await UserService.deleteFavoriteBook(bookId, userId);
             res.sendStatus(204);
         } catch (error) {

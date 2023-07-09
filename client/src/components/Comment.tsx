@@ -30,6 +30,7 @@ const Comment: FC<CommentProps> = (
     const month = (dateN.getMonth() + 1).toString().padStart(2, '0');
     const year = dateN.getFullYear().toString();
     const formattedDate = `${day}.${month}.${year}`;
+    
     const red: CSSProperties = {
         background: '#F6E6DF',
     }

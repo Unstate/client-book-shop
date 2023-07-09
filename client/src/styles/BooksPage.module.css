@@ -1,4 +1,5 @@
 .siteContainer {
-    @apply flex px-[42px] space-x-[34px] mt-[30px]
+    @apply flex px-[42px] space-x-[34px] mt-[30px];
+    font-family: 'Open Sans';
 }
 

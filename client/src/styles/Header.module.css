@@ -16,7 +16,7 @@
 }
 
 .search {
-    @apply py-[9px] px-[12px] border-[2px] border-gray-500 text-[20px] w-[561px] z-0 relative 
+    @apply py-[9px] px-[12px] border-[2px] border-gray-500 text-[16px] w-[561px] z-0 relative 
 }
 
 hr {
@@ -33,4 +33,8 @@ hr {
 
 .searchButton {
     @apply relative left-[540px] z-20 cursor-pointer
+}
+
+.searchResultContainer {
+    @apply absolute top-[82px] right-[420px] overflow-auto w-[560px] h-[500px] z-[100] bg-red-500
 }

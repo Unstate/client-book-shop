@@ -1,106 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        .beige_container 
-        {
+        .pageContainer {
+            width: 1000px;
             height: 500px;
-            background: #F3DFC1;
-            border-radius: 2px;
-            padding-top: 40px;
+            margin: auto;
+            background-color: #F3DFC1;
         }
-        .white_container 
-        {
+
+        .pageContainer__img {
+            width: 300px;
+            height: 71px;
+            padding: 20px 0;
+            margin-left: 330px;
+        }
+
+        .pageContainer__textContainer {
             width: 686px;
-            height: 360px;
-            margin: 0 auto;
-            text-align: center;
-            background: #FFFFFF;
-            border-radius: 2px;
-            text-align: center;
-            padding-top:20px;
-        }
-        .user 
-        {
-            margin-top: 20px;
+            height: 300px;
             margin-bottom: 40px;
-            font-family: 'Open Sans', sans-serif;
-            font-style: normal;
-            font-weight: 700;
+            padding: 20px;
+            background-color: white;
+            margin-left: 130px;
+        }
+
+        .title {
+            color: #160F29;
+            font-weight:700;
+            font-family: 'Open Sans';
+            text-transform: uppercase;
+            text-align: center;
             font-size: 20px;
-            line-height: 27px;
-            text-transform: uppercase;
+            padding-bottom: 50px;
+        }
 
+        .descriptionOne {
             color: #160F29;
-        }
-        .message 
-        {
-            width: 550px;
-            margin: 0 auto;
-            font-family: 'Open Sans', sans-serif;
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 25px;
+            font-family: 'Open Sans';
             text-align: center;
-            margin-bottom: 30px;
+            font-size: 18px;
+            padding-bottom: 20px;
+        }
+
+        .descriptionTwo {
             color: #160F29;
-        }
-
-        .logo 
-        {
-            display: block;
+            font-weight:700;
+            font-family: 'Open Sans';
             text-align: center;
-            margin: 0 auto;
-            height: 74px;
-            margin-top: 20px;
-        }
-
-        .logo img {
-            width: 325px;
-            height: 74px;
-        }
-        .accept_btn 
-        {
-            text-decoration: none;
-            box-sizing: border-box;
-            height: 60px;
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-            padding: 15px 30px;
-            margin-top:50px;
-            width: 330px;
-
-            border: 1px solid #160F29;
-            border-radius: 2px;
-
-            font-family: 'Open Sans', sans-serif;
-            font-style: normal;
-            font-weight: 600;
             font-size: 18px;
-            line-height: 27px;
-            text-transform: uppercase;
-
-            color: #160F29 !important;
+            padding-bottom: 50px;
         }
+
+        .pageContainer__textContainer__button {
+            padding: 15px 20px;
+            background-color: white;
+            color: #160F29;
+            text-transform: uppercase;
+            font-weight:700;
+        }
+
+        .pageContainer__textContainer__buttonContainer {
+            width: 100%;
+            text-align: center;
+        }
+
+        .pageContainer__textContainer__button:hover {
+            background-color: #160F29;
+            color: white;
+            cursor: pointer;
+        }
+        
     </style>
 </head>
+
 <body>
-    <div class="beige_container">
-        <div class="logo"><img src="https://i.imgur.com/NoaSqOu.png" alt="Логотип Mooduck"></div>
-        <div class="white_container">
-            <p class="user">Здравствуй, друг!</p>
-            <p class="message">Благодарим за регистрацию в нашем книжном каталоге. <br> Мы очень рады, что вы присоединились к нашему сообществу любителей книг!<br><br><strong>Для завершения регистрации нажмите на кнопку ниже</strong></p>
-            <a href="activationLink" class="accept_btn">Завершить регистрацию</a>
+    <div class="pageContainer">
+        <img class="pageContainer__img" src="https://i.imgur.com/NoaSqOu.png" />
+        <div class="pageContainer__textContainer">
+            <div class="title">Здравствуйте, username</div>
+            <div class="descriptionOne">Благодарим за регистрацию в нашем книжном каталоге. <br> Мы очень рады, что вы присоединились к
+                нашему сообществу <br> любителей книг!</div>
+            <div class="descriptionTwo">Для завершения регистрации нажмите на кнопку ниже</div>
+            <div class="pageContainer__textContainer__buttonContainer"><a href="activationLink"><button class="pageContainer__textContainer__button">Завершить регистрацию</button></a></div>
         </div>
     </div>
 </body>
+
 </html>

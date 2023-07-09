@@ -1,5 +1,6 @@
 .footer {
-    @apply px-[42px] mt-[100px] flex justify-between items-center h-[134px] bg-[#246A73] text-white
+    @apply px-[42px] mt-[100px] flex justify-between items-center h-[134px] bg-[#246A73] text-white;
+    font-family: 'Open Sans';
 }
 
 .rigthsCompany {

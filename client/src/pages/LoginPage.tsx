@@ -31,34 +31,63 @@ const LoginPage = () => {
     return (
         <div className={classes.formContainer}>
             <div className={classes.infoContainer}>
-                <div className={classes.LogoNameCompanyContainer}><LogoNameCompany></LogoNameCompany></div>
+                <div className={classes.LogoNameCompanyContainer}>
+                    <LogoNameCompany />
+                </div>
                 <div className={classes.questionContainer}>
-                    <div className={classes.question}>еще нет аккаунта?</div>
-                    <Link to='/registration'><button className={classes.questionButton}>Зарегестрироваться</button></Link>
+                    <p className={classes.question}>
+                        еще нет аккаунта?
+                    </p>
+                    <Link to='/registration'>
+                        <button className={classes.questionButton}>
+                            Зарегестрироваться
+                        </button>
+                    </Link>
                 </div>
                 <div className={classes.stick}></div>
             </div>
             <div>
-                <div className={classes.formTitle}> Вход </div>
+                <p className={classes.formTitle}> Вход </p>
                 <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={classes.item}>
                         <img src={email} />
-                        <input placeholder="example@mail.ru" {...register("mail")} value={mail} onChange={(e) => setMail(e.target.value) } />
+                        <input
+                            placeholder="example@mail.ru"
+                            {...register("mail")}
+                            value={mail}
+                            onChange={(e) => setMail(e.target.value)} />
                         <p>{errors.mail?.message}</p>
                     </div>
                     <div className={classes.item}>
                         <img src={lock} />
                         {password
-                            ? <input placeholder="strongPsW2#" {...register("password")} type="password" value={value} onChange={(e) => setValue(e.target.value)} />
-                            : <input placeholder="strongPsW2#" {...register("password")} type="text" value={value} onChange={(e) => setValue(e.target.value)} />}
+                            ? <input
+                                placeholder="strongPsW2#"
+                                {...register("password")}
+                                type="password"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)} />
+                            : <input
+                                placeholder="strongPsW2#"
+                                {...register("password")}
+                                type="text"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)} />}
                         <button onClick={(e) => {
                             e.preventDefault()
                             setPassword(!password)
-                        }}><img src={see}/></button>
+                        }}>
+                            <img src={see} />
+                        </button>
                         <p>{errors.password?.message}</p>
                     </div>
                     <div className={classes.passwordLink}>Забыли пароль?</div>
-                    <button type="submit" className={classes.formButton} onClick={() => dispatch(login(mail,value))}>Войти</button>
+                    <button
+                        type="submit"
+                        className={classes.formButton}
+                        onClick={() => dispatch(login(mail, value))}>
+                        Войти
+                    </button>
                 </form>
             </div>
         </div>

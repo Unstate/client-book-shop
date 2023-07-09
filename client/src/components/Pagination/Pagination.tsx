@@ -16,7 +16,7 @@ const PaginationF: FC<Props> = ({ currentPage, lastPage, maxLength, setCurrentPa
     const pageNums = getPaginationItems(currentPage, lastPage, maxLength);
 
     return (
-        <div className='m-auto mt-[40px]'>
+        <div className='m-auto mt-[40px] relative'>
             <nav className="pagination" aria-label="Pagination">
                 <PageLink
                     disabled={currentPage === 1}

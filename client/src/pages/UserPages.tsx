@@ -11,8 +11,6 @@ const CertainBookPage = () => {
     const { user, isLoading } = useAppSelector(state => state.userReducer)
     const { id } = useParams()
 
-    // console.log(user)
-
     useEffect(() => {
         dispatch(getUserId(id))
     }, [])

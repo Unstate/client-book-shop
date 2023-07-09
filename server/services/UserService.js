@@ -13,9 +13,14 @@ class UserService{
         const user = await UserModel.findById(id).select('-__v');
 
         if(!user)
-            throw ApiError.BadRequest('No user with such id');
+            throw ApiError.BadRequest('Invalid user id');
         
         return user;
+    }
+
+    async getUsers(){ 
+        const users = await UserModel.find();
+        return users;
     }
 
     //получение лого юзера из Dropbox
@@ -33,6 +38,8 @@ class UserService{
 
     //загрузка лого юзера из Dropbox
     async uploadLogo(id, file){
+        if(file.size > 2097152)
+            throw ApiError.BadRequest('File is too big. File size should me less or equal 2 MB')
         const user = await UserModel.findById(id);
         if(!user)
             throw ApiError.BadRequest('Invalid user id');
@@ -53,12 +60,25 @@ class UserService{
         await DropBoxV2Service.uploadLogo(logoName, fileStream);
     }
 
+    async deleteLogo(id){
+        const user = await UserModel.findById(id)
+
+        if(!user)
+            throw ApiError.BadRequest('Invalid user id');
+
+        await DropBoxV2Service.deleteLogo(user.logo);
+
+        user.logo = 'default.jpg'
+
+        await user.save();
+    }
+
     //изменение почты
     async changeEmail(email, userId){
         const user = await UserModel.findById(userId);
 
         if(!user)
-            throw ApiError.BadRequest('No user with such id');
+            throw ApiError.BadRequest('Invalid user id');
         
         const existUser = await UserModel.findOne({email});
         if(existUser)
@@ -75,7 +95,7 @@ class UserService{
         const user = await UserModel.findById(userId);
 
         if(!user)
-            throw ApiError.BadRequest('No user with such id');
+            throw ApiError.BadRequest('Invalid user id');
         
         const existUser = await UserModel.findOne({username});
         if(existUser)
@@ -87,10 +107,11 @@ class UserService{
     }
 
     //изменение пароля
-    async changePassword(password, id){
-        const user = await UserModel.findById(id);
+    async changePassword(password, userId){
+        const user = await UserModel.findById(userId);
+
         if(!user)
-            throw ApiError.BadRequest('No user with such id')
+            throw ApiError.BadRequest('Invalid user id')
 
         const hashedPassword = await bcrypt.hash(password, 7);
         user.password = hashedPassword;
@@ -101,7 +122,7 @@ class UserService{
     async checkPassword(password, id){
         const user = await UserModel.findById(id);
         if(!user)
-            throw ApiError.BadRequest('No user with such id')
+            throw ApiError.BadRequest('Invalid user id')
         
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
@@ -119,21 +140,15 @@ class UserService{
     }
 
     //получение любимых книг пользователя
-    async getFavoriteBook(userId){
-        const favoriteBooksId = await FavoriteBookModel.find({userId});
-        if(!favoriteBooksId)
+    async getFavoriteBook(limit, page, userId){
+        const favoriteBooks = await FavoriteBookModel.find({userId}).select('bookId -_id');
+
+        if(!favoriteBooks)
             throw ApiError.BadRequest('User has not any favorite book');
 
-        console.log(favoriteBooksId);
-        let favoriteBooksInfo = [];
+        const books = await BookService.getBooks(limit, page, null, null, favoriteBooks);
 
-        for(let i = 0; i < favoriteBooksId.length; i++)
-        {
-            const bookInfo = await BookService.getFavoriteBook(favoriteBooksId[i].bookId);
-            favoriteBooksInfo.push(bookInfo);
-        }
-
-        return favoriteBooksInfo
+        return books
     }
 
     //удаление любимой книги пользователя

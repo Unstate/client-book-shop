@@ -1,5 +1,6 @@
 .formContainer {
     @apply w-[1400px] h-[100vh] flex m-auto;
+    font-family: 'Open Sans';
 }
 
 .infoContainer {

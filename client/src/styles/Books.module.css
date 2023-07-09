@@ -1,4 +1,5 @@
 .booksContainer {
-    @apply w-[100%] flex flex-wrap gap-x-[34px] gap-y-[30px] 
+    @apply w-[100%] flex flex-wrap gap-x-[34px] gap-y-[30px];
+    font-family: 'Open Sans'; 
 }
 

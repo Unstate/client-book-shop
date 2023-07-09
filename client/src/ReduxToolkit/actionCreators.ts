@@ -10,12 +10,35 @@ import { AuthResponse } from '../components/models/response/AuthResponse';
 
 export const fetchBooks = (limit=30, page=1) => async (dispatch: AppDispatch) => {
     try {
+        const params = {
+            limit: limit,
+            page: page,
+            // genre: genre.join('-'),
+            // author: author.join('-'),
+        }
+        // console.log(params)
         dispatch(booksSlice.actions.booksFetching())
-        const response = await axios.get('http://localhost:3000/api/books',{
-            params: {
-                limit: limit,
-                page: page,
-            }})
+        const response = await axios.get(`http://localhost:3000/api/books`,{ params })
+        dispatch(booksSlice.actions.booksFetchingSucces(response.data.books))
+        dispatch(booksSlice.actions.totalPagesCount(response.data.totalPages))
+        dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
+        dispatch(booksSlice.actions.setHasPrevPage(response.data.hasPrevPage))
+    } catch (error: any) {
+        dispatch(booksSlice.actions.booksFetchingError(error.message))
+    }
+}
+
+export const fetchBooksFilter = (limit=30, page=1, genre:string[], author:string[]) => async (dispatch: AppDispatch) => {
+    try {
+        const params = {
+            limit: limit,
+            page: page,
+            genre: genre.join('-'),
+            author: author.join('-'),
+        }
+        // console.log(params)
+        dispatch(booksSlice.actions.booksFetching())
+        const response = await axios.get(`http://localhost:3000/api/books`,{ params })
         dispatch(booksSlice.actions.booksFetchingSucces(response.data.books))
         dispatch(booksSlice.actions.totalPagesCount(response.data.totalPages))
         dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
@@ -38,16 +61,14 @@ export const getBookById = (id:any) => async (dispatch: AppDispatch) => {
 export const getBookByIdComments = (id:string) => async (dispatch: AppDispatch) => {
     try {
         const response = await axios.get<IComments[]>(`http://localhost:3000/api/books/${id}/comments`)
-        // console.log(`http://localhost:3000/api/books/${id}/comments`)
-        // console.log(`${id}`)
-        console.log(response.data)
+        // console.log(response.data)
         dispatch(booksSlice.actions.setComments(response.data))
     } catch (error: any) {
-        // dispatch(certainBookSlice.actions.certainBookFetchingError(error))
     }
 }
 
-export const setNewBookComment = (id:string, title:string,text:string, rating:number) => async () => {
+export const setNewBookComment = (id:string, title:string,text:string, rating:number) => () => {
+    // console.log(id, title, text, rating)
     return axios.post(`http://localhost:3000/api/books/${id}/comments`, {title, text, rating})
 }
 
@@ -106,4 +127,5 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
         console.log(error.response?.data?.message)
     }
 }
+
 

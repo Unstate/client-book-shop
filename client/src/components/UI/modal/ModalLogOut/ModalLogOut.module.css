@@ -1,0 +1,22 @@
+.modalWrapper {
+    @apply w-[100%] h-[100%] bg-[#160F2980] z-[100] fixed top-0 right-0 overflow-hidden flex justify-center items-center;
+    font-family: 'Open Sans';
+}
+
+.modalContainer {
+    @apply w-[772px] bg-white p-[40px];
+    animation: ani 0.5s forwards;
+}
+
+.modalTitle {
+    @apply text-[#160F29] font-semibold text-[25px] text-center mb-[30px]
+}
+
+
+.modalImageContainer {
+    @apply flex justify-center mb-[60px]
+}
+
+.modalButtonContainer {
+    @apply flex space-x-[40px]
+}

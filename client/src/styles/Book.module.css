@@ -1,5 +1,6 @@
 .bookContainer {
-    @apply w-[200px] h-[464px] text-[20px] font-sans flex flex-col relative
+    @apply w-[200px] h-[464px] text-[20px] font-sans flex flex-col relative;
+    font-family: 'Open Sans';
 }
 
 .image {

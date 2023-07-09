@@ -1,3 +1,69 @@
 .filterContainer {
-    @apply w-[510px] h-[1060px] border-[2px] border-[#160F2980] p-[30px]
+    @apply w-[510px] h-[808px] border-[2px] border-[#160F2980] p-[30px] flex flex-col space-y-[20px];
+    font-family: 'Open Sans';
+}
+
+.authorsContainer {
+    @apply h-[253px] flex flex-col space-y-[10px];
+}
+
+.genreCsontainer {
+    @apply h-[278px] flex flex-col space-y-[10px];
+}
+
+.filterContainerText {
+    @apply uppercase font-[600] text-[16px] text-[#160F29]; 
+}
+
+.buttonsContainer {
+    @apply flex flex-col space-y-[10px];
+}
+
+.genres {
+    @apply overflow-auto h-[245px];
+}
+
+/* Полоска по которой крутит */
+.genres::-webkit-scrollbar-track
+{
+    @apply bg-[#E8E7EA] rounded-[10px];
+}
+
+/* скрол полоска */
+.genres::-webkit-scrollbar
+{
+    @apply w-[6px];
+}
+
+/* скрол бар */
+.genres::-webkit-scrollbar-thumb
+{
+    @apply rounded-[10px] bg-[#160F29] w-[6px];
+}
+
+.author::-webkit-scrollbar-track
+{
+    @apply bg-[#E8E7EA] rounded-[10px]
+}
+
+.author::-webkit-scrollbar
+{
+    @apply w-[6px] 
+}
+
+.author::-webkit-scrollbar-thumb
+{
+    @apply w-[6px] bg-[#160F29] rounded-[10px]
+}
+
+.author {
+    @apply h-[182px] overflow-auto
+}
+
+.inputContainer {
+    @apply flex space-x-[10px] justify-between border-[2px] border-gray-500;
+}
+
+.searchButton {
+    @apply px-[10px] relative z-20 cursor-pointer
 }

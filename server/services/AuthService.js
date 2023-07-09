@@ -5,23 +5,30 @@ import UserModel from '../models/UserModel.js';
 import ApiError from '../exeptions/ApiError.js'
 import UserDto from '../dtos/UserDto.js';
 import TokenModel from '../models/TokenModel.js';
-import MailService from './mailService.js';
-
+import MailService from './MailService.js';
+import RoleModel from '../models/RoleModel.js';
+import UserService from './UserService.js';
 
 class AuthService{
 
     //регистрация пользователя
     async registration(email, username, password){
-        const isExist = await UserModel.findOne({email});
-        if(isExist)
-            throw ApiError.BadRequest('User with this email is already exist');
+        const isExistEmail = await UserModel.findOne({email});
+        const isExistUsermame = await UserModel.findOne({username});
+
+        if(isExistEmail)
+            throw ApiError.BadRequest('Email is taken');
         
+        if(isExistUsermame)
+            throw ApiError.BadRequest('Username is taken');
+
         const hashedPassword = await bcrypt.hash(password, 7);
         const activationLink = uuidv4();
 
-        const user = await UserModel.create({email, username, password:hashedPassword, activationLink});
+        const role = await RoleModel.findOne({value: 'User'});
+        const user = await UserModel.create({email, username, password:hashedPassword, activationLink, roles: [role.value]});
 
-        await MailService.sendActivateMail(user.email, `${process.env.API_URL}/auth/activate/${activationLink}`);
+        await MailService.sendActivateMail(user.email, `${process.env.API_URL}/api/auth/activate/${activationLink}`, username);
         
         const userDto = new UserDto(user);
         const tokens = TokenService.generateToken({...userDto});
@@ -82,10 +89,29 @@ class AuthService{
     async activate(link){
         const user = await UserModel.findOne({activationLink: link});
         if(!user)
-            throw ApiError.BadRequest('Wrong activation link');
+            throw ApiError.BadRequest('Invalid activation link');
         user.isActivated = true;
         await user.save();
     }
+
+    async sendResetEmail(email){
+        const user = await UserModel.findOne({email});
+        if(!user)
+            throw ApiError.BadRequest('Invalid email');
+        
+        const resetToken = await TokenService.generateResetToken(user._id);
+
+        await MailService.sendResetPasswordMail(email, resetToken);
+    }
+
+    async resetPassword(token, password){
+        const resetToken = await TokenService.validateResetToken(token);
+
+        await UserService.changePassword(password, resetToken.userId);
+
+        await TokenService.removeResetToken(resetToken.value);
+    }
+    
 }
 
 export default new AuthService();

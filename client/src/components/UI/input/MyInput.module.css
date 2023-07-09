@@ -1,0 +1,3 @@
+.myInput {
+    @apply py-[9px] px-[12px] text-[16px] z-0 relative 
+}

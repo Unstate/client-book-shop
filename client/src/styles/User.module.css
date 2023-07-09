@@ -1,9 +1,14 @@
 .userContainer {
-    @apply px-[42px] pt-[30px]
+    @apply px-[42px] pt-[30px];
+    font-family: 'Open Sans';
+}
+
+.personData {
+    @apply font-semibold text-[25px]
 }
 
 .userProfile {
-    @apply flex space-x-[301px] mb-[30px]
+    @apply flex space-x-[301px] mb-[30px] items-center
 }
 
 .userCard {

@@ -1,5 +1,6 @@
 .aboutCompany {
-    @apply flex items-center space-x-[30px]
+    @apply flex items-center space-x-[30px];
+    font-family: 'Open Sans';
 }
 
 .logoCompanyImage {

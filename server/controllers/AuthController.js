@@ -1,7 +1,6 @@
 import ApiError from "../exeptions/ApiError.js";
 import AuthService from "../services/AuthService.js";
 import {validationResult} from 'express-validator'
-import DropBoxV2Service from "../services/DropBoxV2Service.js";
 
 class AuthController{
     async registration(req, res, next){
@@ -55,20 +54,42 @@ class AuthController{
         try {
             const activationLink = req.params.link;
             await AuthService.activate(activationLink);
-            res.redirect('https://ya.ru/');
+            res.redirect(process.env.CLIENT_URL);
         } catch (error) {
             next(error);
         }
     }
 
-    async refreshDropboxToken(req, res, next){
+    async sendResetEmail(req, res, next){
         try {
-            const {code} = req.query;
-            res.sendStatus(200);
+            const validResult = validationResult(req);
+            if(!validResult.isEmpty())
+                throw ApiError.BadRequest('Validation error', validResult.array())
 
-            DropBoxV2Service.refreshAccessToken(code);
+            const {email} = req.body;
+            await AuthService.sendResetEmail(email);
+            res.sendStatus(201);
         } catch (error) {
-            next(error);
+            next(error)  
+        }
+    }
+    
+    async resetPassword(req, res, next){
+        try {
+            const validResult = validationResult(req);
+            if(!validResult.isEmpty())
+                throw ApiError.BadRequest('Validation error', validResult.array())
+
+            const {token, password} = req.body;
+
+            if(!token)
+                throw ApiError.BadRequest('Required reset token')
+
+            await AuthService.resetPassword(token, password);
+            
+            res.sendStatus(201);
+        } catch (error) {
+            next(error)  
         }
     }
 }

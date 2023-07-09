@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector} from '../hooks/redux'
 import classes from '../styles/Books.module.css'
 import { fetchBooks } from '../ReduxToolkit/actionCreators'
 import Book from './Book'
 import Preloader from './Preloader'
-import { BooksProps, booksSlice } from '../ReduxToolkit/bookSlice'
+import { booksSlice } from '../ReduxToolkit/bookSlice'
 import PaginationF from './Pagination/Pagination'
 
 
@@ -14,7 +14,6 @@ const Books = () => {
     const { books, isLoading } = useAppSelector(state => state.booksReducer)
     const { totalPages } = useAppSelector(state => state.booksReducer)
     const { page } = useAppSelector(state => state.booksReducer)
-    // const [value, setValue] = useState<string>('')
     const limit = 16
     const pagesArray: number[] = []
 

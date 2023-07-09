@@ -43,16 +43,23 @@ const Comments: FC<IComments> = ({ id }) => {
                     id={id}
                     visable={visable}
                     setVisable={setVisable}>Оставить комментарий</ModalComment>
-                <div>{comments.map(comment => 
-                <Comment 
-                key={comment._id}
-                title={comment.title}
-                description={comment.text}
-                rating={comment.rating}
-                dislikes={comment.dislikes}
-                date={comment.date}
-                likes={comment.likes}
-                userId={comment.userId}></Comment>)}</div>
+                <div>
+                    {comments.length 
+                    ? comments.map(comment =>
+                        <Comment
+                            key={comment._id}
+                            title={comment.title}
+                            description={comment.text}
+                            rating={comment.rating}
+                            dislikes={comment.dislikes}
+                            date={comment.date}
+                            likes={comment.likes}
+                            userId={comment.userId}></Comment>)
+                    : <p className={classes.emptyComments}>Комментариев ещё нет — вы можете быть первым</p>}
+                </div>
+                {comments.length 
+                ? <button>Показать больше комментариев</button>
+                : <></>}
             </div>
         </>
     )

@@ -6,6 +6,8 @@ import { useState } from "react"
 import ModalUploader from "./UI/modal/ModalUploader/ModalUploader"
 import ModalName from "./UI/modal/ModalName/ModalName"
 import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
+import { useAppDispatch } from "../hooks/redux"
+import { logout } from "../ReduxToolkit/actionCreators"
 
 
 const User: React.FC<IUser> = (
@@ -22,11 +24,12 @@ const User: React.FC<IUser> = (
     const [visableImg, setVisableImg] = useState<boolean>(false)
     const [visableEmail, setVisableEmail] = useState<boolean>(false)
     const [visablePassword, setVisablePassword] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
 
     return (
         <>
             <div className={classes.userContainer}>
-                Личные данные
+                <p className={classes.personData}>Личные данные</p>
                 <div className={classes.userProfile}>
                     <div className={classes.userCard}>
                         <div className={classes.userImageContainer}>
@@ -74,6 +77,11 @@ const User: React.FC<IUser> = (
                             className={classes.userProfileButton}
                             onClick={() => setVisablePassword(true)}>
                             изменить пароль
+                        </button>
+                        <button
+                            className={classes.userProfileButton}
+                            onClick={() => dispatch(logout())}>
+                            выйти из аккаунта
                         </button>
                     </div>
                 </div>

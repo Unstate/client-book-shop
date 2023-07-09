@@ -12,7 +12,16 @@ interface BookInfoProps {
     pageCount: number
 }
 
-const BookInfo: React.FC<BookInfoProps> = ({ img, title, authors, description, genres, publisher, bookSeries, pageCount }) => {
+const BookInfo: React.FC<BookInfoProps> = (
+    { img,
+        title,
+        authors,
+        description,
+        genres,
+        publisher,
+        bookSeries,
+        pageCount
+    }) => {
     return (
         <>
             <div className={classes.book}>
