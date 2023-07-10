@@ -1,5 +1,5 @@
 .commentContainer {
-    @apply w-[100%] h-[380px] bg-[#E2F4F2] p-[30px];
+    @apply w-[100%] h-[380px] bg-[#E2F4F2] p-[30px] mb-[30px];
     font-family: 'Open Sans';
 }
 

@@ -1,10 +1,14 @@
 .book {
-    @apply mt-[30px] flex space-x-[50px] font-sans mb-[30px];
+    @apply mt-[30px] flex 2xl:space-x-[50px] lg:space-x-[50px] font-sans mb-[30px] flex-wrap;
     font-family: 'Open Sans';
 }
     
 .bookImage {
-    @apply w-[300px] h-[450px]
+    @apply 2xl:w-[300px] 2xl:h-[450px] lg:w-[223px] lg:h-[340px]  w-[420px] h-[636px]
+}
+
+.bookImageContainer {
+    @apply 2xl:m-0 2xl:mb-0 lg:m-0 lg:mb-0 m-auto mb-[30px]  
 }
     
 .bookTitle {
@@ -12,7 +16,7 @@
 }
     
 .bookAuthors {
-    @apply font-normal text-[20px] text-[#160F2980] mb-[50px]
+    @apply hidden 2xl:block font-normal text-[20px] text-[#160F2980] mb-[50px]
 }
     
 .bookDescription {
@@ -20,7 +24,7 @@
 }
 
 .bookDesc {
-    @apply h-[165px] overflow-hidden text-ellipsis mb-[20px];
+    @apply 2xl:h-[165px] lg:h-[115px] h-[165px] w-[506px] overflow-hidden text-ellipsis mb-[20px];
 }
     
 .bookTitleContainer {
@@ -65,4 +69,12 @@
 
 .linkReadMore:hover {
     @apply text-[#B65C34] cursor-pointer font-semibold
+}
+
+.nameCell {
+    @apply hidden 2xl:block
+}
+
+.descriptionCell {
+    @apply hidden 2xl:block
 }

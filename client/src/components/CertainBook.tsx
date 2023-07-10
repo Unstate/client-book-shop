@@ -65,6 +65,7 @@ const CertainBook: React.FC<CertainBookProps> = (
                 publishedDate={publishedDate}
                 publisher={publisher}
                 translaters={translaters}></BookSpecifications>
+            <hr></hr>
             <Comments
                 id={id}></Comments>
         </div>

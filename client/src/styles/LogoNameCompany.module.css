@@ -1,5 +1,5 @@
 .aboutCompany {
-    @apply flex items-center space-x-[30px];
+    @apply flex items-center space-x-[30px] mb-[20px] 2xl:mb-[0] lg:mb-[0];
     font-family: 'Open Sans';
 }
 

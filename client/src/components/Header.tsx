@@ -51,7 +51,7 @@ const Header = () => {
                     </div>
                 </div>
             </header>
-            <hr></hr>
+            <div className={classes.hrContainer}><hr></hr></div>
         </>
 
     )

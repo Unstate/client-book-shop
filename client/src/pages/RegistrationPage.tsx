@@ -43,6 +43,80 @@ const RegistrationPage = () => {
                 <div className={classes.LogoNameCompanyContainer}>
                     <LogoNameCompany />
                 </div>
+                <div className={`${classes.fieldContainer} ${classes.fieldContainerActive}`}>
+                    <p className={classes.formTitle}> Регистрация </p>
+                    <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+                        <div className={classes.item}>
+                            <img src={user} />
+                            <input
+                                placeholder="nickname123"
+                                value={username}
+                                {...register("username")}
+                                onChange={(e) => setUsername(e.target.value)} />
+                            <p>{errors.username?.message}</p>
+                        </div>
+                        <div className={classes.item}>
+                            <img src={email} />
+                            <input
+                                placeholder="example@mail.ru"
+                                value={mail}
+                                {...register("email")}
+                                onChange={(e) => setMail(e.target.value)} />
+                            <p>{errors.email?.message}</p>
+                        </div>
+                        <div className={classes.item}>
+                            <img src={lock} />
+                            {password
+                                ? <input
+                                    placeholder="strongPsW2#"
+                                    {...register("password")}
+                                    type="password" value={value}
+                                    onChange={(e) => setValue(e.target.value)} />
+                                : <input
+                                    placeholder="strongPsW2#"
+                                    {...register("password")}
+                                    type="text" value={value}
+                                    onChange={(e) => setValue(e.target.value)} />}
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setPassword(!password)
+                                }}><img src={see} /></button>
+                            <p>{errors.password?.message}</p>
+                        </div>
+                        <div className={classes.item}>
+                            <img src={lock} />
+                            {correctPassword
+                                ? <input
+                                    placeholder="Подтвердите пароль"
+                                    {...register("correctPassword")}
+                                    type="password" value={correctValue}
+                                    onChange={(e) => setCorrectValue(e.target.value)} />
+                                : <input
+                                    placeholder="Подтвердите пароль"
+                                    {...register("correctPassword")}
+                                    type="text" value={correctValue}
+                                    onChange={(e) => setCorrectValue(e.target.value)} />}
+                            <button onClick={(e) => {
+                                e.preventDefault()
+                                setCorrectPassword(!setCorrectPassword)
+                            }}>
+                                <img src={see} />
+                            </button>
+                            <p>{errors.correctPassword?.message}</p>
+                            {value !== correctValue ? <p>Пароли не совпадают!</p> : <></>}
+                        </div>
+                        <button
+                            type="submit"
+                            className={classes.formButton}
+                            onClick={() => {
+                                dispatch(registration(mail, username, value))
+                                setVisable(true)
+                            }}>
+                            Зарегестрироваться
+                        </button>
+                    </form>
+                </div>
                 <div className={classes.questionContainer}>
                     <div className={classes.question}>уже есть аккаунт?</div>
                     <Link to='/login'>
@@ -53,8 +127,8 @@ const RegistrationPage = () => {
                 </div>
                 <div className={classes.stick}></div>
             </div>
-            <div>
-                <div className={classes.formTitle}> Регистрация </div>
+            <div className={classes.fieldContainer}>
+                <p className={classes.formTitle}> Регистрация </p>
                 <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={classes.item}>
                         <img src={user} />
@@ -116,20 +190,20 @@ const RegistrationPage = () => {
                         <p>{errors.correctPassword?.message}</p>
                         {value !== correctValue ? <p>Пароли не совпадают!</p> : <></>}
                     </div>
-                    <button 
-                    type="submit" 
-                    className={classes.formButton}
-                    onClick={() => {
-                        dispatch(registration(mail, username, value))
-                        setVisable(true)
-                    }}>
+                    <button
+                        type="submit"
+                        className={classes.formButton}
+                        onClick={() => {
+                            dispatch(registration(mail, username, value))
+                            setVisable(true)
+                        }}>
                         Зарегестрироваться
                     </button>
                 </form>
             </div>
-            <ModalRegister 
-            visable={visable}
-            setVisable={setVisable}>Регистрация почти завершена!</ModalRegister>
+            <ModalRegister
+                visable={visable}
+                setVisable={setVisable}>Регистрация почти завершена!</ModalRegister>
             {/* <ModalLogOut
             visable={visable}
             setVisable={setVisable}>Вы уверены, что хотите выйти?</ModalLogOut> */}

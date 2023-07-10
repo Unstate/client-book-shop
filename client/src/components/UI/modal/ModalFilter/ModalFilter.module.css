@@ -1,5 +1,9 @@
+.modalWrapper {
+    @apply w-[100%] h-[100%] bg-[#160F2980] z-[100] fixed top-0 right-0 overflow-hidden flex justify-center items-center;
+}
+
 .filterContainer {
-    @apply hidden 2xl:w-[510px] 2xl:h-[808px] 2xl:border-[2px] 2xl:border-[#160F2980] 2xl:p-[30px] 2xl:flex 2xl:flex-col 2xl:space-y-[20px];
+    @apply lg:w-[772px] lg:h-[823px] w-[372px] h-[837px] rounded-[10px] bg-[white] border-[2px] border-[#160F2980] p-[30px] flex flex-col space-y-[20px];
     font-family: 'Open Sans';
 }
 
@@ -66,4 +70,20 @@
 
 .searchButton {
     @apply px-[10px] relative z-20 cursor-pointer
+}
+
+.modalFilterButtonContainer {
+    @apply flex justify-between 2xl:hidden mb-[30px]
+}
+
+.viewBooksContainer {
+    @apply flex space-x-[20px]
+}
+
+.viewBooks:hover {
+    @apply text-[white]
+}
+
+.modalFilterTitle {
+    @apply flex justify-between
 }

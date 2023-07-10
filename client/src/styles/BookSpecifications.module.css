@@ -1,5 +1,5 @@
 .aboutBookContainer {
-    @apply mt-[30px];
+    @apply mt-[30px] ;
     font-family: 'Open Sans';
 }
 
@@ -8,7 +8,7 @@
 }
 
 .aboutBookDescription {
-    @apply w-[943px] text-[20px] mb-[30px]
+    @apply 2xl:w-[943px] lg:w-[906px] text-[20px] mb-[30px] 
 }
 
 .charItem {
@@ -16,7 +16,7 @@
 }
 
 .itemF {
-    @apply w-[134px] text-[20px] text-[#160F2980] pb-[20px]
+    @apply 2xl:w-[134px] lg:w-[134px] w-[200px] text-[20px] text-[#160F2980] pb-[20px]
 }
 
 .itemS {
@@ -28,5 +28,5 @@
 }
 
 .charContainer {
-    @apply flex space-x-[70px] mb-[30px]
+    @apply flex 2xl:space-x-[70px] lg:space-x-[104px] mb-[30px] flex-col 2xl:flex-row lg:flex-row
 }

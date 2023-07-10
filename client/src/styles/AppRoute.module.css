@@ -1,4 +1,4 @@
 .appWrapper {
-    @apply w-[1400px] m-auto bg-white;
+    @apply 2xl:w-[1400px] lg:w-[990px] sm:w-[590px] m-auto bg-white;
     font-family: 'Open Sans';
 }

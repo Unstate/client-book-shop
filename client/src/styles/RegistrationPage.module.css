@@ -1,11 +1,10 @@
 .formContainer {
-    @apply w-[1400px] h-[100vh] flex m-auto;
+    @apply 2xl:w-[1400px] lg:w-[990px] w-[100%] h-[100vh] 2xl:flex lg:flex 2xl:m-auto lg:m-auto;
     font-family: 'Open Sans';
-    
 }
 
 .infoContainer {
-    @apply w-[465px] bg-[#246A73] pt-[80px] px-[80px] 
+    @apply 2xl:w-[465px] lg:w-[418px] bg-[#246A73] pt-[80px] 2xl:px-[80px] lg:px-[80px] 
 }
 
 .questionButton {
@@ -29,7 +28,7 @@
 }
 
 .formTitle {
-    @apply pt-[100px] font-bold uppercase text-[32px] px-[328px] mb-[50px]
+    @apply 2xl:pt-[100px] lg:pt-[100px] font-bold uppercase text-[32px] text-center mb-[50px]
 }
 
 .questionButton:hover {
@@ -37,7 +36,7 @@
 }
 
 .form {
-    @apply flex flex-col justify-center items-center
+    @apply flex flex-col 2xl:justify-center items-center
 }
 
 .formButton {
@@ -58,4 +57,12 @@
 
 .item p {
     @apply text-red-500
+}
+
+.fieldContainer {
+    @apply 2xl:w-[100%] lg:w-[572px] 2xl:block lg:block hidden
+}
+
+.fieldContainerActive {
+    @apply 2xl:hidden lg:hidden block bg-white w-[100%] py-[88px];
 }

@@ -1,5 +1,5 @@
 .siteHeader {
-    @apply flex items-center justify-between mb-[30px] pt-[22px] px-[42px];
+    @apply flex items-center justify-between mb-[30px] pt-[22px] px-[42px] md:flex-wrap ;
     font-family: 'Open Sans';
 }
 
@@ -16,11 +16,15 @@
 }
 
 .search {
-    @apply py-[9px] px-[12px] border-[2px] border-gray-500 text-[16px] w-[561px] z-0 relative 
+    @apply py-[9px] px-[12px] border-[2px] border-gray-500 text-[16px] 2xl:w-[561px] w-[506px]  lg:w-[325px]  
 }
 
 hr {
     @apply border-[1px] border-[#160F2980]
+}
+
+.hrContainer {
+    @apply px-[42px]
 }
 
 .serchAndUserLogoContainer {
@@ -28,11 +32,11 @@ hr {
 }
 
 .userImageContainer {
-    @apply flex justify-center items-center cursor-pointer
+    @apply flex justify-center items-center cursor-pointer absolute top-[35px] left-[580px] 2xl:relative 2xl:top-[0] 2xl:left-[0]  lg:relative lg:top-[0] lg:left-[0]
 }
 
 .searchButton {
-    @apply relative left-[540px] z-20 cursor-pointer
+    @apply relative 2xl:left-[540px] lg:left-[310px] left-[470px] z-20 cursor-pointer
 }
 
 .searchResultContainer {

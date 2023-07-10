@@ -1,5 +1,5 @@
 .aboutBookTitle {
-    @apply mb-[30px] text-[#160F29] font-semibold text-[25px] flex justify-between items-center;
+    @apply mt-[30px] mb-[30px] text-[#160F29] font-semibold text-[25px] flex justify-between items-center;
     font-family: 'Open Sans';
 }
 
