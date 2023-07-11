@@ -1,5 +1,5 @@
 .siteHeader {
-    @apply flex items-center justify-between mb-[30px] pt-[22px] px-[42px] md:flex-wrap ;
+    @apply  items-center justify-between mb-[30px] pt-[22px] px-[42px] md:flex-wrap 2xl:flex lg:flex hidden;
     font-family: 'Open Sans';
 }
 
@@ -41,4 +41,8 @@ hr {
 
 .searchResultContainer {
     @apply absolute top-[82px] right-[420px] overflow-auto w-[560px] h-[500px] z-[100] bg-red-500
+}
+
+.siteHeaderMobile {
+    @apply 2xl:hidden lg:hidden block
 }

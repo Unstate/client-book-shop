@@ -23,10 +23,9 @@ const LoginPage = () => {
     const [value, setValue] = useState('')
     const [mail, setMail] = useState('')
     const dispatch = useAppDispatch()
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    const { register, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     });
-    const onSubmit = (data: FormData) => console.log(data);
 
     return (
         <div className={classes.formContainer}>
@@ -34,6 +33,50 @@ const LoginPage = () => {
                 <div className={classes.LogoNameCompanyContainer}>
                     <LogoNameCompany />
                 </div>
+                <div className={`${classes.fieldContainer} ${classes.fieldContainerActive}`}>
+                <p className={classes.formTitle}> Вход </p>
+                <form className={classes.form}>
+                    <div className={classes.item}>
+                        <img src={email} />
+                        <input
+                            placeholder="example@mail.ru"
+                            {...register("mail")}
+                            value={mail}
+                            onChange={(e) => setMail(e.target.value)} />
+                        <p>{errors.mail?.message}</p>
+                    </div>
+                    <div className={classes.item}>
+                        <img src={lock} />
+                        {password
+                            ? <input
+                                placeholder="strongPsW2#"
+                                {...register("password")}
+                                type="password"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)} />
+                            : <input
+                                placeholder="strongPsW2#"
+                                {...register("password")}
+                                type="text"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)} />}
+                        <button onClick={(e) => {
+                            e.preventDefault()
+                            setPassword(!password)
+                        }}>
+                            <img src={see} />
+                        </button>
+                        <p>{errors.password?.message}</p>
+                    </div>
+                    <div className={classes.passwordLink}>Забыли пароль?</div>
+                    <button
+                        type="submit"
+                        className={classes.formButton}
+                        onClick={() => dispatch(login(mail, value))}>
+                        Войти
+                    </button>
+                </form>
+            </div>
                 <div className={classes.questionContainer}>
                     <p className={classes.question}>
                         еще нет аккаунта?
@@ -46,9 +89,9 @@ const LoginPage = () => {
                 </div>
                 <div className={classes.stick}></div>
             </div>
-            <div>
+            <div className={classes.fieldContainer}>
                 <p className={classes.formTitle}> Вход </p>
-                <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+                <form className={classes.form}>
                     <div className={classes.item}>
                         <img src={email} />
                         <input

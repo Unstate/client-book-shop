@@ -5,13 +5,14 @@ import userImage from '../assets/user.svg'
 import search from '../assets/searchButton.svg'
 import { useAppSelector } from '../hooks/redux'
 import { useEffect, useState } from 'react'
+import HeaderMobile from './HeaderMobile'
 
 const Header = () => {
 
     const { user, isAuth } = useAppSelector(state => state.userReducer)
     const [value, setValue] = useState<string>('')
     const [visable, setVisable] = useState<boolean>(false)
-    // console.log(user, isAuth)
+    console.log(user, isAuth)
 
     useEffect(() => {
         if (value != '') {
@@ -39,7 +40,7 @@ const Header = () => {
                             placeholder='Название книги' />
                         {visable
                             ? <div className={classes.searchResultContainer}>
-                                
+
                             </div>
                             : <></>}
                     </div>
@@ -51,6 +52,10 @@ const Header = () => {
                     </div>
                 </div>
             </header>
+            <HeaderMobile
+            value={value}
+            setValue={setValue}
+            userId={user.id}></HeaderMobile>
             <div className={classes.hrContainer}><hr></hr></div>
         </>
 

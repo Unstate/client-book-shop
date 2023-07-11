@@ -13,6 +13,8 @@ export interface BooksProps {
     title: string;
     img: Image;
     description: string;
+    pageCount: number;
+    publisher: string;
 }
 
 interface BooksState {
@@ -24,6 +26,7 @@ interface BooksState {
     hasPrevPage: boolean;
     page: number;
     comments: IComments[];
+    lines: boolean
 }
 
 export interface IComments {
@@ -46,7 +49,8 @@ const initialState:BooksState = {
     hasNextPage: false,
     hasPrevPage: false,
     page: 1,
-    comments: []
+    comments: [],
+    lines: false
 }
 
 export const booksSlice = createSlice({
@@ -82,6 +86,9 @@ export const booksSlice = createSlice({
         },
         filterBooks(state, action:PayloadAction<BooksProps[]>) {
             state.books = action.payload
+        },
+        setLines(state, action:PayloadAction<boolean>) {
+            state.lines = action.payload
         }
     }
 })

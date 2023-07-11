@@ -1,0 +1,24 @@
+.siteHeaderMobile {
+    @apply block mb-[30px] pt-[22px] px-[42px] 2xl:hidden lg:hidden;
+    font-family: 'Open Sans';
+}
+
+.upperContainer {
+    @apply flex justify-between items-center
+}
+
+.userImageContainer {
+    @apply cursor-pointer relative bottom-[10px] 
+}
+
+.searchContainer {
+    @apply flex w-[600px]
+}
+
+.searchButton {
+    @apply relative right-[30px] z-20 cursor-pointer
+}
+
+.search {
+    @apply py-[9px] px-[12px] border-[2px] border-gray-500 text-[16px] 2xl:w-[561px] w-[506px]  lg:w-[325px]  
+}

@@ -4,7 +4,7 @@
 }
 
 .modalContainer {
-    @apply w-[772px] bg-white p-[40px];
+    @apply 2xl:w-[772px] lg:w-[772px] w-[426px] bg-white p-[40px] rounded-[10px];
     animation: ani 0.5s forwards;
 }
 

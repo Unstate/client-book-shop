@@ -1,0 +1,40 @@
+.bookContainer {
+    @apply relative lg:w-[906px] lg:h-[326px] w-[506px] h-[368px] lg:flex lg:space-x-[20px] text-[16px]; 
+    font-family: 'Open Sans'
+}
+
+.withoutButton {
+    @apply flex space-x-[20px] lg:mb-[0] mb-[30px]
+}
+
+.image {
+    @apply lg:w-[200px] lg:h-[306px] w-[180px] h-[276px]
+}
+
+.titleContainer {
+    @apply mb-[10px] whitespace-nowrap overflow-hidden text-ellipsis
+}
+
+.authorContainer {
+    @apply text-[#00000080] whitespace-nowrap overflow-hidden text-ellipsis mb-[20px]
+}
+
+.bookDescription {
+    @apply lg:w-[486px] lg:h-[150px] w-[306px] h-[142px] overflow-hidden text-ellipsis mb-[26px]
+}
+
+.publicBookInfo {
+    @apply text-[#00000080]
+}
+
+.bookButton {
+    @apply absolute bottom-[10px] right-0 uppercase font-[600] h-[42px] mt-[20px] border-[2px] border-[#160F2980] py-[10px] text-[16px] lg:w-[180px] w-[506px]
+}
+
+.bookButton:hover {
+     @apply bg-[#160F29] text-white
+}
+
+hr {
+    @apply w-[100%] 
+}

@@ -4,7 +4,7 @@
 }
 
 .modalContainer {
-    @apply w-[772px] bg-white flex flex-col p-[40px];
+    @apply 2xl:w-[772px] lg:w-[772px] md:w-[426px] bg-white flex flex-col p-[40px] rounded-[10px];
     animation: ani 0.5s forwards;
 }
 
@@ -13,11 +13,11 @@
 }
 
 .modalImg {
-    @apply mb-[30px]
+    @apply mb-[30px] 2xl:w-[137px] 2xl:h-[137px] lg:w-[137px] lg:h-[137px] md:w-[80px] md:h-[80px]
 }
 
 .modalDesc {
-    @apply text-[#160F29] font-semibold text-[25px]
+    @apply text-[#160F29] font-semibold 2xl:text-[25px] lg:text-[25px] md:text-[22px] text-center
 }
 
 .modalButton {
@@ -33,7 +33,7 @@
 }
 
 .dropzone {
-    @apply flex flex-col  justify-center items-center border-[#160F29] border-[2px] border-dotted w-[692px] h-[306px] cursor-pointer p-[21px]
+    @apply flex flex-col  justify-center items-center border-[#160F29] border-[2px] border-dotted 2xl:w-[692px] lg:w-[692px] w-[346px] h-[306px] cursor-pointer p-[21px]
 }
 
 .modalButtonDelete {
@@ -46,4 +46,8 @@
 
 .crossImage {
     @apply cursor-pointer;
+}
+
+.modalButtonActive {
+    @apply 2xl:block lg:block hidden
 }

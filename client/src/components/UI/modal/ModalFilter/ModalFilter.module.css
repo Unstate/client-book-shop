@@ -3,7 +3,7 @@
 }
 
 .filterContainer {
-    @apply lg:w-[772px] lg:h-[823px] w-[372px] h-[837px] rounded-[10px] bg-[white] border-[2px] border-[#160F2980] p-[30px] flex flex-col space-y-[20px];
+    @apply lg:w-[772px] w-[372px] h-[837px] rounded-[10px] bg-[white] border-[2px] border-[#160F2980] p-[30px] flex flex-col space-y-[20px];
     font-family: 'Open Sans';
 }
 
@@ -81,7 +81,7 @@
 }
 
 .viewBooks:hover {
-    @apply text-[white]
+    @apply text-[white] bg-[#160F29]
 }
 
 .modalFilterTitle {

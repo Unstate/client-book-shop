@@ -128,4 +128,8 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
     }
 }
 
+export const setBookLocation = (lines:boolean) => (dispatch: AppDispatch) => {
+    dispatch(booksSlice.actions.setLines(lines))
+}
+
 

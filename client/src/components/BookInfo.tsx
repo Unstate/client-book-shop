@@ -1,5 +1,6 @@
 import { Image } from '../ReduxToolkit/bookSlice'
 import classes from '../styles/BookInfo.module.css'
+import cat from '../assets/Cover big.svg'
 
 interface BookInfoProps {
     img: Image;
@@ -28,7 +29,12 @@ const BookInfo: React.FC<BookInfoProps> = (
                 <div className={classes.bookImageContainer}>
                     <img
                         className={classes.bookImage}
-                        src={img.largeFingernail} />
+                        src={img.largeFingernail}
+                        alt='Картинка не прогрузилась'
+                        onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
+                            currentTarget.onerror = null
+                            currentTarget.src = cat
+                        }} />
                 </div>
                 <div className={classes.aboutBookContainer}>
                     <div className={classes.bookTitleContainer}>

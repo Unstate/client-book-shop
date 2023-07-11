@@ -66,7 +66,7 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
                                 </div>
                                 : <>
                                     <img className={classes.modalImg} src={notImage}></img>
-                                    <p className={classes.modalDesc}>Перетащите изображение сюда </p>
+                                    <p className={classes.modalDesc}>Выберите изображение на устройстве</p>
                                     <input
                                         type="file"
                                         onChange={(event) => setFiles(event.target.files)}
@@ -82,7 +82,7 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
                                             Выбрать файл
                                         </button>
                                         <button
-                                            className={classes.modalButton}
+                                            className={`${classes.modalButton} ${classes.modalButtonActive}`}
                                             onClick={(e) => handleClick(e)}>
                                             Вставить из буфера
                                         </button>

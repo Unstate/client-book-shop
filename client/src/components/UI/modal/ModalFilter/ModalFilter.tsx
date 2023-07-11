@@ -6,8 +6,8 @@ import { useAppDispatch } from '../../../../hooks/redux'
 import CheckBox from '../../CheckBox/CheckBox'
 import MyInput from '../../input/MyInput'
 import MyButton from '../../button/MyButton'
-import { fetchBooks, fetchBooksFilter } from '../../../../ReduxToolkit/actionCreators'
-import tiles from '../../../../assets/Tiles button.svg'
+import { fetchBooks, fetchBooksFilter, setBookLocation } from '../../../../ReduxToolkit/actionCreators'
+import tiles from '../../../../assets/Tiles.svg'
 import list from '../../../../assets/List button.svg'
 import cross from '../../../../assets/Cross.svg'
 
@@ -27,6 +27,11 @@ const stylesButton: CSSProperties = {
     width: '762px',
 }
 
+const stylesButtonLittle: CSSProperties = {
+    padding: '13px 0',
+    width: '362px',
+}
+
 const stylesViewButton: CSSProperties = {
     border: 'none',
     width: '52px',
@@ -37,6 +42,7 @@ interface ModalFilterProps {
     visable: boolean;
     setVisable: Function;
 }
+
 
 const ModalFilter: FC<ModalFilterProps> = ({ visable, setVisable }) => {
 
@@ -98,20 +104,27 @@ const ModalFilter: FC<ModalFilterProps> = ({ visable, setVisable }) => {
     return (
         <>
             <div className={classes.modalFilterButtonContainer}>
-                <MyButton
-                    styles={stylesButton}
-                    onClick={() => setVisable(true)}>фильтры</MyButton>
+                <div className='lg:block hidden'>
+                    <MyButton
+                        styles={stylesButton}
+                        onClick={() => setVisable(true)}>фильтры</MyButton>
+                </div>
+                <div className='2xl:hidden lg:hidden block'>
+                    <MyButton
+                        styles={stylesButtonLittle}
+                        onClick={() => setVisable(true)}>фильтры</MyButton>
+                </div>
                 <div className={classes.viewBooksContainer}>
                     <MyButton
                         styles={stylesViewButton}
-                        onClick={() => { }}>
+                        onClick={() => {dispatch(setBookLocation(false))}}>
                         <img
                             className={classes.viewBooks}
                             src={tiles} />
                     </MyButton>
                     <MyButton
                         styles={stylesViewButton}
-                        onClick={() => { }}>
+                        onClick={() => {dispatch(setBookLocation(true))}}>
                         <img
                             className={classes.viewBooks}
                             src={list} />
@@ -123,7 +136,7 @@ const ModalFilter: FC<ModalFilterProps> = ({ visable, setVisable }) => {
                     <div className={classes.filterContainer}>
                         <div className={classes.modalFilterTitle}>
                             <p className={classes.filterContainerText}>категории</p>
-                            <img src={cross} onClick={() => setVisable(false)}/>
+                            <img src={cross} onClick={() => setVisable(false)} />
                         </div>
                         <hr />
                         <section className={classes.genreCsontainer}>

@@ -11,7 +11,7 @@ type Props = {
     setCurrentPage: Function
 };
 
-const PaginationF: FC<Props> = ({ currentPage, lastPage, maxLength, setCurrentPage }) => {
+const Pagination: FC<Props> = ({ currentPage, lastPage, maxLength, setCurrentPage }) => {
 
     const pageNums = getPaginationItems(currentPage, lastPage, maxLength);
 
@@ -45,4 +45,4 @@ const PaginationF: FC<Props> = ({ currentPage, lastPage, maxLength, setCurrentPa
     );
 }
 
-export default PaginationF
+export default Pagination

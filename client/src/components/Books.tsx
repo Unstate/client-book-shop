@@ -1,14 +1,18 @@
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector} from '../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import classes from '../styles/Books.module.css'
 import { fetchBooks } from '../ReduxToolkit/actionCreators'
 import Book from './Book'
 import Preloader from './Preloader'
 import { booksSlice } from '../ReduxToolkit/bookSlice'
-import PaginationF from './Pagination/Pagination'
+import Pagination from './Pagination/Pagination'
+import BookLine from './BookLine'
 
+interface BooksProps {
+    lines: boolean,
+}
 
-const Books = () => {
+const Books: React.FC<BooksProps> = ({ lines }) => {
 
     const dispatch = useAppDispatch()
     const { books, isLoading } = useAppSelector(state => state.booksReducer)
@@ -31,38 +35,37 @@ const Books = () => {
         dispatch(booksSlice.actions.setCurrentPage(num))
     }
 
-    //Готовый поиск, осталось добавить поп ап с результатами
-
-    // const filteredBooks = (books:BooksProps[]) => {
-        
-    //     const searchedBooks = () => {
-    //         return books.filter(book => book.title.toLowerCase().includes(value.toLowerCase()))
-    //     }
-
-    //     return searchedBooks()
-    // }
-
-    // const searchedBooks = filteredBooks(books)
+    console.log(books)
 
     return (
         <>
             {isLoading
                 ? <Preloader></Preloader>
                 : <div className={classes.booksContainer}>
-                    {/* <input value={value} onChange={(e) => setValue(e.target.value)} placeholder='aighfsuhfushdf'></input> */}
-                    {books.map((book) =>
-                        <Book
-                            key={book._id}
-                            id={book._id}
-                            author={book.authors}
-                            title={book.title}
-                            genres={book.genres}
-                            img={book.img}></Book>)}
-                    <PaginationF
+                    {lines
+                        ? books.map((book) =>
+                            <BookLine
+                                key={book._id}
+                                id={book._id}
+                                author={book.authors}
+                                title={book.title}
+                                pageCount={book.pageCount}
+                                img={book.img}
+                                publisher={book.publisher}
+                                description={book.description}/>)
+                        : books.map((book) =>
+                            <Book
+                                key={book._id}
+                                id={book._id}
+                                author={book.authors}
+                                title={book.title}
+                                genres={book.genres}
+                                img={book.img}></Book>)}
+                    <Pagination
                         currentPage={page}
                         lastPage={totalPages}
                         maxLength={7}
-                        setCurrentPage={setCurrentPage}></PaginationF>
+                        setCurrentPage={setCurrentPage}></Pagination>
                 </div>}
         </>
     )

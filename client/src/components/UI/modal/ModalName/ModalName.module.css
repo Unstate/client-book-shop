@@ -4,7 +4,7 @@
 }
 
 .modalContainer {
-    @apply w-[772px] bg-white flex flex-col space-y-[30px] p-[40px];
+    @apply 2xl:w-[772px] lg:w-[772px] w-[426px] bg-white flex flex-col space-y-[30px] p-[40px] rounded-[10px];
     animation: ani 0.5s forwards;
 }
 
@@ -23,7 +23,7 @@
 
 
 .modalInputContainer {
-    @apply w-[692px]
+    @apply 2xl:w-[692px] lg:w-[692px] w-[346px]
 }
 
 .modalInput {
@@ -31,7 +31,7 @@
 }
 
 .modalButton {
-    @apply uppercase font-[600] mt-[20px] border-[2px] border-[#160F2980]  py-[15px] text-[16px] w-[692px]
+    @apply uppercase font-[600] mt-[20px] border-[2px] border-[#160F2980]  py-[15px] text-[16px] 2xl:w-[692px] lg:w-[692px] w-[346px]
 }
 
 .modalButton:hover {

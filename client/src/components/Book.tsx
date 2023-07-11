@@ -16,27 +16,16 @@ const Book: FC<BookProps> = ({ author, title, img, id }) => {
     return (
         <div className={classes.bookContainer}>
             <div className={classes.imageContainer}>
-                {img
-                    ? <Link to={`/books/${id}`}>
-                        <img
-                            className={classes.image}
-                            src={img.mediumFingernail}
-                            alt="Картинка не прогрузилась"
-                            onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
-                                currentTarget.onerror = null
-                                currentTarget.src = cat
-                            }} />
-                    </Link>
-                    : <Link to={`/books/${id}`}>
-                        <img
-                            className={classes.image}
-                            src={cat}
-                            alt="Картинка не прогрузилась"
-                            onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
-                                currentTarget.onerror = null
-                                currentTarget.src = cat
-                            }} />
-                    </Link>}
+                <Link to={`/books/${id}`}>
+                    <img
+                        className={classes.image}
+                        src={img.mediumFingernail}
+                        alt="Картинка не прогрузилась"
+                        onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
+                            currentTarget.onerror = null
+                            currentTarget.src = cat
+                        }} />
+                </Link>
             </div>
             <div className={classes.bodyContainer}>
                 <div className={classes.titleContainer}>

@@ -4,7 +4,7 @@
 }
 
 .modalContainer {
-    @apply w-[772px] bg-white p-[40px];
+    @apply 2xl:w-[772px] lg:w-[772px] w-[426px] bg-white p-[40px] rounded-[10px];
     animation: ani 0.5s forwards;
 }
 
@@ -18,5 +18,5 @@
 }
 
 .modalButtonContainer {
-    @apply flex space-x-[40px]
+    @apply flex 2xl:space-x-[40px] 2xl:space-y-[0] lg:space-y-[0] lg:space-x-[40px] 2xl:flex-row lg:flex-row flex-col space-y-[20px] 
 }
