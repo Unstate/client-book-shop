@@ -17,7 +17,6 @@ const AppRoute = () => {
     const { isAuth } = useAppSelector(state => state.userReducer)
     const currentUrl = window.location.pathname
 
-
     useEffect(() => {
         if (localStorage.getItem('token')) {
             dispatch(checkAuth())
@@ -27,6 +26,7 @@ const AppRoute = () => {
     return (
         <>
             <div className={classes.appWrapper}>
+                {isAuth ? <div>TRUE</div> : <div>FALSE</div>}
                 {currentUrl === '/login' || currentUrl === '/registration'
                     ? <Routes>
                         <Route

@@ -62,7 +62,7 @@ const Comment: FC<CommentProps> = (
                 <p>{description}</p>
             </div>
             <div className={classes.commentFooter}>
-                <StarRating rating={rating} handleRating={() => { }}></StarRating>
+                <StarRating disabled={true} rating={rating} handleRating={() => { }}></StarRating>
                 <div className={classes.markContainer}>
                     <img src={like} className={classes.button} />
                     <p className={classes.likesContainer}>{likes.length}</p>

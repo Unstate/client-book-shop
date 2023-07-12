@@ -14,6 +14,7 @@ const Comments: FC<IComments> = ({ id }) => {
 
     const [visable, setVisable] = useState<boolean>(false)
     const dispatch = useAppDispatch()
+    const { user, isAuth } = useAppSelector(state => state.userReducer)
     const { comments } = useAppSelector(state => state.booksReducer)
     const styles: CSSProperties = {
         width: '250px',
@@ -27,6 +28,8 @@ const Comments: FC<IComments> = ({ id }) => {
     const handleClick = () => {
         setVisable(true)
     }
+
+    user && isAuth ? console.log() : ''
 
     return (
         <>

@@ -15,6 +15,9 @@ const CertainBookPage = () => {
         dispatch(getUserId(id))
     }, [])
 
+    console.log(user)
+    console.log(`ISLOADING >>> ${isLoading}`)
+
     return (
         <>
             {isLoading

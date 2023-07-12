@@ -4,10 +4,11 @@ import Star from './Star'
 
 interface StarRatingProps {
     rating: number,
+    disabled: boolean,
     handleRating: (rating:number) => void;
 }
 
-const StarRating:FC<StarRatingProps> = ({rating, handleRating}) => {
+const StarRating:FC<StarRatingProps> = ({rating, handleRating,disabled}) => {
     
     return (
         <div className='App'>
@@ -20,7 +21,8 @@ const StarRating:FC<StarRatingProps> = ({rating, handleRating}) => {
                 transition
                 tooltipArray={['1', '2', '3', '4', '5']}
                 emptyIcon={<Star fufil={false}></Star>}
-                fillIcon={<Star fufil={true}></Star>}/>
+                fillIcon={<Star fufil={true}></Star>}
+                allowHover={disabled ? false : true}/>
         </div>
     )
 }

@@ -8,6 +8,7 @@ import ModalName from "./UI/modal/ModalName/ModalName"
 import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
 import { useAppDispatch } from "../hooks/redux"
 import { logout } from "../ReduxToolkit/actionCreators"
+import ModalLogOut from "./UI/modal/ModalLogOut/ModalLogOut"
 
 
 const User: React.FC<IUser> = (
@@ -22,6 +23,7 @@ const User: React.FC<IUser> = (
 
     const [visableName, setVisableName] = useState<boolean>(false)
     const [visableImg, setVisableImg] = useState<boolean>(false)
+    const [visableLogOut, setVisableLogOut] = useState<boolean>(false)
     const [visableEmail, setVisableEmail] = useState<boolean>(false)
     const [visablePassword, setVisablePassword] = useState<boolean>(false)
     const dispatch = useAppDispatch()
@@ -79,8 +81,9 @@ const User: React.FC<IUser> = (
                             изменить пароль
                         </button>
                         <button
-                            className={classes.userProfileButton}
-                            onClick={() => dispatch(logout())}>
+                            className={`${classes.userProfileButton} ${classes.userLogOut}`}
+                            onClick={() => setVisableLogOut(true)}>
+                            {/* dispatch(logout()) */}
                             выйти из аккаунта
                         </button>
                     </div>
@@ -100,6 +103,9 @@ const User: React.FC<IUser> = (
                 <ModalPassword
                     visable={visablePassword}
                     setVisable={setVisablePassword}>Изменение пароля</ModalPassword>
+                <ModalLogOut
+                    visable={visableLogOut}
+                    setVisable={setVisableLogOut}>Вы уверены, что хотите выйти?</ModalLogOut>
             </div>
         </>
     )

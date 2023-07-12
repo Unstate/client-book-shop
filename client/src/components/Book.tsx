@@ -3,6 +3,8 @@ import { Image } from "../ReduxToolkit/bookSlice";
 import classes from '../styles/Book.module.css'
 import cat from '../assets/Covermiddle.svg'
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { setFavouriteBook } from "../ReduxToolkit/actionCreators";
 
 export interface BookProps {
     author: string[],
@@ -13,6 +15,10 @@ export interface BookProps {
 }
 
 const Book: FC<BookProps> = ({ author, title, img, id }) => {
+
+    const dispatch = useAppDispatch()
+    const { user } = useAppSelector(state => state.userReducer)
+
     return (
         <div className={classes.bookContainer}>
             <div className={classes.imageContainer}>
@@ -44,7 +50,9 @@ const Book: FC<BookProps> = ({ author, title, img, id }) => {
                 </div>
             </div>
             <div className={classes.bookButtonContainer}>
-                <button className={classes.bookButton}>
+                <button 
+                className={classes.bookButton}
+                onClick={() => setFavouriteBook(user.id,id)}>
                     Хочу почитать
                 </button>
             </div>

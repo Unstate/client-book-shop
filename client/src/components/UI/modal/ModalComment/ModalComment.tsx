@@ -43,6 +43,7 @@ const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id
                                 onClick={() => setVisable(false)} />
                         </div>
                         <StarRating
+                            disabled={false}
                             rating={rating}
                             handleRating={handleRating}></StarRating>
                         <div className={classes.modalInputContainer}>
@@ -63,8 +64,9 @@ const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id
                         </div>
                         <button
                             className={classes.modalButton} 
-                            onClick={() => {
-                                dispatch(setNewBookComment(id, title, description, rating))
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setNewBookComment(id, title, description, rating)
                                 setVisable(false)
                             }}>Опубликовать
                         </button>

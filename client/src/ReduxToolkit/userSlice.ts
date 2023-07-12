@@ -26,11 +26,11 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         userFetching(state) {
-            state.isLoading = true
+            state.isLoading = true;
         },
-        userFetchingSucces(state,action:PayloadAction<IUser>) {
-            state.isLoading = false
-            state.user = action.payload
+        userFetchingSucces(state,action:PayloadAction<boolean>) {
+            state.isLoading = action.payload
+            // state.user = action.payload
         },
         setUser(state, action: PayloadAction<IUser>) {
             state.user = action.payload

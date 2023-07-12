@@ -1,14 +1,24 @@
 import { FC } from 'react'
 import classes from './ModalName.module.css'
 import cross from '../../../../assets/Cross.svg'
+import { useAppDispatch } from '../../../../hooks/redux';
+import { changeUserEmail } from '../../../../ReduxToolkit/actionCreators';
 
 interface ModalNameProps {
     children: React.ReactElement | React.ReactNode;
     visable: boolean;
     setVisable: Function;
+    id: string;
+    email: string;
 }
 
-const ModalName: FC<ModalNameProps> = ({ children, visable, setVisable }) => {
+const ModalName: FC<ModalNameProps> = ({
+    children,
+    visable,
+    setVisable,
+    id,
+    email }) => {
+
 
     return (
         <>
@@ -30,7 +40,10 @@ const ModalName: FC<ModalNameProps> = ({ children, visable, setVisable }) => {
                         {/* эта кнопка будет отправлять изменение на сервер */}
                         <button
                             className={classes.modalButton}
-                            onClick={() => setVisable(false)}>
+                            onClick={() => {
+                                changeUserEmail(id,email)
+                                setVisable(false)
+                            }}>
                             Сохранить изменения
                         </button>
                         {/* именно она, та что сверху от этой строчки */}

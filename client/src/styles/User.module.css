@@ -4,17 +4,20 @@
 }
 
 .personData {
-    @apply font-semibold text-[25px]
+    @apply font-semibold text-[25px] 2xl:mb-0 mb-[30px]
 }
 
 .userProfile {
-    @apply flex space-x-[301px] mb-[30px] items-center
+    @apply flex 2xl:space-x-[301px] mb-[30px] items-center 2xl:flex-row flex-col 2xl:gap-y-0 gap-y-[20px]
 }
 
 .userCard {
-    @apply w-[729px] h-[280px] bg-[#B65C34] rounded-[15px] flex items-center justify-center space-x-[50px]
+    @apply 2xl:w-[729px] lg:w-[906px] w-[506px] 2xl:h-[280px] lg:h-[280px] h-[511px] bg-[#B65C34] rounded-[15px] flex 2xl:flex-row lg:flex-row flex-col items-center justify-center 2xl:gap-y-0 lg:gap-y-0 gap-y-[20px] space-x-[50px]
 }
 
+.userImage {
+    @apply 2xl:w-[220px] 2xl:h-[220px] lg:w-[220px] lg:h-[220px] w-[200px] h-[200px]
+}
 
 .userCardInfo {
     @apply flex space-x-[53px]
@@ -29,11 +32,11 @@
 }
 
 .urlImage {
-    @apply mb-[29px] 
+    @apply mb-[29px]
 }
 
 .userProfileButton {
-    @apply w-[286px] py-[15px] uppercase text-[#160F29] text-[16px] font-[600] border-[2px] border-[#160F29]
+    @apply 2xl:w-[286px] lg:w-[433px] w-[100%] py-[15px] uppercase text-[#160F29] text-[16px] font-[600] border-[2px] border-[#160F29]
 }
 
 .userProfileButton:hover {
@@ -41,5 +44,9 @@
 }
 
 .buttonsContainer {
-    @apply flex flex-col space-y-[20px]
+    @apply flex 2xl:flex-col 2xl:space-y-[20px] flex-wrap 2xl:gap-0 md:gap-x-[40px] gap-y-[20px]
+}
+
+.userLogOut {
+    @apply 2xl:w-[286px] 2xl:py-[15px] w-[100%]
 }

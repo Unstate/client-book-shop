@@ -23,9 +23,11 @@ const LoginPage = () => {
     const [value, setValue] = useState('')
     const [mail, setMail] = useState('')
     const dispatch = useAppDispatch()
-    const { register, formState: { errors } } = useForm<FormData>({
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     });
+
+    const onSubmit = (data: FormData) => console.log(data);
 
     return (
         <div className={classes.formContainer}>
@@ -35,7 +37,7 @@ const LoginPage = () => {
                 </div>
                 <div className={`${classes.fieldContainer} ${classes.fieldContainerActive}`}>
                 <p className={classes.formTitle}> Вход </p>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={classes.item}>
                         <img src={email} />
                         <input
@@ -70,9 +72,11 @@ const LoginPage = () => {
                     </div>
                     <div className={classes.passwordLink}>Забыли пароль?</div>
                     <button
-                        type="submit"
                         className={classes.formButton}
-                        onClick={() => dispatch(login(mail, value))}>
+                        onClick={(e) => {
+                            e.preventDefault()
+                            dispatch(login(mail, value))
+                        }}>
                         Войти
                     </button>
                 </form>
@@ -126,9 +130,13 @@ const LoginPage = () => {
                     </div>
                     <div className={classes.passwordLink}>Забыли пароль?</div>
                     <button
-                        type="submit"
                         className={classes.formButton}
-                        onClick={() => dispatch(login(mail, value))}>
+                        onClick={(e) => {
+                                e.preventDefault()
+                                dispatch(login(mail,value))
+                                setValue('')
+                                setMail('')
+                            }}>
                         Войти
                     </button>
                 </form>
