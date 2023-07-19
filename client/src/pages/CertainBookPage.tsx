@@ -22,7 +22,7 @@ const CertainBookPage = () => {
         <>
             {isLoading
                 ? <Preloader></Preloader>
-                : <>
+                : <main>
                     <Header/>
                     <CertainBook
                         authors={book.authors}
@@ -40,7 +40,7 @@ const CertainBookPage = () => {
                         translaters={book.translaters}
                         id={book._id}></CertainBook>
                     <Footer/>
-                </>}
+                </main>}
         </>
     )
 }

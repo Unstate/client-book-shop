@@ -15,13 +15,13 @@ const BooksPage = () => {
     return (
         <>  
             <Header/>
-            <div className={classes.siteContainer}>
+            <main className={classes.siteContainer}>
                 <Filter/>
                 <ModalFilter
                 visable={visable}
                 setVisable={setVisable}/>
                 <Books lines={lines}></Books>
-            </div>
+            </main>
             <Footer/>
         </>
     )

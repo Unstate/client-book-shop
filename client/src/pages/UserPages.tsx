@@ -26,7 +26,7 @@ const CertainBookPage = () => {
         <>  
             {isLoading
                 ? <Preloader/>
-                : <>
+                : <main>
                     <Header/>
                     <User
                     isActivated={user.isActivated}
@@ -38,7 +38,7 @@ const CertainBookPage = () => {
                     password={user.password}
                     favouriteBooks={favouriteBooks}/>
                     <Footer/>
-                </>
+                </main>
             }
         </>
     )
