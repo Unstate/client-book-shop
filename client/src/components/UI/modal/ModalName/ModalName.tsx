@@ -3,6 +3,7 @@ import classes from './ModalName.module.css'
 import cross from '../../../../assets/Cross.svg'
 import { changeUserEmail, changeUserName, resetPassword } from '../../../../ReduxToolkit/actionCreators';
 import ModalPasswordAccess from '../ModalPassword/ModalPasswordAccess';
+import { useAppDispatch } from '../../../../hooks/redux';
 
 interface ModalNameProps {
     // children: React.ReactElement | React.ReactNode;
@@ -58,6 +59,7 @@ const ModalName: FC<ModalNameProps> = ({
 
     const [value, setValue] = useState<string>('')
     const [visablePassword, setVisablePassword] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
 
     const handleOnChange:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         setValue(e.target.value)

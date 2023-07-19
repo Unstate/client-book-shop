@@ -3,6 +3,7 @@ import StarRating from "./UI/starRating/StarRating";
 import classes from '../styles/Comment.module.css'
 import like from '../assets/likeButton.svg'
 import dislike from '../assets/disLikeButton.svg'
+import { setLikes } from "../ReduxToolkit/actionCreators";
 
 interface CommentProps {
     title: string;
@@ -30,7 +31,7 @@ const Comment: FC<CommentProps> = (
     const month = (dateN.getMonth() + 1).toString().padStart(2, '0');
     const year = dateN.getFullYear().toString();
     const formattedDate = `${day}.${month}.${year}`;
-    
+
     const red: CSSProperties = {
         background: '#F6E6DF',
     }
@@ -64,10 +65,16 @@ const Comment: FC<CommentProps> = (
             <div className={classes.commentFooter}>
                 <StarRating disabled={true} rating={rating} handleRating={() => { }}></StarRating>
                 <div className={classes.markContainer}>
-                    <img src={like} className={classes.button} />
-                    <p className={classes.likesContainer}>{likes.length}</p>
-                    <img src={dislike} className={classes.button} />
-                    <p>{dislikes.length}</p>
+                    <img
+                        src={like}
+                        className={classes.button} />
+                    <p
+                        onClick={() => setLikes(userId)}
+                        className={classes.likesContainer}>{likes.length}</p>
+                    <img
+                        src={dislike}
+                        className={classes.button} />
+                    <p onClick={() => setLikes(userId)}>{dislikes.length}</p>
                 </div>
             </div>
         </article>

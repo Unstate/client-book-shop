@@ -164,12 +164,20 @@ export const setBookLocation = (lines: boolean) => (dispatch: AppDispatch) => {
 }
 
 export const setFavouriteBook = async (id: string, bookId: string) => {
-    return await $api_users.post(`/${id}/favoritebooks`, { bookId })
+    try {
+        return await $api_users.post(`/${id}/favoritebooks`, { bookId })
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
 }
 
-export const getFavouriteBooks = (id: string) => async (dispatch: AppDispatch) => {
+export const getFavouriteBooks = (id: string, limit = 5, page = 1) => async (dispatch: AppDispatch) => {
     try {
-        const response = await $api_users.get<BooksState>(`/${id}/favoritebooks`)
+        const params = {
+            limit: limit,
+            page: page,
+        }
+        const response = await $api_users.get<BooksState>(`/${id}/favoritebooks`, {params})
         dispatch(userSlice.actions.setFavouriteBooks(response.data))
     } catch (e: any) {
         console.log(e.response?.data?.message)
@@ -177,15 +185,28 @@ export const getFavouriteBooks = (id: string) => async (dispatch: AppDispatch) =
 }
 
 export const changeUserEmail = async (id: string, email: string) => {
-    return await $api_users.put(`/${id}/email`, { email })
+    try {
+        return await $api_users.put(`/${id}/email`, { email })
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
+    
 }
 
-export const changeUserName = async (id: string, name: string) => {
-    return await $api_users.put(`/${id}/username`, { name })
+export const changeUserName = async (id: string, name: string) => { 
+    try {
+        return await $api_users.put(`/${id}/username`, { name })
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
 }
 
-export const deleteFavouriteBook = async (id: any, bookId: string) => {
-    return await $api_users.delete(`/${id}/favoritebooks`, { data: { bookId } })
+export const deleteFavouriteBook = async (id: any, bookId: string) => {    
+    try {
+        return await $api_users.delete(`/${id}/favoritebooks`, { data: { bookId } })
+    } catch (error:any) {
+       console.log(error.response?.data?.message)
+    }
 }
 
 export const checkPassword = async (id: string, password: string) => {
@@ -213,7 +234,7 @@ export const getUserImage = async (id: string) => {
     }
 }
 
-export const setNewUserImage = async (id: string, logo: any) => {
+export const setNewUserImage = async (id: string, logo: any) =>  {
     try {
         return await $api_users.put(`/${id}/logo`, {logo})
     } catch (error:any) {
@@ -221,7 +242,22 @@ export const setNewUserImage = async (id: string, logo: any) => {
     }
 }
 
+export const getUserComments = (id: string) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $api_users.get<IComments[]>(`/${id}/comments`)
+        dispatch(userSlice.actions.setUserComments(response.data))
+    } catch (error: any) {
+        console.log(error.response?.data?.message)
+    }
+}
 
+export const setLikes = async (id: string) => {
+    try {
+        return $api_books(`/${id}/comments`)
+    } catch (error: any) {
+        console.log(error.response?.data?.message)
+    }
+}
 
 
 

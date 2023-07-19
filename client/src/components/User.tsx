@@ -8,6 +8,10 @@ import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
 import ModalLogOut from "./UI/modal/ModalLogOut/ModalLogOut"
 import Book from "./Book"
 import { IFavoritebooks } from "../ReduxToolkit/userSlice"
+import { getUserComments } from '../ReduxToolkit/actionCreators'
+import { IComments } from '../ReduxToolkit/bookSlice'
+import Comment from './Comment'
+import ModalError from './UI/modal/modalError/modalError'
 
 interface UserProps {
     id: string;
@@ -18,14 +22,18 @@ interface UserProps {
     activationLink: string;
     logo: string;
     favouriteBooks: IFavoritebooks;
+    comments: IComments[];
+    error: string
 }
+
+const ITEMS_PER_PAGE = 3
 
 const User: React.FC<UserProps> = (
     {
         email,
-        // isActivated,
+        error,
         logo,
-        // password,
+        comments,
         username,
         id,
         favouriteBooks
@@ -38,30 +46,54 @@ const User: React.FC<UserProps> = (
         visableEmail: false,
         visablePassword: false,
     })
+    const [items, setItems] = useState<IComments[]>(comments)
+    const [visibleItemsCount, setVisibleItemsCount] = useState<number>(ITEMS_PER_PAGE)
 
-    const visableName:(data:boolean) => void = (data) => {
-        setVisables(prev => ({...prev, visableName: data}))
+    const showMoreItems = () => {
+        setVisibleItemsCount(count => count + ITEMS_PER_PAGE);
+    };
+
+    const visableName: (data: boolean) => void = (data) => {
+        setVisables(prev => ({ ...prev, visableName: data }))
     }
 
-    const visableImg:(data:boolean) => void = (data) => {
-        setVisables(prev => ({...prev, visableImg: data}))
+    const visableImg: (data: boolean) => void = (data) => {
+        setVisables(prev => ({ ...prev, visableImg: data }))
     }
 
-    const visableLogOut:(data:boolean) => void = (data) => {
-        setVisables(prev => ({...prev, visableLogOut: data}))
+    const visableLogOut: (data: boolean) => void = (data) => {
+        setVisables(prev => ({ ...prev, visableLogOut: data }))
     }
 
-    const visableEmail:(data:boolean) => void = (data) => {
-        setVisables(prev => ({...prev, visableEmail: data}))
+    const visableEmail: (data: boolean) => void = (data) => {
+        setVisables(prev => ({ ...prev, visableEmail: data }))
     }
 
-    const visablePassword:(data:boolean) => void = (data) => {
-        setVisables(prev => ({...prev, visablePassword: data}))
+    const visablePassword: (data: boolean) => void = (data) => {
+        setVisables(prev => ({ ...prev, visablePassword: data }))
     }
 
+    // getUserComments(id)
+    const [errorMessage, setErrorMessage] = useState<string | null>(error);
+
+    console.log(errorMessage)
+
+    const handleError = (message: string) => {
+        setErrorMessage(message);
+    };
+
+    const handleCloseError = () => {
+        setErrorMessage(null);
+    };
     return (
         <>
             <div className={classes.userContainer}>
+            {errorMessage && (
+              <ModalError message={errorMessage} onClose={handleCloseError} />
+            )}
+      
+            {/* Example button that triggers an error */}
+            <button onClick={() => handleError('Something went wrong!')}>Trigger error</button>
                 <p className={classes.personData}>Личные данные</p>
                 <div className={classes.userProfile}>
                     <div className={classes.userCard}>
@@ -124,8 +156,8 @@ const User: React.FC<UserProps> = (
                     </div>
                 </div>
                 <hr></hr>
-                <div>
-                    <p>Закладки</p>
+                <div className='mb-[30px]'>
+                    <p className=' text-[#160F29] text-[25px] my-[30px] font-semibold'>Закладки</p>
                     <div className={classes.booksContainer}>
                         {favouriteBooks.books
                             ? favouriteBooks.books.map(book => <Book
@@ -138,8 +170,28 @@ const User: React.FC<UserProps> = (
                                 id={book._id} />)
                             : <p>Закладок ещё нет — вы можете добавить первую книгу!</p>}
                     </div>
+                    {/* <p className='mt-[30px] text-center' */}
+                    {/* onClick={() => {}}>Показать больше книг</p> */}
                 </div>
-                <div>Комментарии</div>
+                <hr></hr>
+                <div>
+                    <p className=' text-[#160F29] text-[25px] my-[30px] font-semibold'>Комментарии</p>
+                    <div>
+                        {comments.slice(0, visibleItemsCount).map(comment => <Comment
+                            key={comment._id}
+                            title={comment.title}
+                            description={comment.text}
+                            rating={comment.rating}
+                            likes={comment.likes}
+                            dislikes={comment.dislikes}
+                            date={comment.date}
+                            userId={comment.userId}></Comment>)}
+                    </div>
+                    <p
+                        className='text-center text-[#160F29] cursor-pointer hover:text-[#246A73] text-[20px] font-semibold'
+                        onClick={showMoreItems}>Показать больше комменатриев</p>
+                </div>
+
                 <ModalName
                     type={'name'}
                     id={id}

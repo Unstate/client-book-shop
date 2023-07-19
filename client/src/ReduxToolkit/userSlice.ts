@@ -1,12 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../components/models/IUser";
-import { BooksProps, BooksState } from "./bookSlice";
+import { BooksProps, BooksState, IComments } from "./bookSlice";
 
 interface IUsers {
     user: IUser;
     isAuth: boolean;
     isLoading: boolean;
     favouriteBooks: IFavoritebooks;
+    comments: IComments[];
+    error: string;
+    
 }
 
 export interface IFavoritebooks {
@@ -35,7 +38,9 @@ const initialState: IUsers = {
         hasNextPage: false,
         hasPrevPage: false,
         page: 1,
-    },   
+    },
+    comments: [],
+    error: ''   
 }
 
 export const userSlice = createSlice({
@@ -57,6 +62,12 @@ export const userSlice = createSlice({
         },
         setFavouriteBooks(state, action: PayloadAction<BooksState>) {
             state.favouriteBooks = action.payload
+        },
+        setUserComments(state, action:PayloadAction<IComments[]>) {
+            state.comments = action.payload
+        },
+        setError(state, action:PayloadAction<string>) {
+            state.error = action.payload
         }
     }
 })

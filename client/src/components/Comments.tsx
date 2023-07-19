@@ -6,16 +6,25 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { getBookByIdComments } from '../ReduxToolkit/actionCreators'
 import Comment from './Comment'
 
-interface IComments {
+interface CommentsProps {
     id: string;
 }
 
-const Comments: FC<IComments> = ({ id }) => {
+const ITEMS_PER_PAGE = 3
+
+const Comments: FC<CommentsProps> = ({ id }) => {
 
     const [visable, setVisable] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const { user, isAuth } = useAppSelector(state => state.userReducer)
     const { comments } = useAppSelector(state => state.booksReducer)
+    const [items, setItems] = useState(comments)
+    const [visibleItemsCount, setVisibleItemsCount] = useState<number>(ITEMS_PER_PAGE)
+
+    const showMoreItems = () => {
+        setVisibleItemsCount(count => count + ITEMS_PER_PAGE);
+    };
+
     const styles: CSSProperties = {
         width: '250px',
         padding: '12px 0',
@@ -47,22 +56,22 @@ const Comments: FC<IComments> = ({ id }) => {
                     visable={visable}
                     setVisable={setVisable}>Оставить комментарий</ModalComment>
                 <div>
-                    {comments.length 
-                    ? comments.map(comment =>
-                        <Comment
-                            key={comment._id}
-                            title={comment.title}
-                            description={comment.text}
-                            rating={comment.rating}
-                            dislikes={comment.dislikes}
-                            date={comment.date}
-                            likes={comment.likes}
-                            userId={comment.userId}></Comment>)
-                    : <p className={classes.emptyComments}>Комментариев ещё нет — вы можете быть первым</p>}
+                    {comments.length
+                        ? comments.slice(0, visibleItemsCount).map(comment =>
+                            <Comment
+                                key={comment._id}
+                                title={comment.title}
+                                description={comment.text}
+                                rating={comment.rating}
+                                dislikes={comment.dislikes}
+                                date={comment.date}
+                                likes={comment.likes}
+                                userId={comment.userId}></Comment>)
+                        : <p className={classes.emptyComments}>Комментариев ещё нет — вы можете быть первым</p>}
                 </div>
-                {comments.length 
-                ? <button>Показать больше комментариев</button>
-                : <></>}
+                <p
+                    className='text-center text-[#160F29] cursor-pointer hover:text-[#246A73] text-[20px] font-semibold'
+                    onClick={showMoreItems}>Показать больше комменатриев</p>
             </div>
         </>
     )
