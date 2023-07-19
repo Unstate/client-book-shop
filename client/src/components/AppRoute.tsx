@@ -4,17 +4,14 @@ import classes from '../styles/AppRoute.module.css'
 import LoginPage from "../pages/LoginPage"
 import RegistrationPage from "../pages/RegistrationPage"
 import BooksPage from "../pages/BooksPage"
-import { useAppDispatch, useAppSelector } from "../hooks/redux"
+import { useAppDispatch } from "../hooks/redux"
 import { useEffect } from "react"
 import { checkAuth } from "../ReduxToolkit/actionCreators"
 import UserPage from "../pages/UserPages"
-import Header from "./Header"
-import Footer from "./Footer"
 
 const AppRoute = () => {
 
     const dispatch = useAppDispatch()
-    // const { isAuth } = useAppSelector(state => state.userReducer)
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -25,8 +22,6 @@ const AppRoute = () => {
     return (
         <>
             <div className={classes.appWrapper}>
-                {/* {isAuth ? <div>TRUE</div> : <div>FALSE</div>} */}
-                {/* <Header /> */}
                 <Routes>
 
                     <Route
@@ -60,7 +55,6 @@ const AppRoute = () => {
                     </Route>
 
                 </Routes>
-                {/* <Footer /> */}
 
             </div>
         </>
