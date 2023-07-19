@@ -3,16 +3,18 @@ import Books from '../components/Books'
 import Filter from '../components/Filter'
 import ModalFilter from '../components/UI/modal/ModalFilter/ModalFilter'
 import classes from '../styles/BooksPage.module.css'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { setBookLocation } from '../ReduxToolkit/actionCreators'
+import { useAppSelector } from '../hooks/redux'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const BooksPage = () => {
 
     const [visable, setVisable] = useState<boolean>(false)
-    const { lines } = useAppSelector(state => state.booksReducer)
+    const { lines, isLoading } = useAppSelector(state => state.booksReducer)
 
     return (
-        <>
+        <>  
+            <Header/>
             <div className={classes.siteContainer}>
                 <Filter/>
                 <ModalFilter
@@ -20,6 +22,7 @@ const BooksPage = () => {
                 setVisable={setVisable}/>
                 <Books lines={lines}></Books>
             </div>
+            <Footer/>
         </>
     )
 

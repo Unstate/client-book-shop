@@ -50,3 +50,7 @@
 .userLogOut {
     @apply 2xl:w-[286px] 2xl:py-[15px] w-[100%]
 }
+
+.booksContainer {
+    @apply w-[100%] flex flex-wrap 2xl:gap-x-[36px] lg:gap-x-[35px] gap-x-[100px] gap-y-[30px];
+}

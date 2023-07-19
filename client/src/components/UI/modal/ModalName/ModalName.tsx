@@ -1,24 +1,67 @@
-import { FC } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import classes from './ModalName.module.css'
 import cross from '../../../../assets/Cross.svg'
-import { useAppDispatch } from '../../../../hooks/redux';
-import { changeUserEmail } from '../../../../ReduxToolkit/actionCreators';
+import { changeUserEmail, changeUserName, resetPassword } from '../../../../ReduxToolkit/actionCreators';
+import ModalPasswordAccess from '../ModalPassword/ModalPasswordAccess';
 
 interface ModalNameProps {
-    children: React.ReactElement | React.ReactNode;
+    // children: React.ReactElement | React.ReactNode;
     visable: boolean;
     setVisable: Function;
     id: string;
-    email: string;
+    type: 'name' | 'email' | 'reset';
+    // email: string;
+}
+
+interface Iitem {
+    title: string;
+    usedFunction: Function;
+    buttonPlaceholder: string;
+    inputPlaceholder: string
+}
+
+interface IContentToRender {
+    name: Iitem,
+    email: Iitem,
+    reset: Iitem,
+}
+
+const contentToRender:IContentToRender = {
+    name: {
+        title: 'Изменение имени пользователя',
+        usedFunction: changeUserName,
+        inputPlaceholder: 'Введите новое имя пользователя',
+        buttonPlaceholder: 'Сохранить изменения',
+    },
+    email: {
+        title: 'Изменение E-mail',
+        usedFunction: changeUserEmail,
+        inputPlaceholder: 'Введите новый адрес E-mail',
+        buttonPlaceholder: 'Сохранить изменения',
+    },
+    reset: {
+        title: 'Забыли пароль? Введите ваш E-mail чтобы сбросить пароль',
+        usedFunction: resetPassword,
+        inputPlaceholder: 'mooduck@mail.ru',
+        buttonPlaceholder: 'Сбросить пароль',
+    }
 }
 
 const ModalName: FC<ModalNameProps> = ({
-    children,
+    // children,
     visable,
     setVisable,
     id,
-    email }) => {
+    type,
+    // email    
+}) => {
 
+    const [value, setValue] = useState<string>('')
+    const [visablePassword, setVisablePassword] = useState<boolean>(false)
+
+    const handleOnChange:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setValue(e.target.value)
+    }
 
     return (
         <>
@@ -26,7 +69,8 @@ const ModalName: FC<ModalNameProps> = ({
                 ? <div className={classes.modalWrapper}>
                     <div className={classes.modalContainer}>
                         <div className={classes.modalTitle}>
-                            <p>{children}</p>
+                            {/* <p>{children}</p> */}
+                            <p>{contentToRender[type as keyof IContentToRender].title}</p>
                             <img className={classes.crossImage}
                                 src={cross}
                                 onClick={() => setVisable(false)}>
@@ -35,35 +79,28 @@ const ModalName: FC<ModalNameProps> = ({
                         <div className={classes.modalInputContainer}>
                             <input className={classes.modalInput}
                                 type="text"
-                                placeholder='Введите новое имя пользователя' />
+                                onChange={handleOnChange}
+                                // placeholder={type === 'name' ? 'Введите новое имя пользователя' : 'Введите новый адрес E-mail'} />
+                                placeholder={contentToRender[type as keyof IContentToRender].inputPlaceholder} />
                         </div>
-                        {/* эта кнопка будет отправлять изменение на сервер */}
                         <button
                             className={classes.modalButton}
                             onClick={() => {
-                                changeUserEmail(id,email)
+                                type === 'name' ? changeUserName(id,value) : 
+                                type === 'email' ? changeUserEmail(id,value) :
+                                type === 'reset' ? resetPassword(value) : <></>
                                 setVisable(false)
+                                setVisablePassword(true)
                             }}>
-                            Сохранить изменения
+                            {contentToRender[type as keyof IContentToRender].buttonPlaceholder}
                         </button>
-                        {/* именно она, та что сверху от этой строчки */}
                     </div>
                 </div>
-                : <div className={`${classes.modalWrapper} ${classes.disable}`}>
-                    <div className={classes.modalContainer}>
-                        <p className={classes.modalTitle}>
-                            {children}
-                        </p>
-                        <div className={classes.modalInputContainer}>
-                            <input className={classes.modalInput}
-                                type="text"
-                                placeholder='Введите новое имя пользователя' />
-                        </div>
-                        <button className={classes.modalButton}>
-                            Сохранить изменения
-                        </button>
-                    </div>
-                </div>}
+                : <ModalPasswordAccess
+                id={id}
+                type={true}
+                visable={visablePassword}
+                setVisable={setVisablePassword}>Введите код подтверждения и новый пароль</ModalPasswordAccess>}
         </>
     )
 }

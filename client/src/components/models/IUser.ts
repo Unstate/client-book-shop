@@ -1,3 +1,6 @@
+import { BooksState } from "../../ReduxToolkit/bookSlice";
+import { IFavoritebooks } from "../../ReduxToolkit/userSlice";
+
 export interface IUser {
     id: string;
     email: string;

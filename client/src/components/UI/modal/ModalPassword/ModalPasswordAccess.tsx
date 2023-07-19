@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import classes from './ModalPasswordAccess.module.css'
 import see from '../../../../assets/see.svg'
 import cross from '../../../../assets/Cross.svg'
+import { setNewPassword } from "../../../../ReduxToolkit/actionCreators";
 
 
 const schema = yup.object({
+    token: yup.string().required(),
     password: yup.string().required(),
     correctPassword: yup.string().required(),
 }).required();
@@ -17,14 +19,47 @@ interface ModalPasswordProps {
     children: React.ReactElement | React.ReactNode;
     visable: boolean;
     setVisable: Function;
+    id: string;
+    type: boolean;
 }
 
-const ModalPasswordAccess: FC<ModalPasswordProps> = ({ children, visable, setVisable }) => {
+const ModalPasswordAccess: FC<ModalPasswordProps> = (
+    {
+        children,
+        visable,
+        setVisable,
+        id,
+        type,
+    }) => {
+    
+    const [passwordSettings, setPasswordSettings] = useState({
+        password: '',
+        passwordRepeat:'',
+        passwordVisable: false,
+        passwordRepeatVisable: false,
+        token: '',
+    })
 
-    const [password, setPassword] = useState<boolean>(false)
-    const [correctPassword, setСorrectPassword] = useState<boolean>(false)
-    const [value, setValue] = useState<string>('')
-    const [correctValue, setCorrectValue] = useState<string>('')
+    const setPassword:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setPasswordSettings(prev => ({...prev, password: e.target.value}))
+    }
+
+    const setPasswordRepeat:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setPasswordSettings(prev => ({...prev, passwordRepeat: e.target.value}))
+    }
+
+    const setPasswordVisable:() => void = () => {
+        setPasswordSettings(prev => ({...prev, passwordVisable: !passwordSettings.passwordVisable}))
+    }
+
+    const setPasswordRepeatVisable:() => void = () => {
+        setPasswordSettings(prev => ({...prev, passwordRepeatVisable: !passwordSettings.passwordRepeatVisable}))
+    }
+
+    const setToken:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setPasswordSettings(prev => ({...prev, token: e.target.value}))
+    }
+
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     });
@@ -43,43 +78,52 @@ const ModalPasswordAccess: FC<ModalPasswordProps> = ({ children, visable, setVis
                                 onClick={() => setVisable(false)} />
                         </div>
                         <div className={classes.inputsContainer}>
+                            {type
+                                ? <div className={classes.modalInputContainer}>
+                                    <input
+                                        placeholder="Введите код подтверждения"
+                                        className={classes.modalInput} {...register("token")}
+                                        type="text" value={passwordSettings.token}
+                                        onChange={setToken} />
+                                </div>
+                                : <></>}
                             <div className={classes.modalInputContainer}>
-                                {password
+                                {passwordSettings.passwordVisable
                                     ? <input
-                                        placeholder="Введите текущий пароль"
+                                        placeholder="Введите новый пароль"
                                         className={classes.modalInput} {...register("password")}
-                                        type="password" value={value}
-                                        onChange={(e) => setValue(e.target.value)} />
+                                        type="password" value={passwordSettings.password}
+                                        onChange={setPassword} />
                                     : <input
-                                        placeholder="Введите текущий пароль"
+                                        placeholder="Введите новый пароль"
                                         className={classes.modalInput} {...register("password")}
-                                        type="text" value={value}
-                                        onChange={(e) => setValue(e.target.value)} />}
+                                        type="text" value={passwordSettings.password}
+                                        onChange={setPassword} />}
                                 <button onClick={(e) => {
                                     e.preventDefault()
-                                    setPassword(!password)
+                                    setPasswordVisable()
                                 }}>
                                     <img src={see} />
                                 </button>
                             </div>
-                            <p>{errors.password?.message}</p>
-                            {value != correctValue ? <p>Пароли не совпадают</p> : <></>}
+                            {passwordSettings.password != passwordSettings.passwordRepeat ? <p>Пароли не совпадают</p> : <></>}
                             <div className={classes.modalInputContainer}>
-                                {correctPassword
+                                {passwordSettings.passwordRepeatVisable
                                     ? <input
-                                        placeholder="Введите текущий пароль"
+                                        placeholder="Повторите новый пароль"
                                         className={classes.modalInput} {...register("correctPassword")}
-                                        type="password" value={correctValue}
-                                        onChange={(e) => setCorrectValue(e.target.value)} />
+                                        type="password" value={passwordSettings.passwordRepeat}
+                                        onChange={setPasswordRepeat} />
                                     : <input
-                                        placeholder="Введите текущий пароль"
+                                        placeholder="Повторите текущий пароль"
                                         className={classes.modalInput} {...register("correctPassword")}
-                                        type="text" value={correctValue}
-                                        onChange={(e) => setCorrectValue(e.target.value)} />}
+                                        type="text" value={passwordSettings.passwordRepeat}
+                                        onChange={setPasswordRepeat} />}
                                 <button
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        setСorrectPassword(!correctPassword)}}>
+                                        setPasswordRepeatVisable()
+                                    }}>
                                     <img src={see} />
                                 </button>
                             </div>
@@ -89,7 +133,10 @@ const ModalPasswordAccess: FC<ModalPasswordProps> = ({ children, visable, setVis
                         </div>
                         <button
                             className={classes.modalButton}
-                            onClick={() => setVisable(false)}>
+                            onClick={() => {
+                                setNewPassword(id, passwordSettings.password)
+                                setVisable(false)
+                            }}>
                             Подтвердить
                         </button>
                     </form>

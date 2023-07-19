@@ -14,7 +14,7 @@ const Header = () => {
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>('')
     const [visable, setVisable] = useState<boolean>(false)
-    user && isAuth ? console.log(user, isAuth) : ''
+    // user && isAuth ? console.log(user, isAuth) : ''
 
     useEffect(() => {
         if (value != '') {
@@ -35,17 +35,15 @@ const Header = () => {
                         <img
                             className={classes.searchButton}
                             src={search} 
-                            onClick={() => dispatch(fetchBooksByText(value))}/>
+                            onClick={() => {
+                                dispatch(fetchBooksByText(value))
+                                setValue('')
+                            }}/>
                         <input
                             className={classes.search}
                             value={value}
                             onChange={(e) => { setValue(e.target.value) }}
                             placeholder='Название книги' />
-                        {/* {visable
-                            ? <div className={classes.searchResultContainer}>
-
-                            </div>
-                            : <></>} */}
                     </div>
                     <div className={classes.userImageContainer}>
                         <Link

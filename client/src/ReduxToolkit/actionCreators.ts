@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { AppDispatch } from './store';
-import { IComments, booksSlice } from './bookSlice';
+import { BooksState, IComments, booksSlice } from './bookSlice';
 import { CertainBook, certainBookSlice } from './certainBookSlice';
 import { userSlice } from './userSlice';
 import AuthService from '../components/services/AuthService';
 import { IUser } from '../components/models/IUser';
 import { AuthResponse } from '../components/models/response/AuthResponse';
-// import { $api_TEST, $api_TEST_SECOND } from '../components/http';
+import $api, { $api_books, $api_users } from '../components/http';
 
 
 export const fetchBooks = (limit = 30, page = 1) => async (dispatch: AppDispatch) => {
@@ -22,7 +22,7 @@ export const fetchBooks = (limit = 30, page = 1) => async (dispatch: AppDispatch
         dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
         dispatch(booksSlice.actions.setHasPrevPage(response.data.hasPrevPage))
     } catch (error: any) {
-        dispatch(booksSlice.actions.booksFetchingError(error.message))
+        dispatch(booksSlice.actions.booksFetchingError(error.response?.data?.message))
     }
 }
 
@@ -41,7 +41,7 @@ export const fetchBooksFilter = (limit = 30, page = 1, genre: string[], author: 
         dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
         dispatch(booksSlice.actions.setHasPrevPage(response.data.hasPrevPage))
     } catch (error: any) {
-        dispatch(booksSlice.actions.booksFetchingError(error.message))
+        dispatch(booksSlice.actions.booksFetchingError(error.response?.data?.message))
     }
 }
 
@@ -58,49 +58,37 @@ export const getBookById = (id: any) => async (dispatch: AppDispatch) => {
 export const getBookByIdComments = (id: string) => async (dispatch: AppDispatch) => {
     try {
         const response = await axios.get<IComments[]>(`http://localhost:3000/api/books/${id}/comments`)
-        console.log(response.data)
         dispatch(booksSlice.actions.setComments(response.data))
     } catch (error: any) {
+        console.log(error.response?.data?.message)
     }
 }
 
-export const fetchBooksByText = (text:string) => async (dispatch: AppDispatch) => {
+export const fetchBooksByText = (text: string) => async (dispatch: AppDispatch) => {
     try {
         const params = {
             text,
         }
         console.log(text)
         dispatch(booksSlice.actions.booksFetching())
-        const response = await axios.get(`http://localhost:3000/api/books?text=${text}`, { params })
-        console.log(response)
+        const response = await axios.get(`http://localhost:3000/api/books`, { params })
         dispatch(booksSlice.actions.booksFetchingSucces(response.data.books))
+        dispatch(booksSlice.actions.totalPagesCount(response.data.totalPages))
+        dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
+        dispatch(booksSlice.actions.setHasPrevPage(response.data.hasPrevPage))
     } catch (error: any) {
-        dispatch(booksSlice.actions.booksFetchingError(error.message))
+        dispatch(booksSlice.actions.booksFetchingError(error.response?.data?.message))
     }
 }
 
 export const setNewBookComment = (id: string, title: string, text: string, rating: number) => {
-    console.log(`
-                    TITLE >>> ${title}
-                    TEXT >>> ${text}
-                    RATING >>> ${rating}            
-    `)
-
-    return axios.post(`http://localhost:3000/api/books/${id}/comments`,{title:title,text:text,rating:rating})
-    // return axios.post(`http://localhost:3000/api/books/${id}/comments`, {
-    //     withCredentials:true,
-    //     title,
-    //     text,
-    //     rating,
-    // })
-    
+    return $api_books.post(`/${id}/comments`, { title: title, text: text, rating: rating })
 }
 
 export const getUserId = (id: any) => async (dispatch: AppDispatch) => {
     try {
         dispatch(userSlice.actions.userFetching())
         const response = await axios.get<IUser>(`http://localhost:3000/api/users/${id}`)
-        console.log(response.headers)
         dispatch(userSlice.actions.userFetchingSucces(false))
         dispatch(userSlice.actions.setUser(response.data))
     } catch (error: any) {
@@ -110,10 +98,8 @@ export const getUserId = (id: any) => async (dispatch: AppDispatch) => {
 }
 
 export const login = (email: string, password: string) => async (dispatch: AppDispatch) => {
-    console.log(`FUNCION LOGIN IS WORKING NOW`)
     try {
         const response = await AuthService.login(email, password)
-        console.log(`LOGINRESPONSE >> ${response.data}`)
         localStorage.setItem('token', response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
@@ -125,12 +111,11 @@ export const login = (email: string, password: string) => async (dispatch: AppDi
 export const registration = (email: string, username: string, password: string) => async (dispatch: AppDispatch) => {
     try {
         const response = await AuthService.registration(email, username, password)
-        console.log(`REGISTRATIONRESPONSE >> ${response.data}`)
         localStorage.setItem('token', response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
     } catch (error: any) {
-        console.log(error.response?.data)
+        console.log(error.response?.data?.message)
     }
 }
 
@@ -145,12 +130,27 @@ export const logout = () => async (dispatch: AppDispatch) => {
     }
 }
 
+export const resetPassword = async (email: string) => {
+    try {
+        const response = await AuthService.resetPassword(email)
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
+export const resetChangePassword = async (token: string, password: string) => {
+    try {
+        const response = await AuthService.resetChangePassword(token, password)
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
 export const checkAuth = () => async (dispatch: AppDispatch) => {
     try {
         const response = await axios.get<AuthResponse>(`http://localhost:3000/api/auth/refresh`, {
             withCredentials: true,
         })
-        console.log(`CheckAuthResponse >>> ${response}`)
         localStorage.setItem('token', response.data.accessToken)
         dispatch(userSlice.actions.setAuth(true))
         dispatch(userSlice.actions.setUser(response.data.user))
@@ -164,13 +164,64 @@ export const setBookLocation = (lines: boolean) => (dispatch: AppDispatch) => {
 }
 
 export const setFavouriteBook = async (id: string, bookId: string) => {
-    console.log('TRY')
-    return await axios.post(`http://localhost:3000/api/users/${id}/favoritebooks`, { bookId })
+    return await $api_users.post(`/${id}/favoritebooks`, { bookId })
 }
 
-export const changeUserEmail = async (id:string, email:string) => {
-    return await axios.put(`http://localhost:3000/api/users/${id}/email`,{email})
+export const getFavouriteBooks = (id: string) => async (dispatch: AppDispatch) => {
+    try {
+        const response = await $api_users.get<BooksState>(`/${id}/favoritebooks`)
+        dispatch(userSlice.actions.setFavouriteBooks(response.data))
+    } catch (e: any) {
+        console.log(e.response?.data?.message)
+    }
 }
+
+export const changeUserEmail = async (id: string, email: string) => {
+    return await $api_users.put(`/${id}/email`, { email })
+}
+
+export const changeUserName = async (id: string, name: string) => {
+    return await $api_users.put(`/${id}/username`, { name })
+}
+
+export const deleteFavouriteBook = async (id: any, bookId: string) => {
+    return await $api_users.delete(`/${id}/favoritebooks`, { data: { bookId } })
+}
+
+export const checkPassword = async (id: string, password: string) => {
+    try {
+        return await $api_users.post(`/${id}/checkpassword`, { password })
+    } catch (error: any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
+export const setNewPassword = async (id: string, password: string) => {
+    try {
+        return await $api_users.put(`/${id}/password`, {password})
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
+export const getUserImage = async (id: string) => {
+    try {
+        const response = await $api_users.get(`/${id}/logo`)
+        console.log(response)
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
+export const setNewUserImage = async (id: string, logo: any) => {
+    try {
+        return await $api_users.put(`/${id}/logo`, {logo})
+    } catch (error:any) {
+        console.log(error.response?.data?.message)
+    }
+}
+
+
 
 
 

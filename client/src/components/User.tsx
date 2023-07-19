@@ -1,4 +1,3 @@
-import { IUser } from "./models/IUser"
 import classes from './../styles/User.module.css'
 import goose from '../assets/Goose.svg'
 import url from '../assets/url.svg'
@@ -6,27 +5,59 @@ import { useState } from "react"
 import ModalUploader from "./UI/modal/ModalUploader/ModalUploader"
 import ModalName from "./UI/modal/ModalName/ModalName"
 import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
-import { useAppDispatch } from "../hooks/redux"
-import { logout } from "../ReduxToolkit/actionCreators"
 import ModalLogOut from "./UI/modal/ModalLogOut/ModalLogOut"
+import Book from "./Book"
+import { IFavoritebooks } from "../ReduxToolkit/userSlice"
 
+interface UserProps {
+    id: string;
+    email: string;
+    username: string;
+    password: string;
+    isActivated: boolean;
+    activationLink: string;
+    logo: string;
+    favouriteBooks: IFavoritebooks;
+}
 
-const User: React.FC<IUser> = (
+const User: React.FC<UserProps> = (
     {
         email,
-        isActivated,
+        // isActivated,
         logo,
-        password,
+        // password,
         username,
-        id
+        id,
+        favouriteBooks
     }) => {
 
-    const [visableName, setVisableName] = useState<boolean>(false)
-    const [visableImg, setVisableImg] = useState<boolean>(false)
-    const [visableLogOut, setVisableLogOut] = useState<boolean>(false)
-    const [visableEmail, setVisableEmail] = useState<boolean>(false)
-    const [visablePassword, setVisablePassword] = useState<boolean>(false)
-    const dispatch = useAppDispatch()
+    const [visables, setVisables] = useState({
+        visableName: false,
+        visableImg: false,
+        visableLogOut: false,
+        visableEmail: false,
+        visablePassword: false,
+    })
+
+    const visableName:(data:boolean) => void = (data) => {
+        setVisables(prev => ({...prev, visableName: data}))
+    }
+
+    const visableImg:(data:boolean) => void = (data) => {
+        setVisables(prev => ({...prev, visableImg: data}))
+    }
+
+    const visableLogOut:(data:boolean) => void = (data) => {
+        setVisables(prev => ({...prev, visableLogOut: data}))
+    }
+
+    const visableEmail:(data:boolean) => void = (data) => {
+        setVisables(prev => ({...prev, visableEmail: data}))
+    }
+
+    const visablePassword:(data:boolean) => void = (data) => {
+        setVisables(prev => ({...prev, visablePassword: data}))
+    }
 
     return (
         <>
@@ -37,7 +68,12 @@ const User: React.FC<IUser> = (
                         <div className={classes.userImageContainer}>
                             <img
                                 className={classes.userImage}
-                                src={goose} />
+                                src={goose}
+                                alt="Картинка не прогрузилась"
+                                onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
+                                    currentTarget.onerror = null
+                                    currentTarget.src = goose
+                                }} />
                         </div>
                         <div>
                             <img
@@ -62,50 +98,68 @@ const User: React.FC<IUser> = (
                     <div className={classes.buttonsContainer}>
                         <button
                             className={classes.userProfileButton}
-                            onClick={() => setVisableImg(true)}>
+                            onClick={() => visableImg(true)}>
                             изменить фотографию
                         </button>
                         <button
                             className={classes.userProfileButton}
-                            onClick={() => setVisableName(true)}>
+                            onClick={() => visableName(true)}>
                             изменить имя пользователя
                         </button>
                         <button
                             className={classes.userProfileButton}
-                            onClick={() => setVisableEmail(true)}>
+                            onClick={() => visableEmail(true)}>
                             изменить E-mail
                         </button>
                         <button
                             className={classes.userProfileButton}
-                            onClick={() => setVisablePassword(true)}>
+                            onClick={() => visablePassword(true)}>
                             изменить пароль
                         </button>
                         <button
                             className={`${classes.userProfileButton} ${classes.userLogOut}`}
-                            onClick={() => setVisableLogOut(true)}>
-                            {/* dispatch(logout()) */}
+                            onClick={() => visableLogOut(true)}>
                             выйти из аккаунта
                         </button>
                     </div>
                 </div>
                 <hr></hr>
-                <div>Закладки</div>
+                <div>
+                    <p>Закладки</p>
+                    <div className={classes.booksContainer}>
+                        {favouriteBooks.books
+                            ? favouriteBooks.books.map(book => <Book
+                                isDelete={true}
+                                key={book._id}
+                                author={book.authors}
+                                title={book.title}
+                                genres={book.genres}
+                                img={book.img}
+                                id={book._id} />)
+                            : <p>Закладок ещё нет — вы можете добавить первую книгу!</p>}
+                    </div>
+                </div>
                 <div>Комментарии</div>
                 <ModalName
-                    visable={visableName}
-                    setVisable={setVisableName}>Изменение имени пользователя</ModalName>
+                    type={'name'}
+                    id={id}
+                    visable={visables.visableName}
+                    setVisable={visableName} />
                 <ModalUploader
-                    visable={visableImg}
-                    setVisable={setVisableImg}>Изменение фотографии</ModalUploader>
+                    visable={visables.visableImg}
+                    setVisable={visableImg}>Изменение фотографии</ModalUploader>
                 <ModalName
-                    visable={visableEmail}
-                    setVisable={setVisableEmail}>Изменение E-mail</ModalName>
+                    id={id}
+                    type={'email'}
+                    visable={visables.visableEmail}
+                    setVisable={visableEmail} />
                 <ModalPassword
-                    visable={visablePassword}
-                    setVisable={setVisablePassword}>Изменение пароля</ModalPassword>
+                    userId={id}
+                    visable={visables.visablePassword}
+                    setVisable={visablePassword}>Изменение пароля</ModalPassword>
                 <ModalLogOut
-                    visable={visableLogOut}
-                    setVisable={setVisableLogOut}>Вы уверены, что хотите выйти?</ModalLogOut>
+                    visable={visables.visableLogOut}
+                    setVisable={visableLogOut}>Вы уверены, что хотите выйти?</ModalLogOut>
             </div>
         </>
     )

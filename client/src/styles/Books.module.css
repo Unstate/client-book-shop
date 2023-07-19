@@ -3,3 +3,15 @@
     font-family: 'Open Sans'; 
 }
 
+.contentContainer {
+    @apply flex flex-col w-[100%]
+}
+
+.books {
+    @apply flex flex-wrap 2xl:gap-x-[36px] lg:gap-x-[35px] gap-x-[100px] gap-y-[30px] min-h-[715px]
+}
+
+.paginationContainer {
+    @apply flex justify-center
+}
+

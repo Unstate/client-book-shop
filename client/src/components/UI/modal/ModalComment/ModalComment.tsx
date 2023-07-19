@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import classes from './ModalComment.module.css'
 import cross from '../../../../assets/Cross.svg'
 import StarRating from '../../starRating/StarRating';
@@ -14,20 +14,28 @@ interface ModalCommentProps {
 
 const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id }) => {
 
-    // сделать обработку ошибки, если статус код 401, то пользователь не авторизован
-    // нужно вывести ему это, что тип пошел нахуй, с
-
-    const [rating, setRating] = useState<number>(0)
     const dispatch = useAppDispatch()
-    const [title, setTitle] = useState<string>('')
-    const [description, setDescription] = useState<string>('')
+
+    const [commentData, setCommentData] = useState({
+        title: '',
+        description: '',
+        rating: 0,
+    })
+
+    const setTitle:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setCommentData(prev => ({...prev, title: e.target.value}))
+    }
+
+    const setDescription:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setCommentData(prev => ({...prev, description: e.target.value}))
+    }
 
     const handleRating = (rate: number) => {
-        setRating(rate)
+        setCommentData(prev => ({...prev, rating: rate}))
     }
 
     const handleReset = () => {
-        setRating(0)
+        setCommentData(prev => ({...prev, rating: 0}))
     }
 
     return (
@@ -44,30 +52,31 @@ const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id
                         </div>
                         <StarRating
                             disabled={false}
-                            rating={rating}
+                            rating={commentData.rating}
                             handleRating={handleRating}></StarRating>
                         <div className={classes.modalInputContainer}>
                             <input
                                 type="text"
                                 className={classes.modalInput}
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
+                                value={commentData.title}
+                                onChange={setTitle}
                                 placeholder='Заголовок *' />
                         </div>
                         <div className={classes.modalInputContainer}>
                             <input
                                 type="text"
                                 className={classes.modalInput}
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                value={commentData.description}
+                                onChange={setDescription}
                                 placeholder='Комментарий *' />
                         </div>
                         <button
                             className={classes.modalButton} 
                             onClick={(e) => {
                                 e.preventDefault()
-                                setNewBookComment(id, title, description, rating)
+                                setNewBookComment(id, commentData.title, commentData.description, commentData.rating)
                                 setVisable(false)
+                                handleReset()
                             }}>Опубликовать
                         </button>
                     </div>

@@ -27,7 +27,7 @@ const CertainBook: React.FC<CertainBookProps> = (
         authors,
         bookBinding,
         bookSeries,
-        comments,
+        // comments,
         description,
         genres,
         img,

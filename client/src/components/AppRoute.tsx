@@ -14,8 +14,7 @@ import Footer from "./Footer"
 const AppRoute = () => {
 
     const dispatch = useAppDispatch()
-    const { isAuth } = useAppSelector(state => state.userReducer)
-    const currentUrl = window.location.pathname
+    // const { isAuth } = useAppSelector(state => state.userReducer)
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -26,53 +25,43 @@ const AppRoute = () => {
     return (
         <>
             <div className={classes.appWrapper}>
-                {isAuth ? <div>TRUE</div> : <div>FALSE</div>}
-                {currentUrl === '/login' || currentUrl === '/registration'
-                    ? <Routes>
-                        <Route
-                            path='/login'
-                            element={<LoginPage />}>
-                        </Route>
+                {/* {isAuth ? <div>TRUE</div> : <div>FALSE</div>} */}
+                {/* <Header /> */}
+                <Routes>
 
-                        <Route
-                            path='/registration'
-                            element={<RegistrationPage />}>
-                        </Route>
+                    <Route
+                        path='/booksPage'
+                        element={<BooksPage />}>
+                    </Route>
 
-                        {/* <Route
-                                path='/*'
-                                element={<Navigate to='/login' replace />}>
-                            </Route> */}
-                    </Routes>
-                    : <>
-                        <Header />
-                        <Routes>
+                    <Route
+                        path='/books/:id'
+                        element={<CertainBookPage />}>
+                    </Route>
 
-                            <Route
-                                path='/booksPage'
-                                element={<BooksPage />}>
-                            </Route>
+                    <Route
+                        path='/users/:id'
+                        element={<UserPage />}>
+                    </Route>
 
-                            <Route
-                                path='/books/:id'
-                                element={<CertainBookPage />}>
-                            </Route>
+                    <Route
+                        path='/login'
+                        element={<LoginPage />}>
+                    </Route>
 
+                    <Route
+                        path='/registration'
+                        element={<RegistrationPage />}>
+                    </Route>
 
+                    <Route
+                        path='/*'
+                        element={<Navigate to='/login' replace />}>
+                    </Route>
 
-                            <Route
-                                path='/users/:id'
-                                element={<UserPage />}>
-                            </Route>
+                </Routes>
+                {/* <Footer /> */}
 
-                            <Route
-                                path='/*'
-                                element={<Navigate to='/login' replace />}>
-                            </Route>
-
-                        </Routes>
-                        <Footer />
-                    </>}
             </div>
         </>
     )

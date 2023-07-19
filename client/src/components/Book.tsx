@@ -3,8 +3,8 @@ import { Image } from "../ReduxToolkit/bookSlice";
 import classes from '../styles/Book.module.css'
 import cat from '../assets/Covermiddle.svg'
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
-import { setFavouriteBook } from "../ReduxToolkit/actionCreators";
+import { useAppSelector } from "../hooks/redux";
+import { deleteFavouriteBook, setFavouriteBook } from "../ReduxToolkit/actionCreators";
 
 export interface BookProps {
     author: string[],
@@ -12,11 +12,11 @@ export interface BookProps {
     genres: string[];
     img: Image;
     id: string;
+    isDelete: boolean;
 }
 
-const Book: FC<BookProps> = ({ author, title, img, id }) => {
+const Book: FC<BookProps> = ({ author, title, img, id, isDelete}) => {
 
-    const dispatch = useAppDispatch()
     const { user } = useAppSelector(state => state.userReducer)
 
     return (
@@ -50,11 +50,17 @@ const Book: FC<BookProps> = ({ author, title, img, id }) => {
                 </div>
             </div>
             <div className={classes.bookButtonContainer}>
-                <button 
+                {isDelete 
+                ? <button 
                 className={classes.bookButton}
-                onClick={() => setFavouriteBook(user.id,id)}>
-                    Хочу почитать
+                onClick={() => deleteFavouriteBook(user.id, id)}>
+                    Не хочу читать
                 </button>
+                : <button 
+                className={classes.bookButton}
+                onClick={() => setFavouriteBook(user.id, id)}>
+                    Хочу почитать
+                </button> }
             </div>
         </div>
     )

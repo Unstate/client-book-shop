@@ -1,0 +1,35 @@
+.infoContainer {
+    @apply 2xl:w-[700px] lg:w-[418px] 2xl:block lg:block hidden bg-[#246A73] pt-[80px] 2xl:px-[70px] lg:px-[47px] 
+}
+
+.questionButton {
+    @apply uppercase font-[600] mt-[15px] border-[2px] border-[#246A73] w-[253px] py-[15px] text-[16px] bg-white text-[#246A73] rounded-sm
+}
+
+.question {
+    @apply font-bold text-white uppercase text-[24px] pb-[36px]
+}
+
+.questionContainer {
+    @apply flex flex-col items-center justify-center 2xl:mb-[258px] lg:mb-[258px] mb-[30px]
+}
+
+.LogoNameCompanyContainer {
+    @apply 2xl:mb-[180px] 2xl:block lg:block lg:mb-[180px] flex justify-center text-white
+}
+
+.stick {
+    @apply 2xl:w-[100%] 2xl:m-0 lg:w-[100%] lg:m-0 w-[325px] m-auto border-[2px] border-white
+}
+
+.formTitle {
+    @apply 2xl:pt-[100px] lg:pt-[100px] font-bold uppercase text-[32px] text-center mb-[50px]
+}
+
+.questionButton:hover {
+    @apply text-white bg-[#160F29]
+}
+
+.fieldContainer {
+    @apply 2xl:w-[100%] lg:w-[572px] 2xl:block lg:block hidden  pt-[80px]
+}

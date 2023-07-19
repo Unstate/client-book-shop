@@ -17,7 +17,7 @@ export interface BooksProps {
     publisher: string;
 }
 
-interface BooksState {
+export interface BooksState {
     books: BooksProps[];
     isLoading: boolean;
     error: string;

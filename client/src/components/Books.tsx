@@ -15,9 +15,7 @@ interface BooksProps {
 const Books: React.FC<BooksProps> = ({ lines }) => {
 
     const dispatch = useAppDispatch()
-    const { books, isLoading } = useAppSelector(state => state.booksReducer)
-    const { totalPages } = useAppSelector(state => state.booksReducer)
-    const { page } = useAppSelector(state => state.booksReducer)
+    const { books, isLoading, totalPages, page } = useAppSelector(state => state.booksReducer)
     const limit = 16
     const pagesArray: number[] = []
 
@@ -35,37 +33,40 @@ const Books: React.FC<BooksProps> = ({ lines }) => {
         dispatch(booksSlice.actions.setCurrentPage(num))
     }
 
-    console.log(books)
-
     return (
         <>
             {isLoading
                 ? <Preloader></Preloader>
-                : <div className={classes.booksContainer}>
-                    {lines
-                        ? books.map((book) =>
-                            <BookLine
-                                key={book._id}
-                                id={book._id}
-                                author={book.authors}
-                                title={book.title}
-                                pageCount={book.pageCount}
-                                img={book.img}
-                                publisher={book.publisher}
-                                description={book.description}/>)
-                        : books.map((book) =>
-                            <Book
-                                key={book._id}
-                                id={book._id}
-                                author={book.authors}
-                                title={book.title}
-                                genres={book.genres}
-                                img={book.img}></Book>)}
-                    <Pagination
-                        currentPage={page}
-                        lastPage={totalPages}
-                        maxLength={7}
-                        setCurrentPage={setCurrentPage}></Pagination>
+                : <div className={classes.contentContainer}>
+                    <div className={classes.books}>
+                        {lines
+                            ? books.map((book) =>
+                                <BookLine
+                                    key={book._id}
+                                    id={book._id}
+                                    author={book.authors}
+                                    title={book.title}
+                                    pageCount={book.pageCount}
+                                    img={book.img}
+                                    publisher={book.publisher}
+                                    description={book.description} />)
+                            : books.map((book) =>
+                                <Book
+                                    isDelete={false}
+                                    key={book._id}
+                                    id={book._id}
+                                    author={book.authors}
+                                    title={book.title}
+                                    genres={book.genres}
+                                    img={book.img}></Book>)}
+                    </div>
+                    <div className={classes.paginationContainer}>
+                        <Pagination
+                            currentPage={page}
+                            lastPage={totalPages}
+                            maxLength={7}
+                            setCurrentPage={setCurrentPage}></Pagination>
+                    </div>
                 </div>}
         </>
     )

@@ -1,0 +1,27 @@
+.form {
+    @apply flex flex-col 2xl:justify-center items-center 
+}
+
+.formButton {
+    @apply w-[200px] uppercase font-[600] mt-[15px] border-[2px] border-[#160F29] px-[30px] py-[15px] text-[20px] bg-white text-[#160F29] rounded-sm
+}
+
+.formButton:hover {
+    @apply text-white bg-[#160F29]
+}
+
+.item {
+    @apply border-[2px] border-[#160F2980] flex items-center py-[12px] px-[12px] space-x-[12px] w-[463px] mb-[28px]
+}
+
+.item input {
+    @apply w-[440px]
+}
+
+.item p {
+    @apply text-red-500
+}
+
+.passwordLink {
+    @apply relative right-[7.8rem] mb-[20px] hover:text-[red] cursor-pointer
+}

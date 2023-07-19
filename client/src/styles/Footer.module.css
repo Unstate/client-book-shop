@@ -6,3 +6,7 @@
 .rigthsCompany {
     @apply text-center py-[10px] uppercase font-[14px]
 }
+
+.item {
+    @apply h-[74px] bg-white w-[2px]
+}
