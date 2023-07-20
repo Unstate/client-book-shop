@@ -10,6 +10,7 @@ import { fetchBooks, fetchBooksFilter, setBookLocation } from '../../../../Redux
 import tiles from '../../../../assets/Tiles.svg'
 import list from '../../../../assets/List button.svg'
 import cross from '../../../../assets/Cross.svg'
+import { scrollToTop } from '../../../ScrollButton'
 
 
 const styles: CSSProperties = {
@@ -173,7 +174,9 @@ const ModalFilter: FC<ModalFilterProps> = ({ visable, setVisable }) => {
                         <section className={classes.buttonsContainer}>
                             <MyButton
                                 styles={styles}
-                                onClick={() => { dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors)) }}>
+                                onClick={() => { 
+                                    dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors))
+                                    scrollToTop()}}>
                                 применить фильтры
                             </MyButton>
                             <MyButton

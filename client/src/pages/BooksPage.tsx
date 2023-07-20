@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 const BooksPage = () => {
 
     const [visable, setVisable] = useState<boolean>(false)
-    const { lines, isLoading } = useAppSelector(state => state.booksReducer)
+    const { lines } = useAppSelector(state => state.booksReducer)
 
     return (
         <>  

@@ -8,6 +8,7 @@ import { useAppDispatch } from "../hooks/redux"
 import { useEffect } from "react"
 import { checkAuth } from "../ReduxToolkit/actionCreators"
 import UserPage from "../pages/UserPages"
+import ScrollButton from "./ScrollButton"
 
 const AppRoute = () => {
 
@@ -55,7 +56,7 @@ const AppRoute = () => {
                     </Route>
 
                 </Routes>
-
+                <ScrollButton></ScrollButton>
             </div>
         </>
     )
