@@ -3,15 +3,13 @@ import classes from './ModalName.module.css'
 import cross from '../../../../assets/Cross.svg'
 import { changeUserEmail, changeUserName, resetPassword } from '../../../../ReduxToolkit/actionCreators';
 import ModalPasswordAccess from '../ModalPassword/ModalPasswordAccess';
-import { useAppDispatch } from '../../../../hooks/redux';
+// import { useAppDispatch } from '../../../../hooks/redux';
 
 interface ModalNameProps {
-    // children: React.ReactElement | React.ReactNode;
     visable: boolean;
     setVisable: Function;
     id: string;
     type: 'name' | 'email' | 'reset';
-    // email: string;
 }
 
 interface Iitem {
@@ -49,17 +47,15 @@ const contentToRender:IContentToRender = {
 }
 
 const ModalName: FC<ModalNameProps> = ({
-    // children,
     visable,
     setVisable,
     id,
     type,
-    // email    
 }) => {
 
     const [value, setValue] = useState<string>('')
     const [visablePassword, setVisablePassword] = useState<boolean>(false)
-    const dispatch = useAppDispatch()
+    // const dispatch = useAppDispatch()
 
     const handleOnChange:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         setValue(e.target.value)
@@ -71,7 +67,6 @@ const ModalName: FC<ModalNameProps> = ({
                 ? <div className={classes.modalWrapper}>
                     <div className={classes.modalContainer}>
                         <div className={classes.modalTitle}>
-                            {/* <p>{children}</p> */}
                             <p>{contentToRender[type as keyof IContentToRender].title}</p>
                             <img className={classes.crossImage}
                                 src={cross}
@@ -82,7 +77,6 @@ const ModalName: FC<ModalNameProps> = ({
                             <input className={classes.modalInput}
                                 type="text"
                                 onChange={handleOnChange}
-                                // placeholder={type === 'name' ? 'Введите новое имя пользователя' : 'Введите новый адрес E-mail'} />
                                 placeholder={contentToRender[type as keyof IContentToRender].inputPlaceholder} />
                         </div>
                         <button
@@ -92,7 +86,7 @@ const ModalName: FC<ModalNameProps> = ({
                                 type === 'email' ? changeUserEmail(id,value) :
                                 type === 'reset' ? resetPassword(value) : <></>
                                 setVisable(false)
-                                setVisablePassword(true)
+                                type == 'reset' ? setVisablePassword(true) : ''
                             }}>
                             {contentToRender[type as keyof IContentToRender].buttonPlaceholder}
                         </button>

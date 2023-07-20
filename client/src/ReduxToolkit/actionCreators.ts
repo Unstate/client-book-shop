@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AppDispatch } from './store';
-import { BooksState, IComments, booksSlice } from './bookSlice';
+import { BooksProps, BooksState, IComments, booksSlice } from './bookSlice';
 import { CertainBook, certainBookSlice } from './certainBookSlice';
 import { userSlice } from './userSlice';
 import AuthService from '../components/services/AuthService';
@@ -17,6 +17,7 @@ export const fetchBooks = (limit = 30, page = 1) => async (dispatch: AppDispatch
         }
         dispatch(booksSlice.actions.booksFetching())
         const response = await axios.get(`http://localhost:3000/api/books`, { params })
+        console.log(response.data.books)
         dispatch(booksSlice.actions.booksFetchingSucces(response.data.books))
         dispatch(booksSlice.actions.totalPagesCount(response.data.totalPages))
         dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))
@@ -257,6 +258,14 @@ export const setLikes = async (id: string) => {
     } catch (error: any) {
         console.log(error.response?.data?.message)
     }
+}
+
+export const deleteFavouriteBookFromStore = (id:string) => (dispatch: AppDispatch) => {
+    return dispatch(userSlice.actions.deleteFavouriteBook(id))
+}
+
+export const setOneFavouriteBook = (book:BooksProps) => (dispatch: AppDispatch) => {
+    return dispatch(userSlice.actions.setOneFavouriteBook(book))
 }
 
 

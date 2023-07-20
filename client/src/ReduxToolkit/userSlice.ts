@@ -68,6 +68,12 @@ export const userSlice = createSlice({
         },
         setError(state, action:PayloadAction<string>) {
             state.error = action.payload
+        },
+        deleteFavouriteBook(state, action: PayloadAction<string>) {
+            state.favouriteBooks.books = state.favouriteBooks.books.filter(book => book._id !== action.payload)
+        },
+        setOneFavouriteBook(state, action:PayloadAction<BooksProps>) {
+            state.favouriteBooks.books = [...state.favouriteBooks.books, action.payload]
         }
     }
 })

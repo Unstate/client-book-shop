@@ -11,7 +11,7 @@ import { IFavoritebooks } from "../ReduxToolkit/userSlice"
 import { getUserComments } from '../ReduxToolkit/actionCreators'
 import { IComments } from '../ReduxToolkit/bookSlice'
 import Comment from './Comment'
-import ModalError from './UI/modal/modalError/modalError'
+import ModalError from './UI/modal/modalError/ModalError'
 
 interface UserProps {
     id: string;
@@ -76,7 +76,7 @@ const User: React.FC<UserProps> = (
     // getUserComments(id)
     const [errorMessage, setErrorMessage] = useState<string | null>(error);
 
-    console.log(errorMessage)
+    // console.log(errorMessage)
 
     const handleError = (message: string) => {
         setErrorMessage(message);
@@ -167,7 +167,10 @@ const User: React.FC<UserProps> = (
                                 title={book.title}
                                 genres={book.genres}
                                 img={book.img}
-                                id={book._id} />)
+                                id={book._id}
+                                description={book.description}
+                                pageCount={book.pageCount}
+                                publisher={book.publisher} />)
                             : <p>Закладок ещё нет — вы можете добавить первую книгу!</p>}
                     </div>
                     {/* <p className='mt-[30px] text-center' */}

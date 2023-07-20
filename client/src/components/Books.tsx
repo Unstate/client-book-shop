@@ -16,6 +16,7 @@ const Books: React.FC<BooksProps> = ({ lines }) => {
 
     const dispatch = useAppDispatch()
     const { books, isLoading, totalPages, page } = useAppSelector(state => state.booksReducer)
+    const { favouriteBooks } = useAppSelector(state => state.userReducer)
     const limit = 16
     const pagesArray: number[] = []
 
@@ -50,15 +51,30 @@ const Books: React.FC<BooksProps> = ({ lines }) => {
                                     img={book.img}
                                     publisher={book.publisher}
                                     description={book.description} />)
-                            : books.map((book) =>
-                                <Book
-                                    isDelete={false}
-                                    key={book._id}
-                                    id={book._id}
-                                    author={book.authors}
-                                    title={book.title}
-                                    genres={book.genres}
-                                    img={book.img}></Book>)}
+                            : books.map(book => {
+                                const isFavourite = favouriteBooks.books.some(favouriteBook => 
+                                    favouriteBook._id === book._id)
+                                return <Book
+                                        isDelete={isFavourite}
+                                        key={book._id}
+                                        id={book._id}
+                                        author={book.authors}
+                                        title={book.title}
+                                        genres={book.genres}
+                                        img={book.img}
+                                        description={book.description}
+                                        pageCount={book.pageCount}
+                                        publisher={book.publisher}/>
+                            })}
+                            {/* // books.map((book) =>
+                            //     <Book
+                            //         isDelete={false}
+                            //         key={book._id}
+                            //         id={book._id}
+                            //         author={book.authors}
+                            //         title={book.title}
+                            //         genres={book.genres}
+                            //         img={book.img}></Book>)} */}
                     </div>
                     <div className={classes.paginationContainer}>
                         <Pagination
