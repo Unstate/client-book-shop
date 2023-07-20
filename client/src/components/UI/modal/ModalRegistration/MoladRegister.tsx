@@ -30,7 +30,9 @@ const ModalRegister: React.FC<ModalRegisterProps> = ({ children, visable, setVis
                         <div className={classes.modalImageContainer}><img src={message}/></div>
                         <MyButton
                             styles={styles}
-                            onClick={() => setVisable(false)}>
+                            onClick={() => { 
+                                setVisable(false)
+                                window.location.assign('/login')}}>
                             Продолжить
                         </MyButton>
                     </div>

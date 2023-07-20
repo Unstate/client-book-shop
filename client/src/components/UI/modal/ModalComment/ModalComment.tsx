@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 import classes from './ModalComment.module.css'
 import cross from '../../../../assets/Cross.svg'
 import StarRating from '../../starRating/StarRating';
@@ -22,20 +22,20 @@ const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id
         rating: 0,
     })
 
-    const setTitle:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-        setCommentData(prev => ({...prev, title: e.target.value}))
+    const setTitle: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setCommentData(prev => ({ ...prev, title: e.target.value }))
     }
 
-    const setDescription:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-        setCommentData(prev => ({...prev, description: e.target.value}))
+    const setDescription: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setCommentData(prev => ({ ...prev, description: e.target.value }))
     }
 
     const handleRating = (rate: number) => {
-        setCommentData(prev => ({...prev, rating: rate}))
+        setCommentData(prev => ({ ...prev, rating: rate }))
     }
 
     const handleReset = () => {
-        setCommentData(prev => ({...prev, rating: 0}))
+        setCommentData(prev => ({ ...prev, rating: 0 }))
     }
 
     return (
@@ -71,7 +71,7 @@ const ModalComment: FC<ModalCommentProps> = ({ children, visable, setVisable, id
                                 placeholder='Комментарий *' />
                         </div>
                         <button
-                            className={classes.modalButton} 
+                            className={classes.modalButton}
                             onClick={(e) => {
                                 e.preventDefault()
                                 setNewBookComment(id, commentData.title, commentData.description, commentData.rating)

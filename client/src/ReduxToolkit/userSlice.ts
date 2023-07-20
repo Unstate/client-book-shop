@@ -74,7 +74,7 @@ export const userSlice = createSlice({
         },
         setOneFavouriteBook(state, action:PayloadAction<BooksProps>) {
             state.favouriteBooks.books = [...state.favouriteBooks.books, action.payload]
-        }
+        },
     }
 })
 

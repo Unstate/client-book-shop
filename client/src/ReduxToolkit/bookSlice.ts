@@ -89,7 +89,7 @@ export const booksSlice = createSlice({
         },
         setLines(state, action:PayloadAction<boolean>) {
             state.lines = action.payload
-        }
+        },
     }
 })
 

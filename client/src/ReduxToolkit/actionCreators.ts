@@ -6,7 +6,7 @@ import { userSlice } from './userSlice';
 import AuthService from '../components/services/AuthService';
 import { IUser } from '../components/models/IUser';
 import { AuthResponse } from '../components/models/response/AuthResponse';
-import $api, { $api_books, $api_users } from '../components/http';
+import { $api_books, $api_users } from '../components/http';
 
 
 export const fetchBooks = (limit = 30, page = 1) => async (dispatch: AppDispatch) => {
@@ -267,6 +267,7 @@ export const deleteFavouriteBookFromStore = (id:string) => (dispatch: AppDispatc
 export const setOneFavouriteBook = (book:BooksProps) => (dispatch: AppDispatch) => {
     return dispatch(userSlice.actions.setOneFavouriteBook(book))
 }
+
 
 
 

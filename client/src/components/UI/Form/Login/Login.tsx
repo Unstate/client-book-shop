@@ -52,6 +52,15 @@ const Login = () => {
         setUserData(prev => ({ ...prev, passwordSettings: !userData.passwordSettings }))
     }
 
+    const TestFn = (callback:Function) => {
+        dispatch(login(userData.mail, userData.password))
+        callback()
+    }
+
+    const myCallback = () => {
+        setTimeout(() => window.location.assign('/booksPage'), 1000)
+    }
+
     return (
         <>
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +100,9 @@ const Login = () => {
                     className={classes.formButton}
                     onClick={(e) => {
                         e.preventDefault()
-                        dispatch(login(userData.mail, userData.password))
+                        TestFn(myCallback)
+                        // dispatch(login(userData.mail, userData.password))
+                        // 
                     }}>
                     Войти
                 </button>

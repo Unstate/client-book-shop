@@ -10,19 +10,18 @@ import { fetchBooksByText } from '../ReduxToolkit/actionCreators'
 
 const Header = () => {
 
-    const { user, isAuth } = useAppSelector(state => state.userReducer)
+    const { user } = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>('')
-    const [visable, setVisable] = useState<boolean>(false)
-    // user && isAuth ? console.log(user, isAuth) : ''
 
-    useEffect(() => {
-        if (value != '') {
-            setVisable(true)
-        } else {
-            setVisable(false)
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            dispatch(fetchBooksByText(value))
+            setValue('')
         }
-    }, [value])
+      };
+
+    // user ? console.log(user) : console.log('No')
 
     return (
         <>
@@ -34,12 +33,13 @@ const Header = () => {
                     <div className={classes.searchContainer}>
                         <img
                             className={classes.searchButton}
-                            src={search} 
+                            src={search}
                             onClick={() => {
                                 dispatch(fetchBooksByText(value))
                                 setValue('')
                             }}/>
                         <input
+                            onKeyDown={handleKeyPress}
                             className={classes.search}
                             value={value}
                             onChange={(e) => { setValue(e.target.value) }}

@@ -3,6 +3,7 @@ import classes from './ModalLogOut.module.css'
 import duckFoots from '../../../../assets/duck-footprints.svg'
 import { useAppDispatch } from '../../../../hooks/redux';
 import { logout } from '../../../../ReduxToolkit/actionCreators';
+import { Navigate } from 'react-router-dom';
 
 interface ModalLogOutProps {
     children: React.ReactElement | React.ReactNode;
@@ -35,6 +36,7 @@ const ModalLogOut: React.FC<ModalLogOutProps> = ({ children, visable, setVisable
                                 onClick={() => {
                                     dispatch(logout())
                                     setVisable(false)
+                                    window.location.assign('/login');
                                 }}>
                                 Да, выйти
                             </MyButton>
