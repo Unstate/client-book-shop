@@ -1,6 +1,8 @@
 import { Image } from '../ReduxToolkit/bookSlice'
 import classes from '../styles/BookInfo.module.css'
 import cat from '../assets/Cover big.svg'
+import { Link, animateScroll as scroll } from "react-scroll";
+// import { Link, animateScroll as scroll } from "react-scroll";
 
 interface BookInfoProps {
     img: Image;
@@ -45,11 +47,26 @@ const BookInfo: React.FC<BookInfoProps> = (
                         <div className={classes.bookDescription}>
                             <div className={classes.bookDesc}>{description}</div>
                             <div className={classes.linkReadMoreContainer}>
-                                <a
+                                {/* <a
                                     href="#section1"
                                     className={classes.linkReadMore}>
                                     Читать далее
-                                </a>
+                                </a> */}
+                                <Link
+                                    activeClass="active"
+                                    to="section1"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-10}
+                                    duration={400}
+                                    className={classes.linkReadMore}
+                                >Читать далее</Link>
+                                {/* <Link
+                                    to="#section1"
+                                    smooth={true} duration={500}
+                                    className={classes.linkReadMore}>
+                                    Читать далее
+                                </Link> */}
                             </div>
                             <div>
                                 <button
@@ -63,7 +80,16 @@ const BookInfo: React.FC<BookInfoProps> = (
                             <p className={classes.item}>Издательство</p>
                             <p className={classes.item}>Серия</p>
                             <p className={classes.item}>Количество страниц</p>
-                            <a href="#section2" className={classes.allChar}>Все характеристики</a>
+                            <Link
+                                    activeClass="active"
+                                    to="section2"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-10}
+                                    duration={400}
+                                    className={classes.allChar}
+                                >Все характеристики</Link>
+                            {/* <a href="#section2" className={classes.allChar}>Все характеристики</a> */}
                         </div>
                         <div className={classes.descriptionCell}>
                             <p className={classes.dItem}>{genres[0]}</p>

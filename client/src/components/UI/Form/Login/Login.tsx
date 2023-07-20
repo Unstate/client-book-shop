@@ -58,7 +58,12 @@ const Login = () => {
     }
 
     const myCallback = () => {
-        setTimeout(() => window.location.assign('/booksPage'), 1000)
+        if (localStorage.getItem('token') !== null) {
+            // window.location.assign('/booksPage')
+            setTimeout(() => window.location.assign('/booksPage'), 1000)
+          } else {
+            myCallback()
+          }
     }
 
     return (

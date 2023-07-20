@@ -17,7 +17,7 @@ export const fetchBooks = (limit = 30, page = 1) => async (dispatch: AppDispatch
         }
         dispatch(booksSlice.actions.booksFetching())
         const response = await axios.get(`http://localhost:3000/api/books`, { params })
-        console.log(response.data.books)
+        // console.log(response.data.books)
         dispatch(booksSlice.actions.booksFetchingSucces(response.data.books))
         dispatch(booksSlice.actions.totalPagesCount(response.data.totalPages))
         dispatch(booksSlice.actions.setHasNextPage(response.data.hasNextPage))

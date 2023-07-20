@@ -25,7 +25,7 @@ const Header = () => {
 
     return (
         <>
-            <header className={classes.siteHeader}>
+            <header className={classes.siteHeader} id='header1'>
                 <Link to="/booksPage">
                     <LogoNameCompany></LogoNameCompany>
                 </Link>
