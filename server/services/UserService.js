@@ -143,10 +143,10 @@ class UserService{
     async getFavoriteBook(limit, page, userId){
         const favoriteBooks = await FavoriteBookModel.find({userId}).select('bookId -_id');
 
-        if(!favoriteBooks)
+        if(favoriteBooks.length === 0)
             throw ApiError.BadRequest('User has not any favorite book');
 
-        const books = await BookService.getBooks(limit, page, null, null, favoriteBooks);
+        const books = await BookService.getBooks(limit, page, null, null, favoriteBooks, null);
 
         return books
     }

@@ -1,5 +1,5 @@
 .filterContainer {
-    @apply hidden 2xl:w-[510px] 2xl:h-[808px] 2xl:border-[2px] 2xl:border-[#160F2980] 2xl:p-[30px] 2xl:flex 2xl:flex-col 2xl:space-y-[20px];
+    @apply hidden text-base 2xl:w-[510px] 2xl:h-[808px] 2xl:border-[2px] 2xl:border-[#160F2980] 2xl:p-[30px] 2xl:flex 2xl:flex-col 2xl:space-y-[20px];
     font-family: 'Open Sans';
 }
 

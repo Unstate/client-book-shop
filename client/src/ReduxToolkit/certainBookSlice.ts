@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Image } from "./bookSlice";
+import { IComments, Image } from "./bookSlice";
 
 export interface CertainBook {
     authors: string[];
     bookBinding: string;
     bookSeries: string;
-    comments: any[];
+    comments: IComments[];
     description: string;
     genres: string[];
     img: Image;

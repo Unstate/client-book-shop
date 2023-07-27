@@ -28,7 +28,7 @@ router.get('/:id/comments', CommentController.getByUserId);
 
 //изменение пользовательских данных
 router.put('/:id/email', body('email').isEmail(), UserController.changeEmail);
-router.put('/:id/username', UserController.changeUsename);
+router.put('/:id/username', UserController.changeUsername);
 router.post('/:id/checkpassword', UserController.checkPassword);
 router.put('/:id/password', body('password').isLength({min:6, max: 32}), UserController.changePassword);
 

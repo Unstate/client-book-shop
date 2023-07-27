@@ -4,6 +4,7 @@ import { AuthResponse } from "../models/response/AuthResponse";
 const API_URL_AUTH = `http://localhost:3000/api/auth`
 const API_URL_BOOKS = `http://localhost:3000/api/books`
 const API_URL_USERS = `http://localhost:3000/api/users`
+const API_URL_COMMENTS = `http://localhost:3000/api/comments`
 
 export const $api = axios.create({
     withCredentials: true,
@@ -19,6 +20,12 @@ export const $api_users = axios.create({
     withCredentials: true,
     baseURL: API_URL_USERS
 })
+
+export const $api_comments = axios.create({
+    withCredentials: true,
+    baseURL: API_URL_COMMENTS
+})
+
 
 $api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
@@ -54,6 +61,14 @@ $api_books.interceptors.request.use((config) => {
 })
 
 $api_users.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+})
+
+$api_comments.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`

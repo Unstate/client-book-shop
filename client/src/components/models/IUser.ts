@@ -1,5 +1,3 @@
-import { BooksState } from "../../ReduxToolkit/bookSlice";
-import { IFavoritebooks } from "../../ReduxToolkit/userSlice";
 
 export interface IUser {
     id: string;
@@ -8,5 +6,5 @@ export interface IUser {
     password: string;
     isActivated: boolean;
     activationLink: string;
-    logo: string;
+    logo: any;
 }

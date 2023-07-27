@@ -84,7 +84,7 @@ class UserController{
         }
     }
 
-    async changeUsename(req, res, next){
+    async changeUsername(req, res, next){
         try {
             const {username, id} = req.user;
             console.log('req.user', req.user);

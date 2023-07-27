@@ -1,4 +1,4 @@
-import { Image } from "../ReduxToolkit/bookSlice"
+import { IComments, Image } from "../ReduxToolkit/bookSlice"
 import classes from '../styles/CertainBook.module.css'
 import BookInfo from "./BookInfo";
 import BookSpecifications from "./BookSpecifications";
@@ -8,7 +8,7 @@ interface CertainBookProps {
     authors: string[];
     bookBinding: string;
     bookSeries: string;
-    comments: any[];
+    comments: IComments[];
     description: string;
     genres: string[];
     img: Image;

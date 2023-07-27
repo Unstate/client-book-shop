@@ -33,10 +33,44 @@ class CommentController{
         }   
     }
 
-    async update(req, res, next){
+    async addLike(req, res, next){
         try {
-            const {_id, likes, dislikes} = req.body;
-            await CommentService.update(_id, likes, dislikes);
+            const commentId = req.params.id;
+            const userId = req.user.id
+            await CommentService.addLike(commentId, userId);
+            return res.status(201).end();
+        } catch (error) {
+            next(error)
+        }   
+    }
+
+    async removeLike(req, res, next){
+        try {
+            const commentId = req.params.id;
+            const userId = req.user.id
+            await CommentService.removeLike(commentId, userId);
+            return res.status(201).end();
+        } catch (error) {
+            next(error)
+        }   
+    }
+
+    async addDislike(req, res, next){
+        try {
+            const commentId = req.params.id;
+            const userId = req.user.id
+            await CommentService.addDislike(commentId, userId);
+            return res.status(201).end();
+        } catch (error) {
+            next(error)
+        }   
+    }
+
+    async removeDislike(req, res, next){
+        try {
+            const commentId = req.params.id;
+            const userId = req.user.id
+            await CommentService.removeDislike(commentId, userId);
             return res.status(201).end();
         } catch (error) {
             next(error)

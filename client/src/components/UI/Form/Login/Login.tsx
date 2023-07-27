@@ -76,7 +76,7 @@ const Login = () => {
                         {...register("mail")}
                         value={userData.mail}
                         onChange={setMail} />
-                    <p>{errors.mail?.message}</p>
+                    <p className="text-red-500">{errors.mail?.message}</p>
                 </div>
                 <div className={classes.item}>
                     <img src={lock} />
@@ -97,7 +97,7 @@ const Login = () => {
                     }}>
                         <img src={see} />
                     </button>
-                    <p>{errors.password?.message}</p>
+                    <p className="text-red-500">{errors.password?.message}</p>
                 </div>
                 <div className={classes.passwordLink}
                     onClick={() => setVisable(true)}>Забыли пароль?</div>

@@ -1,22 +1,29 @@
-import { CSSProperties, FC } from "react";
+import { CSSProperties, FC} from "react";
 import StarRating from "./UI/starRating/StarRating";
 import classes from '../styles/Comment.module.css'
 import like from '../assets/likeButton.svg'
 import dislike from '../assets/disLikeButton.svg'
-import { setLikes } from "../ReduxToolkit/actionCreators";
+import { addDislike, addLike, deleteDislike, deleteLike } from "../ReduxToolkit/actionCreators";
+import { ILikeAndDislike } from "../ReduxToolkit/bookSlice";
 
 interface CommentProps {
     title: string;
     description: string;
     rating: number;
-    dislikes: string[];
-    likes: string[];
+    dislikes: ILikeAndDislike[];
+    likes: ILikeAndDislike[];
     date: number;
     userId: string;
+    commentId: string;
+    currentUser: string;
+    checkExtendOfUserId: (arr:ILikeAndDislike[],userId:string ) => boolean;
 }
 
 const Comment: FC<CommentProps> = (
     {
+        checkExtendOfUserId,
+        currentUser,
+        commentId,
         title,
         description,
         rating,
@@ -45,6 +52,7 @@ const Comment: FC<CommentProps> = (
         background: 'black',
     }
 
+
     return (
         <article style={rating <= 2
             ? red
@@ -65,16 +73,27 @@ const Comment: FC<CommentProps> = (
             <div className={classes.commentFooter}>
                 <StarRating disabled={true} rating={rating} handleRating={() => { }}></StarRating>
                 <div className={classes.markContainer}>
-                    <img
-                        src={like}
-                        className={classes.button} />
+                    {checkExtendOfUserId(likes, currentUser) 
+                    ? <img
+                    onClick={() => deleteLike(commentId) }
+                    src={like}
+                    className={classes.button} />
+                    : <img
+                    onClick={() => addLike(commentId) }
+                    src={like}
+                    className={classes.button} />}
                     <p
-                        onClick={() => setLikes(userId)}
-                        className={classes.likesContainer}>{likes.length}</p>
-                    <img
-                        src={dislike}
-                        className={classes.button} />
-                    <p onClick={() => setLikes(userId)}>{dislikes.length}</p>
+                        className={classes.likesContainer}>{likes?.length}</p>
+                    {checkExtendOfUserId(dislikes, currentUser)
+                    ? <img
+                    onClick={() => deleteDislike(commentId)}
+                    src={dislike}
+                    className={classes.button} /> 
+                    : <img
+                    onClick={() => addDislike(commentId)}
+                    src={dislike}
+                    className={classes.button} />}
+                    <p>{dislikes?.length}</p>
                 </div>
             </div>
         </article>

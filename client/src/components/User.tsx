@@ -1,15 +1,15 @@
 import classes from './../styles/User.module.css'
 import goose from '../assets/Goose.svg'
 import url from '../assets/url.svg'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalUploader from "./UI/modal/ModalUploader/ModalUploader"
 import ModalName from "./UI/modal/ModalName/ModalName"
 import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
 import ModalLogOut from "./UI/modal/ModalLogOut/ModalLogOut"
 import Book from "./Book"
 import { IFavoritebooks } from "../ReduxToolkit/userSlice"
-import { getUserComments } from '../ReduxToolkit/actionCreators'
-import { IComments } from '../ReduxToolkit/bookSlice'
+// import { getUserComments } from '../ReduxToolkit/actionCreators'
+import { IComments, ILikeAndDislike } from '../ReduxToolkit/bookSlice'
 import Comment from './Comment'
 import ModalError from './UI/modal/modalError/ModalError'
 
@@ -38,7 +38,7 @@ const User: React.FC<UserProps> = (
         id,
         favouriteBooks
     }) => {
-
+    // console.log(comments)
     const [visables, setVisables] = useState({
         visableName: false,
         visableImg: false,
@@ -46,7 +46,7 @@ const User: React.FC<UserProps> = (
         visableEmail: false,
         visablePassword: false,
     })
-    const [items, setItems] = useState<IComments[]>(comments)
+    // const [items, setItems] = useState<IComments[]>(comments)
     const [visibleItemsCount, setVisibleItemsCount] = useState<number>(ITEMS_PER_PAGE)
 
     const showMoreItems = () => {
@@ -85,22 +85,33 @@ const User: React.FC<UserProps> = (
     const handleCloseError = () => {
         setErrorMessage(null);
     };
+
+    const checkExtendOfUserId:(arr:ILikeAndDislike[],userId:string) => boolean = (arr, userId) => {
+        return arr?.some(el => el?.userId === userId)
+    }
+
+    useEffect(() => {
+        if (error) {
+            handleError(error)
+        }
+    }, [error])
     return (
         <>
             <div className={classes.userContainer}>
-            {errorMessage && (
-              <ModalError message={errorMessage} onClose={handleCloseError} />
-            )}
-      
-            {/* Example button that triggers an error */}
-            <button onClick={() => handleError('Something went wrong!')}>Trigger error</button>
+                {errorMessage && (
+                    <ModalError message={errorMessage} onClose={handleCloseError} />
+                )}
+
+                {/* Example button that triggers an error */}
+                {/* <button onClick={() => handleError('Something went wrong!')}>Trigger error</button> */}
                 <p className={classes.personData}>Личные данные</p>
                 <div className={classes.userProfile}>
                     <div className={classes.userCard}>
                         <div className={classes.userImageContainer}>
                             <img
                                 className={classes.userImage}
-                                src={goose}
+                                src={logo}
+                                // src={`http://localhost:5173/b38abdbb-5bef-47e4-9d90-61fc61952f45`}
                                 alt="Картинка не прогрузилась"
                                 onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки
                                     currentTarget.onerror = null
@@ -181,6 +192,9 @@ const User: React.FC<UserProps> = (
                     <p className=' text-[#160F29] text-[25px] my-[30px] font-semibold'>Комментарии</p>
                     <div>
                         {comments.slice(0, visibleItemsCount).map(comment => <Comment
+                            checkExtendOfUserId={checkExtendOfUserId}
+                            currentUser={id}
+                            commentId={comment._id}
                             key={comment._id}
                             title={comment.title}
                             description={comment.text}
@@ -201,6 +215,7 @@ const User: React.FC<UserProps> = (
                     visable={visables.visableName}
                     setVisable={visableName} />
                 <ModalUploader
+                    id={id}
                     visable={visables.visableImg}
                     setVisable={visableImg}>Изменение фотографии</ModalUploader>
                 <ModalName

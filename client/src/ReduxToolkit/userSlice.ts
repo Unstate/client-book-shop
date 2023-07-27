@@ -75,6 +75,9 @@ export const userSlice = createSlice({
         setOneFavouriteBook(state, action:PayloadAction<BooksProps>) {
             state.favouriteBooks.books = [...state.favouriteBooks.books, action.payload]
         },
+        setUserImage(state,action:PayloadAction<string>) {
+            state.user.logo = action.payload
+        }
     }
 })
 

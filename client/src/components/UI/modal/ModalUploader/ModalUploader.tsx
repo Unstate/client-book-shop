@@ -2,14 +2,16 @@ import { useState, useRef, FC } from "react";
 import classes from './ModalUploader.module.css'
 import notImage from '../../../../assets/g38.svg'
 import cross from '../../../../assets/Cross.svg'
+import { deleteUserImage, setNewUserImage } from "../../../../ReduxToolkit/actionCreators";
 
 interface ModalUploaderProps {
     children: React.ReactElement | React.ReactNode;
     visable: boolean;
     setVisable: Function;
+    id: string;
 }
 
-const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }) => {
+const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable,id }) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<FileList | null>(null);
@@ -30,10 +32,15 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
         }
     }
 
+
     const handleClearClick = (e: any) => {
         e.preventDefault()
         setFiles(null);
     };
+
+    // files ? console.log(files) : console.log('Нет файлов')
+    // const file = inputRef.current?.files
+    // console.log(files[0])
 
     return (
         <>
@@ -42,10 +49,10 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
                     <div className={classes.modalContainer}>
                         <div className={classes.modalTitle}>
                             {children}
-                            <img 
-                            src={cross} 
-                            className={classes.crossImage} 
-                            onClick={() => setVisable(false)}/>
+                            <img
+                                src={cross}
+                                className={classes.crossImage}
+                                onClick={() => setVisable(false)} />
                         </div>
                         <div
                             className={classes.dropzone}
@@ -59,7 +66,10 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
                                     <div className="actions">
                                         <button
                                             className={classes.modalButton}
-                                            onClick={() => setVisable(false)}>
+                                            onClick={() => {
+                                                setNewUserImage(id,files)
+                                                setVisable(false)
+                                            }}>
                                             Сохранить изменения
                                         </button>
                                     </div>
@@ -91,7 +101,9 @@ const ModalUploader: FC<ModalUploaderProps> = ({ children, visable, setVisable }
                         </div>
                         <button
                             className={`${classes.modalButton} ${classes.modalButtonDelete}`}
-                            onClick={handleClearClick}>
+                            onClick={() => deleteUserImage(id)}>
+                                
+                                {/* (e) => handleClearClick(e) */}
                             Удалить фотографию
                         </button>
                     </div>

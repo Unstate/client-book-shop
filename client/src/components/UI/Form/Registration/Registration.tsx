@@ -75,7 +75,7 @@ const Registration = () => {
                         {...register("username")}
                         value={userData.username}
                         onChange={setUsername} />
-                    <p>{errors.username?.message}</p>
+                    <p className="text-red-500">{errors.username?.message}</p>
                 </div>
                 <div className={classes.item}>
                     <img src={email} />
@@ -84,7 +84,7 @@ const Registration = () => {
                         {...register("email")}
                         value={userData.mail}
                         onChange={setMail} />
-                    <p>{errors.email?.message}</p>
+                    <p className="text-red-500">{errors.email?.message}</p>
                 </div>
                 <div className={classes.item}>
                     <img src={lock} />
@@ -108,7 +108,7 @@ const Registration = () => {
                         }}>
                         <img src={see} />
                     </button>
-                    <p>{errors.password?.message}</p>
+                    <p className="text-red-500">{errors.password?.message}</p>
                 </div>
                 <div className={classes.item}>
                     <img src={lock} />
@@ -132,7 +132,7 @@ const Registration = () => {
                         }}>
                         <img src={see} />
                     </button>
-                    <p>{errors.correctPassword?.message}</p>
+                    <p className="text-red-500">{errors.correctPassword?.message}</p>
                 </div>
                 <button
                     type="submit"

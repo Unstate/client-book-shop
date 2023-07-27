@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react'
+import { CSSProperties, useEffect, useMemo, useState } from 'react'
 import classes from '../styles/Filter.module.css'
 import { IAuthor, author, genre } from '../ReduxToolkit/genreList'
 import CheckBox from './UI/CheckBox/CheckBox'
@@ -42,14 +42,22 @@ const Filter = () => {
 
     const filteredAuthors = (authors: IAuthor[]) => {
 
+        // console.log('Я сработала')
+
         const searchedAuthors = () => {
-            return authors.filter(author =>
-                author.author.toLowerCase().includes(value.toLowerCase()))
+            if (value) {
+                return authors.filter(author =>
+                    author.author.toLowerCase().includes(value.toLowerCase()))
+            } else {
+                return authors
+            }
         }
         return searchedAuthors()
     }
 
-    const searchedAuthors = filteredAuthors(authors)
+    var searchedAuthors = filteredAuthors(authors)
+
+    // useEffect(()=>{console.log(searchedAuthors)},[searchedAuthors])
 
     const handleOnClickAuthor: (id: string) => void = (id) => {
         setAuthors(searchedAuthors.map(author => author.id === id
@@ -113,7 +121,17 @@ const Filter = () => {
             <section className={classes.buttonsContainer}>
                 <MyButton
                     styles={styles}
-                    onClick={() => { dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors)) }}>
+                    onClick={() => { 
+                        if (resultGenres.length !== 0 && resultAuthors.length !== 0 ) {
+                            dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors))
+                        } else if (resultAuthors.length === 0 && resultGenres.length !== 0) {
+                            dispatch(fetchBooksFilter(30, 1, resultGenres))
+                        } else if (resultGenres.length === 0 && resultAuthors.length!== 0) {
+                            dispatch(fetchBooksFilter(30, 1, undefined,resultAuthors))
+                        } else if (resultGenres.length === 0 && resultAuthors.length === 0) {
+                            dispatch(fetchBooksFilter(30, 1))
+                        }
+                    }}>
                     применить фильтры
                 </MyButton>
                 <MyButton
@@ -121,6 +139,8 @@ const Filter = () => {
                     onClick={() => {
                         clear()
                         dispatch(fetchBooks(16, 1))
+                        // setValue('')
+                        // searchedAuthors = authors
                     }}>
                     очистить фильтры
                 </MyButton>

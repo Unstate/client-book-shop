@@ -106,7 +106,9 @@ const ModalPasswordAccess: FC<ModalPasswordProps> = (
                                     <img src={see} />
                                 </button>
                             </div>
-                            {passwordSettings.password != passwordSettings.passwordRepeat ? <p>Пароли не совпадают</p> : <></>}
+                            {passwordSettings.password != passwordSettings.passwordRepeat 
+                            ? <p className="text-red-500">Пароли не совпадают</p> 
+                            : <></>}
                             <div className={classes.modalInputContainer}>
                                 {passwordSettings.passwordRepeatVisable
                                     ? <input
@@ -127,7 +129,7 @@ const ModalPasswordAccess: FC<ModalPasswordProps> = (
                                     <img src={see} />
                                 </button>
                             </div>
-                            <p>
+                            <p className="text-red-500">
                                 {errors.correctPassword?.message}
                             </p>
                         </div>

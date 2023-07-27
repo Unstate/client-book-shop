@@ -6,8 +6,6 @@ const commentSchema = new mongoose.Schema({
     title: {type: String, required: true},
     text: {type: String, required: true},
     rating: {type: Number, required: true},
-    likes: {type:[String], default: []},
-    dislikes: {type:[String], default: []},
     date:{type:Number, default: Date.now() + 10800000}
 });
 

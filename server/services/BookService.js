@@ -29,11 +29,24 @@ class BookService{
                 query = {$or:correctedBooksId}
             }
             else{
+                console.log(genres, author)
                 const genresArr = genres?.split('-');
                 const authorsArr = author?.split('-');
+                console.log(genresArr, authorsArr)
+                let genreQuery
+                let authorQuery
                 
-                const genreQuery = genresArr ? {genres:{$in: genresArr}} : {};
-                const authorQuery = authorsArr ? {authors:{$in: authorsArr}} : {};
+                genreQuery = genresArr ? {genres:{$in: genresArr}} : {};
+                authorQuery = authorsArr ? {authors:{$in: authorsArr}} : {};
+
+                if(genreQuery && authorQuery){
+                    query = {$and: [genreQuery, authorQuery]};
+                } else if(genreQuery){
+                    query = {genreQuery}
+                } else{
+                    query = {authorQuery}
+                }
+                
         
                 query = {$and: [genreQuery, authorQuery]};
             }

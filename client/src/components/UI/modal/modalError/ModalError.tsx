@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { userSlice } from '../../../../ReduxToolkit/userSlice';
 
 type ErrorProps = {
   message: string;
@@ -9,6 +11,7 @@ const ModalError = ({ message, onClose }: ErrorProps) => {
 
   const HIDE_TIMEOUT = 5000;
   const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const hide = () => {
@@ -19,7 +22,8 @@ const ModalError = ({ message, onClose }: ErrorProps) => {
       if (elapsedTime < HIDE_TIMEOUT) {
         setElapsedTime(time => time + 1000);
       } else {
-        hide();
+        hide()
+        dispatch(userSlice.actions.setError(''));
       }
     }, 1000);
 

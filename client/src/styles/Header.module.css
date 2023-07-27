@@ -1,5 +1,5 @@
 .siteHeader {
-    @apply  items-center justify-between mb-[30px] pt-[22px] px-[42px] md:flex-wrap 2xl:flex lg:flex hidden;
+    @apply  items-center justify-between mb-[30px] pt-[22px] px-[42px] sm:flex-wrap 2xl:flex lg:flex hidden;
     font-family: 'Open Sans';
 }
 

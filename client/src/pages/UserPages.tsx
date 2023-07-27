@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { useEffect } from 'react'
-import { getFavouriteBooks, getUserComments, getUserId } from '../ReduxToolkit/actionCreators'
+import { getFavouriteBooks, getUserComments, getUserId, getUserImage } from '../ReduxToolkit/actionCreators'
 import Preloader from '../components/Preloader'
 import User from '../components/User'
 import Header from '../components/Header'
@@ -13,15 +13,20 @@ const CertainBookPage = () => {
     const { user, isLoading, favouriteBooks, comments, error } = useAppSelector(state => state.userReducer)
     const { id } = useParams()
 
+    // console.log(user)
+
     useEffect(() => {
         if (id) {
             dispatch(getUserId(id))
             if (user) {
                 dispatch(getFavouriteBooks(id, 4, 1))
                 dispatch(getUserComments(id))
+                dispatch(getUserImage(id))
             }
         }
     }, [])
+
+    // useEffect(()=>{console.log(error)},[error])
 
     return (
         <>  

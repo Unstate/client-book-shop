@@ -17,6 +17,10 @@ export interface BooksProps {
     publisher: string;
 }
 
+export interface ILikeAndDislike {
+    userId: string;
+}
+
 export interface BooksState {
     books: BooksProps[];
     isLoading: boolean;
@@ -32,8 +36,8 @@ export interface BooksState {
 export interface IComments {
     bookId: string;
     date: number;
-    dislikes: string[];
-    likes: string[];
+    dislikes: ILikeAndDislike[];
+    likes: ILikeAndDislike[];
     rating: number;
     text: string;
     title: string;
@@ -90,6 +94,9 @@ export const booksSlice = createSlice({
         setLines(state, action:PayloadAction<boolean>) {
             state.lines = action.payload
         },
+        setLikesAndDislikes(state, action:PayloadAction<string>) {
+            state.comments
+        } 
     }
 })
 

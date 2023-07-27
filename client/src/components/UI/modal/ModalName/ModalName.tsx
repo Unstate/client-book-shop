@@ -3,6 +3,7 @@ import classes from './ModalName.module.css'
 import cross from '../../../../assets/Cross.svg'
 import { changeUserEmail, changeUserName, resetPassword } from '../../../../ReduxToolkit/actionCreators';
 import ModalPasswordAccess from '../ModalPassword/ModalPasswordAccess';
+import { useAppDispatch } from '../../../../hooks/redux';
 // import { useAppDispatch } from '../../../../hooks/redux';
 
 interface ModalNameProps {
@@ -55,7 +56,7 @@ const ModalName: FC<ModalNameProps> = ({
 
     const [value, setValue] = useState<string>('')
     const [visablePassword, setVisablePassword] = useState<boolean>(false)
-    // const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
     const handleOnChange:(e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         setValue(e.target.value)
@@ -82,8 +83,9 @@ const ModalName: FC<ModalNameProps> = ({
                         <button
                             className={classes.modalButton}
                             onClick={() => {
+                                //FIXME: сделать все запросы с dispatch
                                 type === 'name' ? changeUserName(id,value) : 
-                                type === 'email' ? changeUserEmail(id,value) :
+                                type === 'email' ? dispatch(changeUserEmail(id,value)):
                                 type === 'reset' ? resetPassword(value) : <></>
                                 setVisable(false)
                                 type == 'reset' ? setVisablePassword(true) : ''

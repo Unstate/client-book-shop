@@ -174,9 +174,19 @@ const ModalFilter: FC<ModalFilterProps> = ({ visable, setVisable }) => {
                         <section className={classes.buttonsContainer}>
                             <MyButton
                                 styles={styles}
-                                onClick={() => { 
-                                    dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors))
-                                    scrollToTop()}}>
+                                onClick={() => {
+                                    if (resultGenres.length !== 0 && resultAuthors.length !== 0 ) {
+                                        dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors))
+                                    } else if (resultAuthors.length === 0 && resultGenres.length !== 0) {
+                                        dispatch(fetchBooksFilter(30, 1, resultGenres))
+                                    } else if (resultGenres.length === 0 && resultAuthors.length!== 0) {
+                                        dispatch(fetchBooksFilter(30, 1, undefined,resultAuthors))
+                                    } else if (resultGenres.length === 0 && resultAuthors.length === 0) {
+                                        dispatch(fetchBooksFilter(30, 1))
+                                    }
+                                    // dispatch(fetchBooksFilter(30, 1, resultGenres, resultAuthors))
+                                    scrollToTop()
+                                    setVisable(false)}}>
                                 применить фильтры
                             </MyButton>
                             <MyButton

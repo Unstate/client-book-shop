@@ -16,7 +16,7 @@
 }
 
 .filterContainerText {
-    @apply uppercase font-[600] text-[16px] text-[#160F29]; 
+    @apply uppercase font-[600] text-[20px] text-[#160F29]; 
 }
 
 .buttonsContainer {
