@@ -77,7 +77,7 @@ const Book: FC<BookProps> = ({ author, title, img, id, isDelete, genres, descrip
                     : <button
                         className={classes.bookButton}
                         onClick={() => {
-                            setFavouriteBook(user.id, id)
+                            dispatch(setFavouriteBook(user.id, id))
                             dispatch(setOneFavouriteBook(book))
                         }}>
                         Хочу почитать

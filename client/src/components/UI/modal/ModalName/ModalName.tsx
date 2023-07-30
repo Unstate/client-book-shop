@@ -84,9 +84,9 @@ const ModalName: FC<ModalNameProps> = ({
                             className={classes.modalButton}
                             onClick={() => {
                                 //FIXME: сделать все запросы с dispatch
-                                type === 'name' ? changeUserName(id,value) : 
+                                type === 'name' ? dispatch(changeUserName(id,value)) : 
                                 type === 'email' ? dispatch(changeUserEmail(id,value)):
-                                type === 'reset' ? resetPassword(value) : <></>
+                                type === 'reset' ? dispatch(resetPassword(value)) : <></>
                                 setVisable(false)
                                 type == 'reset' ? setVisablePassword(true) : ''
                             }}>

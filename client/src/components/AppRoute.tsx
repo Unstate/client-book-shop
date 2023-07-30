@@ -9,6 +9,8 @@ import { useEffect } from "react"
 import { checkAuth } from "../ReduxToolkit/actionCreators"
 import UserPage from "../pages/UserPages"
 import ScrollButton from "./ScrollButton"
+import Header from "./Header"
+import Footer from "./Footer"
 
 const AppRoute = () => {
 
@@ -23,39 +25,44 @@ const AppRoute = () => {
     return (
         <>
             <div className={classes.appWrapper}>
-                <Routes>
+                {localStorage.getItem('token')
+                    ? <><Header />
+                        <Routes>
 
-                    <Route
-                        path='/booksPage'
-                        element={<BooksPage />}>
-                    </Route>
+                            <Route
+                                path='/booksPage'
+                                element={<BooksPage />}>
+                            </Route>
 
-                    <Route
-                        path='/books/:id'
-                        element={<CertainBookPage />}>
-                    </Route>
+                            <Route
+                                path='/books/:id'
+                                element={<CertainBookPage />}>
+                            </Route>
 
-                    <Route
-                        path='/users/:id'
-                        element={<UserPage />}>
-                    </Route>
+                            <Route
+                                path='/users/:id'
+                                element={<UserPage />}>
+                            </Route>
 
-                    <Route
-                        path='/login'
-                        element={<LoginPage />}>
-                    </Route>
+                        </Routes>
+                        <Footer /></>
+                    : <Routes>
+                        <Route
+                            path='/login'
+                            element={<LoginPage />}>
+                        </Route>
 
-                    <Route
-                        path='/registration'
-                        element={<RegistrationPage />}>
-                    </Route>
+                        <Route
+                            path='/registration'
+                            element={<RegistrationPage />}>
+                        </Route>
 
-                    <Route
-                        path='/*'
-                        element={<Navigate to='/login' replace />}>
-                    </Route>
+                        <Route
+                            path='/*'
+                            element={<Navigate to='/login' replace />}>
+                        </Route>
+                    </Routes>}
 
-                </Routes>
                 <ScrollButton></ScrollButton>
             </div>
         </>

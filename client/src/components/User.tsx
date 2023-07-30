@@ -1,7 +1,7 @@
 import classes from './../styles/User.module.css'
 import goose from '../assets/Goose.svg'
 import url from '../assets/url.svg'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ModalUploader from "./UI/modal/ModalUploader/ModalUploader"
 import ModalName from "./UI/modal/ModalName/ModalName"
 import ModalPassword from "./UI/modal/ModalPassword/ModalPassword"
@@ -11,7 +11,7 @@ import { IFavoritebooks } from "../ReduxToolkit/userSlice"
 // import { getUserComments } from '../ReduxToolkit/actionCreators'
 import { IComments, ILikeAndDislike } from '../ReduxToolkit/bookSlice'
 import Comment from './Comment'
-import ModalError from './UI/modal/modalError/ModalError'
+// import ModalError from './UI/modal/modalError/ModalError'
 
 interface UserProps {
     id: string;
@@ -31,7 +31,7 @@ const ITEMS_PER_PAGE = 3
 const User: React.FC<UserProps> = (
     {
         email,
-        error,
+        // error,
         logo,
         comments,
         username,
@@ -74,33 +74,33 @@ const User: React.FC<UserProps> = (
     }
 
     // getUserComments(id)
-    const [errorMessage, setErrorMessage] = useState<string | null>(error);
+    // const [errorMessage, setErrorMessage] = useState<string | null>(error);
 
-    // console.log(errorMessage)
+    // // console.log(errorMessage)
 
-    const handleError = (message: string) => {
-        setErrorMessage(message);
-    };
+    // const handleError = (message: string) => {
+    //     setErrorMessage(message);
+    // };
 
-    const handleCloseError = () => {
-        setErrorMessage(null);
-    };
+    // const handleCloseError = () => {
+    //     setErrorMessage(null);
+    // };
 
     const checkExtendOfUserId:(arr:ILikeAndDislike[],userId:string) => boolean = (arr, userId) => {
         return arr?.some(el => el?.userId === userId)
     }
 
-    useEffect(() => {
-        if (error) {
-            handleError(error)
-        }
-    }, [error])
+    // useEffect(() => {
+    //     if (error) {
+    //         handleError(error)
+    //     }
+    // }, [error])
     return (
         <>
             <div className={classes.userContainer}>
-                {errorMessage && (
+                {/* {errorMessage && (
                     <ModalError message={errorMessage} onClose={handleCloseError} />
-                )}
+                )} */}
 
                 {/* Example button that triggers an error */}
                 {/* <button onClick={() => handleError('Something went wrong!')}>Trigger error</button> */}
@@ -110,7 +110,7 @@ const User: React.FC<UserProps> = (
                         <div className={classes.userImageContainer}>
                             <img
                                 className={classes.userImage}
-                                src={logo}
+                                src={logo ? logo : goose}
                                 // src={`http://localhost:5173/b38abdbb-5bef-47e4-9d90-61fc61952f45`}
                                 alt="Картинка не прогрузилась"
                                 onError={({ currentTarget }) => { // Обработка ошибки при загрузке картинки

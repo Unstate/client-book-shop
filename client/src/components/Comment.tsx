@@ -77,7 +77,7 @@ const Comment: FC<CommentProps> = (
                     ? <img
                     onClick={() => deleteLike(commentId) }
                     src={like}
-                    className={classes.button} />
+                    className={`${classes.button} ${classes.buttonPressed}`} />
                     : <img
                     onClick={() => addLike(commentId) }
                     src={like}
@@ -88,7 +88,7 @@ const Comment: FC<CommentProps> = (
                     ? <img
                     onClick={() => deleteDislike(commentId)}
                     src={dislike}
-                    className={classes.button} /> 
+                    className={`${classes.button} ${classes.buttonPressed}`} /> 
                     : <img
                     onClick={() => addDislike(commentId)}
                     src={dislike}

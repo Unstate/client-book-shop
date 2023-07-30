@@ -1,27 +1,31 @@
+import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import classes from './../styles/Header.module.css'
+import { fetchBooksByText } from '../ReduxToolkit/actionCreators'
 import { Link } from 'react-router-dom'
 import LogoNameCompany from './LogoNameCompany'
-import userImage from '../assets/user.svg'
-import search from '../assets/searchButton.svg'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { useEffect, useState } from 'react'
+import search from './../assets/searchButton.svg'
+import userImage from './../assets/user.svg'
 import HeaderMobile from './HeaderMobile'
-import { fetchBooksByText } from '../ReduxToolkit/actionCreators'
 
 const Header = () => {
-
-    const { user } = useAppSelector(state => state.userReducer)
-    const dispatch = useAppDispatch()
+    
+    // getting user data from store
+    const { user } = useAppSelector(state => state.userReducer) 
+    const dispatch = useAppDispatch() 
     const [value, setValue] = useState<string>('')
 
+    //Function that allow start search by press on the ENTER button
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             dispatch(fetchBooksByText(value))
             setValue('')
         }
-      };
+    };
 
-    // user ? console.log(user) : console.log('No')
+    // useEffect(() => {
+    //     console.log(user)
+    // },[user])
 
     return (
         <>
@@ -57,7 +61,9 @@ const Header = () => {
             value={value}
             setValue={setValue}
             userId={user.id}></HeaderMobile>
-            <div className={classes.hrContainer}><hr></hr></div>
+            <div className={classes.hrContainer}>
+                <hr/>
+            </div>
         </>
 
     )

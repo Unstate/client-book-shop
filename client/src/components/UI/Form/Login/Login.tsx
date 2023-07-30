@@ -9,6 +9,7 @@ import see from '../../../../assets/see.svg'
 import { useAppDispatch } from "../../../../hooks/redux";
 import { login } from "../../../../ReduxToolkit/actionCreators";
 import ModalName from "../../modal/ModalName/ModalName";
+// import { Redirect } from "react-router-dom";
 
 
 const schema = yup.object({
@@ -59,11 +60,10 @@ const Login = () => {
 
     const myCallback = () => {
         if (localStorage.getItem('token') !== null) {
+            // return <Redirect to="/" />;
             // window.location.assign('/booksPage')
             setTimeout(() => window.location.assign('/booksPage'), 1000)
-          } else {
-            myCallback()
-          }
+          } 
     }
 
     return (
@@ -107,7 +107,6 @@ const Login = () => {
                         e.preventDefault()
                         TestFn(myCallback)
                         // dispatch(login(userData.mail, userData.password))
-                        // 
                     }}>
                     Войти
                 </button>

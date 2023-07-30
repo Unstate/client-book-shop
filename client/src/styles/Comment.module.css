@@ -20,9 +20,13 @@
 }
 
 .markContainer {
-    @apply flex space-x-[10px] text-[#160F2980] text-[20px]
+    @apply flex space-x-[10px] text-[#160F2980] text-[20px]  
 }
 
 .button {
     @apply cursor-pointer
+}
+
+.buttonPressed {
+    @apply p-1 bg-gray-300 rounded-lg
 }

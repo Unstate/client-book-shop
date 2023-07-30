@@ -1,18 +1,37 @@
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getBookById } from '../ReduxToolkit/actionCreators'
 import CertainBook from '../components/CertainBook'
 import Preloader from '../components/Preloader'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import ModalError from '../components/UI/modal/modalError/ModalError'
 
 
 const CertainBookPage = () => {
 
     const dispatch = useAppDispatch()
-    const { book, isLoading } = useAppSelector(state => state.certainBookReducer)
+    const { book, isLoading, error } = useAppSelector(state => state.certainBookReducer)
     const { id } = useParams()
+
+    const [errorMessage, setErrorMessage] = useState<string | null>(error);
+
+    // console.log(errorMessage)
+
+    const handleError = (message: string) => {
+        setErrorMessage(message);
+    };
+
+    const handleCloseError = () => {
+        setErrorMessage(null);
+    };
+
+    useEffect(() => {
+        if (error) {
+            handleError(error)
+        }
+    }, [error])
 
     useEffect(() => {
         dispatch(getBookById(id))
@@ -23,7 +42,7 @@ const CertainBookPage = () => {
             {isLoading
                 ? <Preloader></Preloader>
                 : <main>
-                    <Header/>
+                    {/* <Header/> */}
                     <CertainBook
                         authors={book.authors}
                         bookBinding={book.bookBinding}
@@ -39,8 +58,11 @@ const CertainBookPage = () => {
                         title={book.title}
                         translaters={book.translaters}
                         id={book._id}></CertainBook>
-                    <Footer/>
+                    {/* <Footer/> */}
                 </main>}
+                {errorMessage && (
+                    <ModalError message={errorMessage} onClose={handleCloseError} />
+                )}
         </>
     )
 }
